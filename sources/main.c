@@ -29,13 +29,13 @@ extern unsigned int __checksum_begin;
 extern unsigned int __checksum_end;
 unsigned int __checksum_zero = 0;
 
-#ifdef USE_SWITCH //Использовать свитч kmz8895
+#ifdef USE_SWITCH //РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЃРІРёС‚С‡ kmz8895
 void settings_load_switch(struct switch_settings_s*);
 #endif
 static void settings_load_complete();
 
 
-#ifdef USE_SWITCH //Использовать свитч kmz8895
+#ifdef USE_SWITCH //РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЃРІРёС‚С‡ kmz8895
   #include "ksz8895fmq.h"
   extern ksz8895fmq_t * SW1;
   #ifdef TWO_SWITCH_ITEMS
@@ -193,7 +193,7 @@ uint8_t read_switch_status(int port, uint8_t reg)
   extern void sdram_init( void );
   extern void sdram_clear( void );
 #endif
-#ifdef USE_SWITCH //Использовать свитч kmz8895
+#ifdef USE_SWITCH //РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЃРІРёС‚С‡ kmz8895
   extern int sw_restart( int iSwIdx );
 #endif
 extern void settings_dmac_table_update();
@@ -226,10 +226,10 @@ extern void ping_thread(void *arg);
 #endif
 #include "ping.h"
 
-uint8_t port_link[7]; //Состояния связи портов свитча (фактические)
+uint8_t port_link[7]; //РЎРѕСЃС‚РѕСЏРЅРёСЏ СЃРІСЏР·Рё РїРѕСЂС‚РѕРІ СЃРІРёС‚С‡Р° (С„Р°РєС‚РёС‡РµСЃРєРёРµ)
 
-#ifdef USE_SWITCH //Использовать свитч kmz8895
-#ifdef PORT_MIGRATE_TRAP //Ловушка для "миграции" по портам
+#ifdef USE_SWITCH //РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЃРІРёС‚С‡ kmz8895
+#ifdef PORT_MIGRATE_TRAP //Р›РѕРІСѓС€РєР° РґР»СЏ "РјРёРіСЂР°С†РёРё" РїРѕ РїРѕСЂС‚Р°Рј
   static dmac_ctrl_t dmac;
 #include "eth.h"
 #define PORT_MIGRATE_ARRAY_SIZE (10)
@@ -248,14 +248,14 @@ void checkPortMigration() {
         settings_read_dmac(0, index, &(dmac.entry));
         if(dmac.entry.empty == 1) break;
         if(index>dmac.entry.entries) break;
-        //++ Ловушка для проверки "миграции" по портам
+        //++ Р›РѕРІСѓС€РєР° РґР»СЏ РїСЂРѕРІРµСЂРєРё "РјРёРіСЂР°С†РёРё" РїРѕ РїРѕСЂС‚Р°Рј
         switch(dmac.entry.port) {
 //        case 0: //SW2
-        case 2: //Единственный подключенный порт
+        case 2: //Р•РґРёРЅСЃС‚РІРµРЅРЅС‹Р№ РїРѕРґРєР»СЋС‡РµРЅРЅС‹Р№ РїРѕСЂС‚
           break;
-        case 4: //ЦПУ
+        case 4: //Р¦РџРЈ
           if (memcmp(&dmac.entry.mac[0], &rsettings->mac[0], NETIF_MAX_HWADDR_LEN) == 0) {
-            break; //Свой МАС - пропустим
+            break; //РЎРІРѕР№ РњРђРЎ - РїСЂРѕРїСѓСЃС‚РёРј
           }
         default:
           if (gPortMigrateIdx < PORT_MIGRATE_ARRAY_SIZE) {
@@ -265,13 +265,13 @@ void checkPortMigration() {
           }
           break;
         }
-        //-- Ловушка
+        //-- Р›РѕРІСѓС€РєР°
       }
       cTick = sTick;
     }
   }
 }
-#endif //PORT_MIGRATE_TRAP //Ловушка для "миграции" по портам
+#endif //PORT_MIGRATE_TRAP //Р›РѕРІСѓС€РєР° РґР»СЏ "РјРёРіСЂР°С†РёРё" РїРѕ РїРѕСЂС‚Р°Рј
 #endif
 
 #if (PIXEL!=0)
@@ -304,7 +304,7 @@ void main_task(void * pvParameters)
 {
   memset(port_link, 0, 7);
 
-  /** Обслуживание выводов и светодиодов */
+  /** РћР±СЃР»СѓР¶РёРІР°РЅРёРµ РІС‹РІРѕРґРѕРІ Рё СЃРІРµС‚РѕРґРёРѕРґРѕРІ */
   extio_init();       // switch pins and PWM drive clead XY or etc. pins
 //
 // OUTS
@@ -347,8 +347,8 @@ void main_task(void * pvParameters)
   sdram_init();
   sdram_clear();
 #endif
-#ifdef USE_SWITCH //Использовать свитч kmz8895
-  /** Инициализируем свитч */
+#ifdef USE_SWITCH //РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЃРІРёС‚С‡ kmz8895
+  /** РРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј СЃРІРёС‚С‡ */
   switch_init();
 
 #endif
@@ -359,26 +359,26 @@ void main_task(void * pvParameters)
 #endif
 
   /**
-   * Загружаем настройки
+   * Р—Р°РіСЂСѓР¶Р°РµРј РЅР°СЃС‚СЂРѕР№РєРё
    */
 //  settings_load(NULL);
  (settings_load_complete);
 
 #ifdef USE_STP
-  CreateTaskRstp(); //Задача RSTP/STP
+  CreateTaskRstp(); //Р—Р°РґР°С‡Р° RSTP/STP
 #endif
 
   /**
-   * Веб интерфейс пользователя
+   * Р’РµР± РёРЅС‚РµСЂС„РµР№СЃ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
    */
   httpd_init();
-#ifdef USE_SWITCH //Использовать свитч kmz8895
- #if (UTD_M == 0) //Для перестройки на UTD_M
+#ifdef USE_SWITCH //РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЃРІРёС‚С‡ kmz8895
+ #if (UTD_M == 0) //Р”Р»СЏ РїРµСЂРµСЃС‚СЂРѕР№РєРё РЅР° UTD_M
   statistics_init();
  #endif
 #endif
 
-#if ((MKPSH10 != 0) || (IMC_FTX_MC != 0)) //Сервер iperf
+#if ((MKPSH10 != 0) || (IMC_FTX_MC != 0)) //РЎРµСЂРІРµСЂ iperf
   iperf_server_init();
 #endif
 
@@ -392,7 +392,7 @@ void main_task(void * pvParameters)
   snmp_set_auth_traps_enabled(SNMP_AUTH_TRAPS_ENABLED);
   snmp_trap_dst_ip_set(0, &gnetif.gw);
   snmp_trap_dst_enable(0, ENABLE);
-  //Задать OID устройства (МКПШ = 1)
+  //Р—Р°РґР°С‚СЊ OID СѓСЃС‚СЂРѕР№СЃС‚РІР° (РњРљРџРЁ = 1)
   // * device a > 1.3.6.1.4.1.XXX(ent-oid).1(devices).1(device a)
   static struct snmp_obj_id dev_snmp_obj_id = {
     .len = 8,
@@ -412,11 +412,11 @@ void main_task(void * pvParameters)
 #endif
 
 
-  // !!! Пробы для лога
+  // !!! РџСЂРѕР±С‹ РґР»СЏ Р»РѕРіР°
   extern void InitLog();
   InitLog();
 
-  //Инициализация SNTP
+  //РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ SNTP
   sntp_setoperatingmode(SNTP_OPMODE_POLL);
   sntp_init();
 
@@ -426,10 +426,10 @@ void main_task(void * pvParameters)
 
 
 #ifdef USE_SUBNETS
-  SetSubnets(&rsettings->VlanCfgDesc); //Установить подсети
+  SetSubnets(&rsettings->VlanCfgDesc); //РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РїРѕРґСЃРµС‚Рё
 #endif
   /**
-   * Завершаем задачу инициализации
+   * Р—Р°РІРµСЂС€Р°РµРј Р·Р°РґР°С‡Сѓ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё
    */
   uint32_t cTickCount = xTaskGetTickCount();  // for delay power ON termocam
 
@@ -449,10 +449,10 @@ void main_task(void * pvParameters)
 #endif
 
 #if (PIXEL!=0)
-    SetWD(); //Watchdog внешний - перезапуск
+    SetWD(); //Watchdog РІРЅРµС€РЅРёР№ - РїРµСЂРµР·Р°РїСѓСЃРє
 #endif
 
-#ifdef USE_SWITCH //Использовать свитч kmz8895
+#ifdef USE_SWITCH //РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЃРІРёС‚С‡ kmz8895
     if(buffer_active)
     {
       buffer_active=0;
@@ -473,12 +473,12 @@ void main_task(void * pvParameters)
 #endif
 
     settings_dmac_table_update();
-#ifdef PORT_MIGRATE_TRAP //Ловушка для "миграции" по портам
+#ifdef PORT_MIGRATE_TRAP //Р›РѕРІСѓС€РєР° РґР»СЏ "РјРёРіСЂР°С†РёРё" РїРѕ РїРѕСЂС‚Р°Рј
     checkPortMigration();
 #endif
 
-#ifdef USE_VLAN  //Поддержка VLAN
-    //Обновление таблицы VLAN
+#ifdef USE_VLAN  //РџРѕРґРґРµСЂР¶РєР° VLAN
+    //РћР±РЅРѕРІР»РµРЅРёРµ С‚Р°Р±Р»РёС†С‹ VLAN
     RefreshVlanTablePart();
     static bool sFilled = false;
     if (gIsVlanTabFull && !sFilled) {
@@ -487,15 +487,15 @@ void main_task(void * pvParameters)
     }
     vTaskDelay(3);
 #endif
-#ifdef USE_DMAC  //Поддержка DMAC таблицы
+#ifdef USE_DMAC  //РџРѕРґРґРµСЂР¶РєР° DMAC С‚Р°Р±Р»РёС†С‹
     ReadSelfMac(caMac[0], SW1);
   #ifdef TWO_SWITCH_ITEMS
     ReadSelfMac(caMac[1], SW2);
   #endif
 #endif
-    //Мониторинг связи по портам
+    //РњРѕРЅРёС‚РѕСЂРёРЅРі СЃРІСЏР·Рё РїРѕ РїРѕСЂС‚Р°Рј
 
-#ifdef USE_SWITCH //Использовать свитч kmz8895
+#ifdef USE_SWITCH //РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЃРІРёС‚С‡ kmz8895
     uint8_t cLink;
     enum eEventCode cEventCode;
     for(int i = 0; i < PORT_NUMBER; i++) {
@@ -517,8 +517,8 @@ void main_task(void * pvParameters)
   }
 }
 
-#ifndef USE_SDRAM //Использование SDRAM
- #ifdef USE_AT45DB     //Использовать Flash-память at45db
+#ifndef USE_SDRAM //РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ SDRAM
+ #ifdef USE_AT45DB     //РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ Flash-РїР°РјСЏС‚СЊ at45db
   #include "at45db.h"
  #endif
 #endif
@@ -532,8 +532,8 @@ void main_task(void * pvParameters)
   */
 int main(void)
 {
-  /**  То что лежит в рабочем каталоге
-   * Проверяем контрольную сумму прошивки, если что перезагружаем.
+  /**  РўРѕ С‡С‚Рѕ Р»РµР¶РёС‚ РІ СЂР°Р±РѕС‡РµРј РєР°С‚Р°Р»РѕРіРµ
+   * РџСЂРѕРІРµСЂСЏРµРј РєРѕРЅС‚СЂРѕР»СЊРЅСѓСЋ СЃСѓРјРјСѓ РїСЂРѕС€РёРІРєРё, РµСЃР»Рё С‡С‚Рѕ РїРµСЂРµР·Р°РіСЂСѓР¶Р°РµРј.
    */
   static unsigned long sum=0xFFFFFFFF;
   sum = hw_crc32( (uint8_t*)&__checksum_begin,
@@ -541,59 +541,59 @@ int main(void)
   if( sum != __checksum )
   {
     /**
-     * Несовпадение CRC - перезагрузка
+     * РќРµСЃРѕРІРїР°РґРµРЅРёРµ CRC - РїРµСЂРµР·Р°РіСЂСѓР·РєР°
      */
     __reboot__();
   }
-  /** Помещаем таблицу векторов в указатель таблицы.  */
+  /** РџРѕРјРµС‰Р°РµРј С‚Р°Р±Р»РёС†Сѓ РІРµРєС‚РѕСЂРѕРІ РІ СѓРєР°Р·Р°С‚РµР»СЊ С‚Р°Р±Р»РёС†С‹.  */
   SCB->VTOR = (uint32_t)&__vector_table - 0x08000000;
 
   RCC_ClocksTypeDef RCC_Clocks;
   RCC_GetClocksFreq(&RCC_Clocks);     // SYSCLK(Hz)     | 168000000
 
-#ifdef USE_AT45DB     //Использовать Flash-память at45db
+#ifdef USE_AT45DB     //РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ Flash-РїР°РјСЏС‚СЊ at45db
   at45db_init(NULL);
 #endif
 
-//#if ((UTD_M != 0) || (IIP != 0))
-//  extern eth_mac ETH_MAC_(0);
-//  ETH_MAC_(0).uninitialize();
-//#endif
-//  /**
-//   * Загружаем таскер и первую задачу,
-//   * которая производит необходимую инициализацию свитча
-//   */
-//  xTaskCreate(main_task, (int8_t *) "Main", configMINIMAL_STACK_SIZE * 3, NULL,MAIN_TASK_PRIO, NULL);
-//
-//  CreateTaskLog();
-//
-//  vTaskStartScheduler();
-  for( ;; ); /* Тута будем при ошибке инициализации таскера. */
+#if ((UTD_M != 0) || (IIP != 0))
+  extern eth_mac ETH_MAC_(0);
+  ETH_MAC_(0).uninitialize();
+#endif
+  /**
+   * Р—Р°РіСЂСѓР¶Р°РµРј С‚Р°СЃРєРµСЂ Рё РїРµСЂРІСѓСЋ Р·Р°РґР°С‡Сѓ,
+   * РєРѕС‚РѕСЂР°СЏ РїСЂРѕРёР·РІРѕРґРёС‚ РЅРµРѕР±С…РѕРґРёРјСѓСЋ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЋ СЃРІРёС‚С‡Р°
+   */
+  xTaskCreate(main_task, (int8_t *) "Main", configMINIMAL_STACK_SIZE * 3, NULL,MAIN_TASK_PRIO, NULL);
+
+  CreateTaskLog();
+
+  vTaskStartScheduler();
+  for( ;; ); /* РўСѓС‚Р° Р±СѓРґРµРј РїСЂРё РѕС€РёР±РєРµ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё С‚Р°СЃРєРµСЂР°. */
 }
 //
 void settings_load_complete()
 {
-#ifdef USE_SWITCH //Использовать свитч kmz8895
+#ifdef USE_SWITCH //РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЃРІРёС‚С‡ kmz8895
   /**
-   * Конфигурирование свитча
+   * РљРѕРЅС„РёРіСѓСЂРёСЂРѕРІР°РЅРёРµ СЃРІРёС‚С‡Р°
    */
   settings_load_switch(&(rsettings->sw));
 #endif
 
   /**
-   * Инициализация стека lwip
+   * РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЃС‚РµРєР° lwip
    */
   LwIP_Init(&(rsettings->ip));
 
 //  /**
-//   * Сервис удаленного управления
+//   * РЎРµСЂРІРёСЃ СѓРґР°Р»РµРЅРЅРѕРіРѕ СѓРїСЂР°РІР»РµРЅРёСЏ
 //   */
 //  service_init();
 
   /**
-   * Конфигурирование TCP/UDP/MODBUS - USART/UART/RS485
+   * РљРѕРЅС„РёРіСѓСЂРёСЂРѕРІР°РЅРёРµ TCP/UDP/MODBUS - USART/UART/RS485
    */
-  settings_load_serial_mode(0); //МКПШ = RS485-2; IMC-FTX/PIXEL  = RS485-1
+  settings_load_serial_mode(0); //РњРљРџРЁ = RS485-2; IMC-FTX/PIXEL  = RS485-1
 
 }
 

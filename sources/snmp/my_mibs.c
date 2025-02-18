@@ -200,7 +200,7 @@ statistics_port10_get_value(const struct snmp_scalar_array_node_def *node, void 
 #endif
 
 #include "temp_ctrl.h"
-#include <cmath> // для round
+//#include <cmath> // для round
 #ifdef USE_TEMP_CTRL
   extern float GetAverageTemp();
 #endif

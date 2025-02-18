@@ -49,7 +49,7 @@ bool ReadSwPortBit(struct sIntPort * cpIntPort, uint8_t iReg, uint8_t iBit) {
   Коэффициенты: MUL = 0,4648; ADD = 0,44204
                       (-1,3)
 */
-#include <cmath> // для round
+//#include <cmath> // для round
 
 void CableTest(uint8_t iPort) {
   //Вычислить свитч и порт
