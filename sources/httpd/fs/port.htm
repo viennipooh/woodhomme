@@ -1,0 +1,109 @@
+<HTML>
+	<HEAD>
+		<LINK href=css/main.css rel=stylesheet type=text/css>
+		<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+		<TITLE>Настройка портов Ethernet</TITLE>
+	</HEAD>
+	<SCRIPT language=JavaScript src="js/port.js"></SCRIPT>
+	<BODY onload=window_onload()>
+		<form name=submit action=port.htm method=get>
+			<TABLE width=100% border=0 align=center>
+				<TR><TD><P><BR></P></TD></TR>
+				<TR><TD><P><BR></P></TD></TR>
+				<TR align=center><TD><H2>Настройки портов Ethernet</H2></TD></TR>
+				<TR>
+					<TD>
+						<TABLE class=table_tt align=center>
+							<P>
+								<TR><TD colspan=100%><b><big>Настройки портов</big></b></TD></TR>
+								<TR>
+									<TD><b>Номер порта</b></TD>
+									<TD><b>Включен</b></TD>
+									<TD><b>Авто</b></TD>
+									<TD><b>Скорость</b></TD>
+									<TD><b>Дуплекс</b></TD>
+									<TD><b>Упр. потоком</b></TD>
+									<TD colspan=2><b>MDI/MDIX</b></TD>
+								</TR>
+								<TR>
+									<TD><b>Eth.1</b></TD>
+									<TD><input type=radio name=pen_1 value=1 checked disabled>Вкл.</input></br><input type=radio name=pen_1 value=0 disabled>Выкл.</input></TD>
+									<TD><input type=radio name=pauto_1 value=1 disabled>Вкл.</input></br><input type=radio name=pauto_1 value=0 disabled>Выкл.</input></TD>
+									<TD><input type=radio name=pspeed_1 value=1 disabled>100Мбит</input></br><input type=radio name=pspeed_1 value=0 disabled>10Мбит</input></TD>
+									<TD><input type=radio name=pduplex_1 value=1 checked disabled>FDX</input></br><input type=radio name=pduplex_1 value=0 disabled>HDX</input></TD>
+									<TD><input type=radio name=pcflw_1 value=1 checked disabled>Вкл.</input></br><input type=radio name=pcflw_1 value=0 disabled>Выкл.</input></TD>
+									<TD><span>Auto</span></br> <input type=checkbox name=pamdi_1 value=1 disabled></input></TD>
+									<TD><input type=radio name=pmdi_1 value=1 disabled>MDI</input> </br><input type=radio name=pmdi_1 value=0 disabled>MDIX</input></TD>
+								</TR>
+								<TR>
+									<TD><b>Eth.2</b></TD>
+									<TD><input type=radio name=pen_2 value=1 checked disabled>Вкл.</input></br><input type=radio name=pen_2 value=0 disabled>Выкл.</input></TD>
+									<TD><input type=radio name=pauto_2 value=1 disabled>Вкл.</input></br><input type=radio name=pauto_2 value=0 disabled>Выкл.</input></TD>
+									<TD><input type=radio name=pspeed_2 value=1 disabled>100Мбит</input></br><input type=radio name=pspeed_2 value=0 disabled>10Мбит</input></TD>
+									<TD><input type=radio name=pduplex_2 value=1 checked disabled>FDX</input></br><input type=radio name=pduplex_2 value=0 disabled>HDX</input></TD>
+									<TD><input type=radio name=pcflw_2 value=1 checked disabled>Вкл.</input></br><input type=radio name=pcflw_2 value=0 disabled>Выкл.</input></TD>
+									<TD><span>Auto</span></br> <input type=checkbox name=pamdi_2 value=1 disabled></input></TD>
+									<TD><input type=radio name=pmdi_2 value=1 disabled>MDI</input> </br><input type=radio name=pmdi_2 value=0 disabled>MDIX</input></TD>
+								</TR>
+								<TR>
+									<TD><b>Eth.3</b></TD>
+									<TD><input type=radio name=pen_2 value=1 checked disabled>Вкл.</input></br><input type=radio name=pen_2 value=0 disabled>Выкл.</input></TD>
+									<TD><input type=radio name=pauto_2 value=1 disabled>Вкл.</input></br><input type=radio name=pauto_2 value=0 disabled>Выкл.</input></TD>
+									<TD><input type=radio name=pspeed_2 value=1 disabled>100Мбит</input></br><input type=radio name=pspeed_2 value=0 disabled>10Мбит</input></TD>
+									<TD><input type=radio name=pduplex_2 value=1 checked disabled>FDX</input></br><input type=radio name=pduplex_2 value=0 disabled>HDX</input></TD>
+									<TD><input type=radio name=pcflw_2 value=1 checked disabled>Вкл.</input></br><input type=radio name=pcflw_2 value=0 disabled>Выкл.</input></TD>
+									<TD><span>Auto</span></br> <input type=checkbox name=pamdi_2 value=1 disabled></input></TD>
+									<TD><input type=radio name=pmdi_2 value=1 disabled>MDI</input> </br><input type=radio name=pmdi_2 value=0 disabled>MDIX</input></TD>
+								</TR>
+								
+							</P>
+						</TABLE>
+					</TD>
+				</TR>
+				<TR><TD><P><BR></P></TD></TR>
+				<TR>
+					<TD>
+						<TABLE class="table_t3" align="center">
+						<TR><TD colspan=100%><b><big>Подсети на основе портов</big></b></TD></TR> <!--<font color="yellow"></font>-->
+							<TR>
+								<TD></b>Подсети</b><TD><b>Порты-члены</b></TD>
+							<TR>
+								<TD><b>Подсеть 1</b></TD>
+								<TD>1<input type="checkbox" id="subnet_member_1_1"></input>
+									2<input type="checkbox" id="subnet_member_1_2"></input>
+									3<input type="checkbox" id="subnet_member_1_3"></input>
+									
+									<input type="hidden" name="subnet_member_1"></input><!-- Для упаковки -->
+								</TD>
+							</TR>
+							<TR>
+								<TD><b>Подсеть 2</b></TD>
+								<TD>1<input type="checkbox" id="subnet_member_2_1"></input>
+									2<input type="checkbox" id="subnet_member_2_2"></input>
+									3<input type="checkbox" id="subnet_member_2_3"></input>
+								
+									<input type="hidden" name="subnet_member_2"></input><!-- Для упаковки -->
+								</TD>
+							</TR>
+							<TR>
+								<TD><b>Подсеть 3</b></TD>
+								<TD>1<input type="checkbox" id="subnet_member_3_1"></input>
+									2<input type="checkbox" id="subnet_member_3_2"></input>
+									3<input type="checkbox" id="subnet_member_3_3"></input>
+									
+									<input type="hidden" name="subnet_member_3"></input><!-- Для упаковки -->
+								</TD>
+							</TR>
+						</TABLE>
+					</TD>
+				</TR>
+				<TR><TD><P><BR></P></TD></TR>
+				<TR width=50% align=center>
+					<TD><input value=отмена type=reset style=width:45%></input> 
+					<input value="Применить настройки" type=submit style=width:45% disabled onclick="sm1()"></input></TD>
+				</TR>
+				<TR><TD><P><BR></P></TD></TR>
+			</TABLE>
+		</form>
+	</BODY>
+</HTML>

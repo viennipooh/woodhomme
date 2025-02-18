@@ -1,0 +1,49 @@
+<HTML>
+	<HEAD>
+		<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+		<LINK href="css/portpoll.css" rel=stylesheet type=text/css>
+		<TITLE>Состояние</TITLE>
+	</HEAD>
+	<SCRIPT language=JavaScript src="js/portpoll.js"></SCRIPT>
+	<BODY onload=window_onload()>
+		<form action="portpoll.htm" method="get">
+			<TABLE width=90% border=0 align=center >
+				<TR><TD><BR></TD></TR>
+				<TR><TD><H2>MODBUS опрос (поллинг) канала RS 485</H2></TD></TR>
+				<TR><TD>
+					<TABLE class="table_param">
+						<TR><TD>Параметры опроса</TD><TD></TD></TR>
+						<TR><TD>MODBUS адрес устройства</TD><TD><input name="rs_dev_addr_1"></input></TD></TR>
+						<TR><TD>Функция MODBUS</TD><TD><select name="rs_modbus_func_1">
+							<option value="3">[03] Read Holding Registers</option>
+							<option value="4">[04] Read Input Registers</option>
+							</select></TD></TR>
+						<TR><TD>Начальный регистр</TD><TD><input name="rs_start_reg_1"></input></TD></TR>
+						<TR><TD>Количество регистров</TD><TD><input name="rs_reg_number_1"></input></TD></TR>
+						<TR><TD>Интервал опроса, мс</TD><TD><input name="rs_poll_period_1"></input></TD></TR>
+						<TR><TD>Канал RS 485</TD><TD><select name="rs_poll_channel_1">
+							<option value="1">Порт RS 485-1</option><!--<option value="2">Порт RS 485-2</option>--></select></TD></TR>
+					</TABLE>
+					<input value='0' name="startpoll" type="hidden" ></input>
+					<TABLE width=30%>
+						<TR><TD><BR></TD></TR>
+						<TR>
+							<TD>Опрос устройства:</TD>
+							<TD width=50%>
+								<input align="center" value="Пуск" type="submit" style="width:45%" id="BtnStart" onclick="OnStartPoll()" ></input>
+								<input align="center" value="Стоп" type="submit" style="width:45%" id="BtnStop" onclick="OnStopPoll()" ></input>
+							</TD>			
+						</TR>
+						<TR><TD>Передано кадров:</TD><TD id="tx_count"></TD></TR>
+						<TR><TD>Ошибок:</TD><TD id="err_count"></TD></TR>
+					</TABLE>
+					<input type=hidden value='0' name="for_change">
+				</TD></TR>
+				<input name="mbpollack" type="hidden" ></input>
+				<TR><TD>
+					<iframe frameborder = "0" id = "devframe" width = "500px" height = "400px" src = "framepoll.htm"></iframe>
+				</TD></TR>
+			</TABLE>
+		</form>
+	</BODY>
+</HTML>

@@ -1,0 +1,234 @@
+<HTML>
+	<HEAD>
+		<LINK href="css/vlan.css" rel=stylesheet type=text/css>
+		<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+		<TITLE>Настройка портов</TITLE>
+	</HEAD>
+	<SCRIPT language=JavaScript src="js/vlan.js"></SCRIPT>
+	<BODY onload=window_onload()>
+		<form name="submit" action="vlan.htm" method="get">
+			<TABLE width=100% border=0 align=center>
+				<TR align="center"><TD><H2>Настройка системы VLAN</H2></TD></TR>
+				<TR>
+					<TD>
+						<TABLE class="table_ll" align="center">
+							<TR>
+								<TD>Включение режима VLAN</TD>
+								<TD><input type="radio" name="vlan_on" value="0" checked>Выкл</input><input type="radio" name="vlan_on" value="1">Вкл</input></TD>
+							</TR>
+							<TR>
+								<TD>Unicast-пакеты могут выходить за пределы VLAN</TD>
+								<TD><input type="radio" name="uni_off" value="0" checked>Выкл</input><input type="radio" name="uni_off" value="1">Вкл</input></TD>
+							</TR>
+							<TR>
+								<TD>NULL-VID заменять на VID порта</TD>
+								<TD><input type="radio" name="chg_vid_on" value="0" checked>Выкл</input><input type="radio" name="chg_vid_on" value="1">Вкл</input></TD>
+							</TR>
+						</TABLE>
+					</TD>
+				</TR>	
+				<TR><TD><P><BR></P></TD></TR>
+				<!--<TR align="center"><TD><H2>Настройки портов для работы в VLAN</H2></TD></TR>-->
+				<TR>
+					<TD>
+						<TABLE class="table_tt" align="center">
+							<!--<TR><TD colspan=100%><b>НАСТРОЙКИ ПОРТОВ</b></TD></TR>-->
+							<TR>
+								<TD><b><big><font color="yellow">Настройки портов для VLAN</font></big></b></TD><TD><b>F.Eth.1</b></TD><TD><b>F.Eth.2</b></TD><TD><b>F.Eth.3</b></TD><TD><b>F.Eth.4</b></TD><TD><b>Eth.5</b></TD><TD><b>Eth.6</b></TD><TD><b>Eth.7</b></TD>
+							<TR>
+								<TD><b>Вставка в пакет тега VLAN с VID порта на входе</b></TD>
+								<TD><input type="checkbox" id="otag_ins_1"></input></TD>
+								<TD><input type="checkbox" id="otag_ins_2"></input></TD>
+								<TD><input type="checkbox" id="otag_ins_3"></input></TD>
+								<TD><input type="checkbox" id="otag_ins_4"></input></TD>
+								<TD><input type="checkbox" id="otag_ins_5"></input></TD>
+								<TD><input type="checkbox" id="otag_ins_6"></input></TD>
+								<TD><input type="checkbox" id="otag_ins_7"></input></TD>
+								<input type="hidden" name="otag_ins_m"></input><!-- Для упаковки -->
+							</TR>
+							<TR>
+								<TD><b>Удаление на выходе тега VLAN из пакета, принятого с тегом</b></TD>
+								<TD><input type="checkbox" id="otag_del_1"></input></TD>
+								<TD><input type="checkbox" id="otag_del_2"></input></TD>
+								<TD><input type="checkbox" id="otag_del_3"></input></TD>
+								<TD><input type="checkbox" id="otag_del_4"></input></TD>
+								<TD><input type="checkbox" id="otag_del_5"></input></TD>
+								<TD><input type="checkbox" id="otag_del_6"></input></TD>
+								<TD><input type="checkbox" id="otag_del_7"></input></TD>
+								<input type="hidden" name="otag_del_m"></input><!-- Для упаковки -->
+							</TR>
+							<TR>
+								<TD><b>Удаление пакетов, если входной порт не член VLAN</b></TD>
+								<TD><input type="checkbox" id="no_v_pack_del_1"></input></TD>
+								<TD><input type="checkbox" id="no_v_pack_del_2"></input></TD>
+								<TD><input type="checkbox" id="no_v_pack_del_3"></input></TD>
+								<TD><input type="checkbox" id="no_v_pack_del_4"></input></TD>
+								<TD><input type="checkbox" id="no_v_pack_del_5"></input></TD>
+								<TD><input type="checkbox" id="no_v_pack_del_6"></input></TD>
+								<TD><input type="checkbox" id="no_v_pack_del_7"></input></TD>
+								<input type="hidden" name="no_v_pack_del_m"></input><!-- Для упаковки -->
+							</TR>
+							<TR>
+								<TD><b>Удаление пакетов c VID не равным VID входного порта</b></TD>
+								<TD><input type="checkbox" id="no_p_vid_pack_del_1"></input></TD>
+								<TD><input type="checkbox" id="no_p_vid_pack_del_2"></input></TD>
+								<TD><input type="checkbox" id="no_p_vid_pack_del_3"></input></TD>
+								<TD><input type="checkbox" id="no_p_vid_pack_del_4"></input></TD>
+								<TD><input type="checkbox" id="no_p_vid_pack_del_5"></input></TD>
+								<TD><input type="checkbox" id="no_p_vid_pack_del_6"></input></TD>
+								<TD><input type="checkbox" id="no_p_vid_pack_del_7"></input></TD>
+								<input type="hidden" name="no_p_vid_pack_del_m"></input><!-- Для упаковки -->
+							</TR>
+							<TR>
+								<TD><b>VID порта по умолчанию</b></TD>
+								<TD><input class="table_tt_text" name="def_port_vid_1"></input></TD>
+								<TD><input class="table_tt_text" name="def_port_vid_2"></input></TD>
+								<TD><input class="table_tt_text" name="def_port_vid_3"></input></TD>
+								<TD><input class="table_tt_text" name="def_port_vid_4"></input></TD>
+								<TD><input class="table_tt_text" name="def_port_vid_5"></input></TD>
+								<TD><input class="table_tt_text" name="def_port_vid_6"></input></TD>
+								<TD><input class="table_tt_text" name="def_port_vid_7"></input></TD>
+							</TR>
+							<TR>
+								<TD><b>Порты - члены VLAN для этого порта</b></TD>
+								<TD>1<input type="checkbox" id="pv_member_1_1" disabled checked></input>
+									2<input type="checkbox" id="pv_member_1_2"></input>
+									3<input type="checkbox" id="pv_member_1_3"></input>
+									4<input type="checkbox" id="pv_member_1_4"></input><BR>
+									5<input type="checkbox" id="pv_member_1_5"></input>
+									6<input type="checkbox" id="pv_member_1_6"></input>
+									7<input type="checkbox" id="pv_member_1_7"></input>
+									<input type="hidden" name="pv_member_1"></input><!-- Для упаковки -->
+								</TD>
+								<TD>1<input type="checkbox" id="pv_member_2_1"></input>
+									2<input type="checkbox" id="pv_member_2_2" disabled checked></input>
+									3<input type="checkbox" id="pv_member_2_3"></input>
+									4<input type="checkbox" id="pv_member_2_4"></input><BR>
+									5<input type="checkbox" id="pv_member_2_5"></input>
+									6<input type="checkbox" id="pv_member_2_6"></input>
+									7<input type="checkbox" id="pv_member_2_7"></input>
+									<input type="hidden" name="pv_member_2"></input><!-- Для упаковки -->
+								</TD>
+								<TD>1<input type="checkbox" id="pv_member_3_1"></input>
+									2<input type="checkbox" id="pv_member_3_2"></input>
+									3<input type="checkbox" id="pv_member_3_3" disabled checked></input>
+									4<input type="checkbox" id="pv_member_3_4"></input><BR>
+									5<input type="checkbox" id="pv_member_3_5"></input>
+									6<input type="checkbox" id="pv_member_3_6"></input>
+									7<input type="checkbox" id="pv_member_3_7"></input>
+									<input type="hidden" name="pv_member_3"></input><!-- Для упаковки -->
+								</TD>
+								<TD>1<input type="checkbox" id="pv_member_4_1"></input>
+									2<input type="checkbox" id="pv_member_4_2"></input>
+									3<input type="checkbox" id="pv_member_4_3"></input>
+									4<input type="checkbox" id="pv_member_4_4" disabled checked></input><BR>
+									5<input type="checkbox" id="pv_member_4_5"></input>
+									6<input type="checkbox" id="pv_member_4_6"></input>
+									7<input type="checkbox" id="pv_member_4_7"></input>
+									<input type="hidden" name="pv_member_4"></input><!-- Для упаковки -->
+								</TD>
+								<TD>1<input type="checkbox" id="pv_member_5_1"></input>
+									2<input type="checkbox" id="pv_member_5_2"></input>
+									3<input type="checkbox" id="pv_member_5_3"></input>
+									4<input type="checkbox" id="pv_member_5_4"></input><BR>
+									5<input type="checkbox" id="pv_member_5_5" disabled checked></input>
+									6<input type="checkbox" id="pv_member_5_6"></input>
+									7<input type="checkbox" id="pv_member_5_7"></input>
+									<input type="hidden" name="pv_member_5"></input><!-- Для упаковки -->
+								</TD>
+								<TD>1<input type="checkbox" id="pv_member_6_1"></input>
+									2<input type="checkbox" id="pv_member_6_2"></input>
+									3<input type="checkbox" id="pv_member_6_3"></input>
+									4<input type="checkbox" id="pv_member_6_4"></input><BR>
+									5<input type="checkbox" id="pv_member_6_5"></input>
+									6<input type="checkbox" id="pv_member_6_6" disabled checked></input>
+									7<input type="checkbox" id="pv_member_6_7"></input>
+									<input type="hidden" name="pv_member_6"></input><!-- Для упаковки -->
+								</TD>
+								<TD>1<input type="checkbox" id="pv_member_7_1"></input>
+									2<input type="checkbox" id="pv_member_7_2"></input>
+									3<input type="checkbox" id="pv_member_7_3"></input>
+									4<input type="checkbox" id="pv_member_7_4"></input><BR>
+									5<input type="checkbox" id="pv_member_7_5"></input>
+									6<input type="checkbox" id="pv_member_7_6"></input>
+									7<input type="checkbox" id="pv_member_7_7" disabled checked></input>
+									<input type="hidden" name="pv_member_7"></input><!-- Для упаковки -->
+								</TD>
+							</TR>
+						</TABLE>
+					</TD>
+				</TR>	
+				<TR><TD><P><BR></P></TD></TR>
+				<input value='0' name="applying" type="hidden" ></input>
+				<TR>
+					<TABLE align="center">
+						<TR align="center">
+							<TD width="20%">
+								<input value="Отменить" type="reset" style="width:10%" ></input>
+								<input value="Установить" type="submit" style="width:10%" onclick="sm1()"></input>
+							</TD>			
+						</TR>
+					</TABLE>
+				</TR>
+				<TR><BR></TR>
+				<TR>
+					<!--<TABLE align="center">
+						<TR><TD><H2>Параметры VLAN</H2></TD></TR>
+					</TABLE>-->
+					<TD>
+						<TABLE class="table_tl" align="center">
+							<TR>
+								<TD><big><font color="yellow">Параметры VLAN</font></big><!--<b>Номер VLAN</b>--></TD><TD><b>Идентификатор</b></TD><TD><b>Индекс</b></TD><TD><b>Порты-члены</b></TD><TD><b>Валиден</b></TD>
+							<TR>
+								<TD><b>1 VLAN</b></TD>
+								<TD><input class="table_tt_text" name="vlan_id_1"></input></TD>
+								<TD><input class="table_tt_text" name="vlan_vid_1"></input></TD>
+								<TD>1<input type="checkbox" id="vlan_member_1_1"></input>
+									2<input type="checkbox" id="vlan_member_1_2"></input>
+									3<input type="checkbox" id="vlan_member_1_3"></input>
+									4<input type="checkbox" id="vlan_member_1_4"></input><BR>
+									5<input type="checkbox" id="vlan_member_1_5"></input>
+									6<input type="checkbox" id="vlan_member_1_6"></input>
+									7<input type="checkbox" id="vlan_member_1_7"></input>
+									<input type="hidden" name="vlan_member_1"></input><!-- Для упаковки -->
+								</TD>
+								<TD><input type="checkbox" name="vlan_valid_1" value="0"></input></TD>
+							</TR>
+							<TR>
+								<TD><b>2 VLAN</b></TD>
+								<TD><input class="table_tt_text" name="vlan_id_2"></input></TD>
+								<TD><input class="table_tt_text" name="vlan_vid_2"></input></TD>
+								<TD>1<input type="checkbox" id="vlan_member_2_1"></input>
+									2<input type="checkbox" id="vlan_member_2_2"></input>
+									3<input type="checkbox" id="vlan_member_2_3"></input>
+									4<input type="checkbox" id="vlan_member_2_4"></input><BR>
+									5<input type="checkbox" id="vlan_member_2_5"></input>
+									6<input type="checkbox" id="vlan_member_2_6"></input>
+									7<input type="checkbox" id="vlan_member_2_7"></input>
+									<input type="hidden" name="vlan_member_2"></input><!-- Для упаковки -->
+								</TD>
+								<TD><input type="checkbox" name="vlan_valid_2" value="0"></input></TD>
+							</TR>
+							<TR>
+								<TD><b>3 VLAN</b></TD>
+								<TD><input class="table_tt_text" name="vlan_id_3"></input></TD>
+								<TD><input class="table_tt_text" name="vlan_vid_3"></input></TD>
+								<TD>1<input type="checkbox" id="vlan_member_3_1"></input>
+									2<input type="checkbox" id="vlan_member_3_2"></input>
+									3<input type="checkbox" id="vlan_member_3_3"></input>
+									4<input type="checkbox" id="vlan_member_3_4"></input><BR>
+									5<input type="checkbox" id="vlan_member_3_5"></input>
+									6<input type="checkbox" id="vlan_member_3_6"></input>
+									7<input type="checkbox" id="vlan_member_3_7"></input>
+									<input type="hidden" name="vlan_member_3"></input><!-- Для упаковки -->
+								</TD>
+								<TD><input type="checkbox" name="vlan_valid_3" value="0"></input></TD>
+							</TR>
+						</TABLE>
+					</TD>
+				</TR>	
+				<TR><TD><P><BR></P></TD></TR>
+			</TABLE>
+		</form>
+	</BODY>
+</HTML>

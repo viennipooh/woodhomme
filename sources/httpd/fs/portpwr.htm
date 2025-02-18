@@ -1,0 +1,56 @@
+<HTML>
+	<HEAD>
+		<LINK href="css/main.css" rel=stylesheet type=text/css>
+		<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+		<TITLE>Настройка RS485</TITLE>
+	</HEAD>
+	<BODY>
+		<form name="submit" action="portpwr.htm" method="get">
+			<TABLE width=100% border=0 align=center>
+				<TR><TD><P><BR></P></TD></TR>
+				<TR><TD><P><BR></P></TD></TR>
+				<TR align="center"><TD><H2>Питание</H2></TD></TR>
+				<TR>
+					<TD>
+						<TABLE class="table_tt" align="center">
+							<P>
+								<TR><TD colspan=100%><b>НАСТРОЙКИ RS485</b></TD></TR>
+								<TR>
+									<TD><b>Наименование</b></TD>
+									<TD><b>Состояние</b></TD>
+									<TD><b>Управление</b></TD>
+								</TR>
+								<TR>
+									<TD><b>Подача питания(1 RS485):</b></TD>
+									<TD><!--#system_power_rs485_1--></TD>
+									<TD>-/-</TD>
+								</TR>
+								
+								<TR>
+									<TD><b>Подача питания(SWITCH 1 MCU):</b></TD>
+									<TD><!--#system_power_sw1--></TD>
+									<TD>-/-</TD>
+								</TR>
+								<TR>
+									<TD><b>Подача питания(SWITCH 2):</b></TD>
+									<TD><!--#system_power_sw2--></TD>
+									<TD>-/-</TD>
+								</TR>
+							</P>
+						</TABLE>
+					</TD>
+				</TR>	
+				<TR><TD><P><BR></P></TD></TR>
+				<TR><TD><P><BR></P></TD></TR>
+				<TR><INPUT type="hidden" name="write" value="1"></TR>
+				<!--<TR width=90% align="center">
+					<TD>
+						<input value="отмена" type="reset" style="width:45%" ></input>
+						<input value="отправить" type="submit" style="width:45%" ></input>
+					</TD>			
+				</TR>-->
+				<TR><TD><P><BR></P></TD></TR>
+			</TABLE>
+		</form>
+	</BODY>
+</HTML>

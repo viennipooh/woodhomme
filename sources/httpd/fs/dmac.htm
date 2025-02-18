@@ -1,0 +1,172 @@
+﻿<HTML><HEAD><META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK href=css/main.css rel=stylesheet type=text/css><TITLE>Состояние</TITLE></HEAD><SCRIPT language=JavaScript src="js/dmac_table.js"></SCRIPT> <script>
+function changePortFilter() {
+var input, filter, table, tr, td, i;
+var pf=[];
+pf.push(document.getElementById("pfc").checked);
+pf.push(document.getElementById("pf1").checked);
+pf.push(document.getElementById("pf2").checked);
+pf.push(document.getElementById("pf3").checked);
+pf.push(document.getElementById("pf4").checked);
+table = document.getElementById("dmac_table");
+tr = table.getElementsByTagName("tr");
+for (i = 0; i < tr.length; i++) {
+td = tr[i].getElementsByTagName("td")[2];
+if (td && tr[i].getElementsByTagName("td")[0].innerHTML != "Индекс") {
+if(td.innerHTML.toUpperCase() == "CPU"){
+if(pf[0] == true){
+tr[i].style.display = "";
+} else {
+tr[i].style.display = "none";
+}} else if (pf[td.innerHTML] == true) {
+tr[i].style.display = "";
+} else {
+tr[i].style.display = "none";
+}}}}
+function changeMacFilter() {
+var input, filter, table, tr, td, i;
+var pfma=[];
+var rex=[];
+pfma.push(document.getElementById("fma0").value);
+pfma.push(document.getElementById("fma1").value);
+pfma.push(document.getElementById("fma2").value);
+pfma.push(document.getElementById("fma3").value);
+pfma.push(document.getElementById("fma4").value);
+pfma.push(document.getElementById("fma5").value);
+rex[0] = new RegExp(pfma[0]);
+rex[1] = new RegExp(pfma[1]);
+rex[2] = new RegExp(pfma[2]);
+rex[3] = new RegExp(pfma[3]);
+rex[4] = new RegExp(pfma[4]);
+rex[5] = new RegExp(pfma[5]);
+table = document.getElementById("dmac_table");
+tr = table.getElementsByTagName("tr");
+for (i = 0; i < tr.length; i++) {
+td = tr[i].getElementsByTagName("td")[1];
+if (td && td.innerHTML.split(":").length==6) {
+res = td.innerHTML.split(":");
+for(var j=0;j<6;j++)
+{
+if (rex[j].exec(res[j])) {
+tr[i].style.display = "";
+} else {
+tr[i].style.display = "none";
+break;
+}}}}}
+var sort_index = 0;
+var sort_dir = 1;
+function updateFilter(el) {
+var new_sort_index = 0;
+if(el.value == "00"){
+new_sort_index = 0;
+} else if(el.value == "01"){
+new_sort_index = 1;
+} else if(el.value == "02"){
+new_sort_index = 2;
+} else {
+new_sort_index = 0;
+}
+if(new_sort_index == sort_index){
+sort_dir = sort_dir>0?0:1;
+} else {
+sort_dir = 1;
+}
+sort_index = new_sort_index;
+console.log(sort_index + ": :"+sort_dir);
+sortTable(sort_index,sort_dir);
+if(sort_index == 1){
+checkSame(1);
+}}
+function changeFilter() {
+var input, filter, table, tr, td, i;
+var pfma=[];
+var rex=[];
+var pf=[];
+pf.push(document.getElementById("pfc").checked);
+pf.push(document.getElementById("pf1").checked);
+pf.push(document.getElementById("pf2").checked);
+pf.push(document.getElementById("pf3").checked);
+pf.push(document.getElementById("pf4").checked);
+pfma.push(document.getElementById("fma0").value);
+pfma.push(document.getElementById("fma1").value);
+pfma.push(document.getElementById("fma2").value);
+pfma.push(document.getElementById("fma3").value);
+pfma.push(document.getElementById("fma4").value);
+pfma.push(document.getElementById("fma5").value);
+rex[0] = new RegExp(pfma[0].length>0?pfma[0]:'.');
+rex[1] = new RegExp(pfma[1].length>0?pfma[1]:'.');
+rex[2] = new RegExp(pfma[2].length>0?pfma[2]:'.');
+rex[3] = new RegExp(pfma[3].length>0?pfma[3]:'.');
+rex[4] = new RegExp(pfma[4].length>0?pfma[4]:'.');
+rex[5] = new RegExp(pfma[5].length>0?pfma[5]:'.');
+table = document.getElementById("dmac_table");
+tr = table.getElementsByTagName("tr");
+console.log("OUT: ");
+for (i = 0; i < tr.length; i++) {
+if(!(/\D/.exec(tr[i].getElementsByTagName("td")[0].innerHTML))){
+tr[i].style.display = "none";
+td = tr[i].getElementsByTagName("td")[2];
+if (td) {
+if(td.innerHTML.toUpperCase() == "CPU"){
+if(pf[0] == true){
+tr[i].style.display = "";
+}} else if (pf[td.innerHTML] == true) {
+tr[i].style.display = "";
+}}
+td = tr[i].getElementsByTagName("td")[1];
+if (td && td.innerHTML.split(":").length==6) {
+res = td.innerHTML.split(":");
+for(var j=0;j<6;j++)
+{
+if (!rex[j].exec(res[j])) {
+tr[i].style.display = "none";
+}}}}}}
+function checkSame(index) {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("dmac_table");
+  switching = true;
+  console.log("sortTable:"+index);  
+  while (switching) {
+switching = false;
+rows = table.getElementsByTagName("TR");
+for (i = 2; i < (rows.length - 1); i++) {
+  shouldSwitch = false;
+  x = rows[i].getElementsByTagName("TD")[index];
+  y = rows[i + 1].getElementsByTagName("TD")[index];
+if (x.innerHTML.toLowerCase() == y.innerHTML.toLowerCase()) {
+shouldSwitch= true;
+break;
+}}
+if (shouldSwitch) {
+  rows[i].style.backgroundColor = 'red';
+  rows[i+1].style.backgroundColor = 'red';
+}}}
+function sortTable(index,dir) {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("dmac_table");
+  switching = true;
+  console.log("sortTable:"+index);
+  while (switching) {
+switching = false;
+rows = table.getElementsByTagName("TR");
+for (i = 2; i < (rows.length - 1); i++) {
+  shouldSwitch = false;
+  x = rows[i].getElementsByTagName("TD")[index];
+  y = rows[i + 1].getElementsByTagName("TD")[index];
+if(dir){
+if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+shouldSwitch= true;
+break;
+}} else {
+if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+shouldSwitch= true;
+break;
+}}}
+if (shouldSwitch) {
+  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+  switching = true;
+}}}
+function changeFilter1() {
+changePortFilter();
+changeMacFilter();
+}
+</script><BODY onload=window_onload()><TABLE width=90% border=0 align=center><TR><TD></BR></TD></TR><TR><TD><H2>Таблица MAC адресов (<a href=dmac_table.csv>скачать</a>)</H2></TD></TR><TR><TD><BR></TD></TR><TR width=90% align=center><TD><input value="обновить страницу" type=submit style=width:45% onClick=window.location.reload()></input></TD></TR><TR><TD><BR></TD></TR><TR><TD><form name=submit action=dmac.htm method=get><TABLE class=table_tt align=center><P><TR><TD colspan=100%>НАСТРОЙКИ ФИЛЬТРА</TD></TR><TR><TD>Фильтр</TD><TD>Настройки</TD></TR><TR><TD>Сортировка</TD><TD>По индексу:<input id=sortf0 onclick=updateFilter(this) type=radio name=sortf value=00 checked /></br> MAC адресу:<input id=sortf1 onclick=updateFilter(this) type=radio name=sortf value=01 /> Номер порта:<input id=sortf2 onclick=updateFilter(this) type=radio name=sortf value=02 /></TD></TR><TR><TD>Адрес</TD><TD><input id=fma0 onkeyup=changeFilter() type=text size=2 maxlength=2 name=faddr1 value="" />: <input id=fma1 onkeyup=changeFilter() type=text size=2 maxlength=2 name=faddr2 value="" />: <input id=fma2 onkeyup=changeFilter() type=text size=2 maxlength=2 name=faddr3 value="" />: <input id=fma3 onkeyup=changeFilter() type=text size=2 maxlength=2 name=faddr4 value="" />: <input id=fma4 onkeyup=changeFilter() type=text size=2 maxlength=2 name=faddr5 value="" />: <input id=fma5 onkeyup=changeFilter() type=text size=2 maxlength=2 name=faddr6 value="" /></TD></TR><TR><TD>Порты</TD><TD>CPU:<input id=pfc onchange=changeFilter() type=checkbox name=fportc value=00 checked /></br> 1:<input id=pf1 onchange=changeFilter() type=checkbox name=fport1 value=00 checked /> 2:<input id=pf2 onchange=changeFilter() type=checkbox name=fport2 value=00 checked /> 3:<input id=pf3 onchange=changeFilter() type=checkbox name=fport3 value=00 checked /> 4:<input id=pf4 onchange=changeFilter() type=checkbox name=fport4 value=00 checked /></TD></TR></P></TABLE></form></TD></TR><TR><TD><BR></TD></TR><TR><TD><TABLE id=dmac_table class=table_tt align=center><P><TR><TD colspan=100%>ТАБЛИЦА АДРЕСОВ</TD></TR></P></TABLE></TD></TR></TABLE></BODY></HTML>

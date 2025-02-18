@@ -1,0 +1,28 @@
+<HTML>
+	<HEAD>
+		<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+		<LINK href="css/event_tab.css" rel=stylesheet type=text/css>
+		<TITLE>События устройства</TITLE>
+	</HEAD>
+	<SCRIPT language=JavaScript src="js/event_tab.js"></SCRIPT>
+	<BODY onload=window_onload()>
+		<form action="event_tab.htm" method="get">
+			<TABLE id=e_tab class="table_tl">
+				<TR><TD width="6%">№</TD><TD width="14%">Время</TD><TD width="18%">Тип</TD><TD width="47%">Событие</TD><TD width="15%">Значение</TD></TR>
+			</TABLE>
+			<input value='0' name="tab_pos" type="hidden" ></input>
+			<TABLE width=100% border=0 align=center>
+				<TR width=70% align="center">
+					<TD>
+						<input value="Строка вниз" type="submit" style="width:15%" onclick="next_row()"></input>
+						<input value="Строка вверх" type="submit" style="width:15%" onclick="prev_row()" ></input>
+						<input value="Страница вниз" type="submit" style="width:15%" onclick="next_page()"></input>
+						<input value="Страница вверх" type="submit" style="width:15%" onclick="prev_page()" ></input>
+						<input value="В конец" type="submit" style="width:15%" onclick="to_end()"></input>
+						<input value="В начало" type="submit" style="width:15%" onclick="to_begin()" ></input>
+					</TD>	
+				</TR>
+			</TABLE>
+		</form>
+	</BODY>
+</HTML>

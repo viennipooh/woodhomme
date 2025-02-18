@@ -1,0 +1,150 @@
+<HTML xmlns='http://www.w3.org/1999/xhtml' >
+	<HEAD>
+		<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+		<LINK href="css/stp.css" rel=stylesheet type=text/css>
+		<TITLE>Параметры RSTP</TITLE>
+	</HEAD>
+	<SCRIPT language=JavaScript src="js/stp.js"></SCRIPT>
+	<BODY onload=window_onload()>
+		<form action="stp.htm" method="get">
+			<TABLE width=90% border=0 align=center class="table_tm">
+				<TR><TD><H2>Параметры RSTP</H2></TD></TR>
+				<TR><TD><H3>Свитч </H3></TD></TR>
+				<TR align="left">
+					<TD>
+						<TABLE class="table_t2">
+							<TR><TD colspan="2">Параметры свитча</TD></TR>
+							<TR><TD>Протокол RSTP</TD>
+								<TD><SELECT size=1 name="rstp_on" id="rstp_on">
+										<OPTION value="0">Откл</OPTION><OPTION value="1">Вкл</OPTION>
+									</SELECT>
+								</TD>
+							</TR>
+							<TR><TD>MAC Адрес</TD><TD><input name="mac_addr" id="mac_addr" disabled></input></TD></TR>
+							<TR><TD>Приоритет</TD><TD><input class="table_tt_text30" name="sw_priority" id=sw_priority></input></TD></TR>
+							<TR><TD>Ид производителя</TD><TD><input class="table_tt_text30" name="owner_id" id="owner_id" disabled></input></TD></TR>
+							<TR><TD>Max возраст сообщения</TD><TD><input class="table_tt_text30" name="max_age" id="max_age" disabled></input></TD></TR>
+							<TR><TD>Интервал сообщений</TD><TD><input class="table_tt_text30" name="hello_time" id="hello_time" disabled></input></TD></TR>
+							<TR><TD>Задержка трансляции</TD><TD><input class="table_tt_text30" name="tx_hold_count" id="tx_hold_count" disabled></input></TD></TR>
+						</TABLE>
+					</TD>
+					<TD></TD>
+					<TD><font color="red">Внимание! IMC-FTX-MC в RSTP-сеть можно включать только в качестве корневого</font><BR><BR>
+						<TABLE class="table_tl">
+							<TR>
+								<TD><b>Параметры портов</b></TD>
+								<!--<TD><b>1 (внутр)</b></TD><TD><b>2 (Eth5)</b></TD><TD><b>3 (F.Eth2)</b></TD><TD><b>4 (F.Eth1)</b></TD>-->
+								<TD><b>Eth1</b></TD><TD><b>Eth2</b></TD><TD><b>F.Eth3</b></TD><TD><b>F.Eth4</b></TD>
+							</TR>
+							<TR>
+								<TD><b>Разрешен</b></TD>
+								<TD><input type="checkbox" value="1" id=enabled_1 name="enabled_1"></input></TD>
+								<TD><input type="checkbox" value="1" id=enabled_2 name="enabled_2"></input></TD>
+								<TD><input type="checkbox" value="1" id=enabled_3 name="enabled_3"></input></TD>
+								<TD><input type="checkbox" value="1" id=enabled_4 name="enabled_4"></input></TD>
+								<input type="hidden" name="enabled_m" id=enabled_m></input><!-- Для упаковки -->
+							</TR>
+							<TR>
+								<TD><b>Оконечный порт</b></TD>
+								<TD><input type="checkbox" value="1" id=admin_edge_1 name="admin_edge_1"></input></TD>
+								<TD><input type="checkbox" value="1" id=admin_edge_2 name="admin_edge_2"></input></TD>
+								<TD><input type="checkbox" value="1" id=admin_edge_3 name="admin_edge_3"></input></TD>
+								<TD><input type="checkbox" value="1" id=admin_edge_4 name="admin_edge_4"></input></TD>
+								<input type="hidden" name="admin_edge_m" id=admin_edge_m></input><!-- Для упаковки -->
+							</TR>
+							<TR>
+								<TD><b>Оконечный порт Авто</b></TD>
+								<TD><input type="checkbox" value="1" id=auto_edge_1 name="auto_edge_1"></input></TD>
+								<TD><input type="checkbox" value="1" id=auto_edge_2 name="auto_edge_2"></input></TD>
+								<TD><input type="checkbox" value="1" id=auto_edge_3 name="auto_edge_3"></input></TD>
+								<TD><input type="checkbox" value="1" id=auto_edge_4 name="auto_edge_4"></input></TD>
+								<input type="hidden" name="auto_edge_m" id=auto_edge_m></input><!-- Для упаковки -->
+							</TR>
+							<TR>
+								<TD><b>Приоритет</b></TD>
+								<TD><input class="table_tt_text50" id=port_priority_1 name="port_priority_1" ></input></TD>
+								<TD><input class="table_tt_text50" id=port_priority_2 name="port_priority_2" ></input></TD>
+								<TD><input class="table_tt_text50" id=port_priority_3 name="port_priority_3" ></input></TD>
+								<TD><input class="table_tt_text50" id=port_priority_4 name="port_priority_4" ></input></TD>
+							</TR>
+							<TR>
+								<TD><b>Время миграции</b></TD>
+								<TD><input class="table_tt_text50" id=migrate_time_1 name="migrate_time_1" disabled></input></TD>
+								<TD><input class="table_tt_text50" id=migrate_time_2 name="migrate_time_2" disabled></input></TD>
+								<TD><input class="table_tt_text50" id=migrate_time_3 name="migrate_time_3" disabled></input></TD>
+								<TD><input class="table_tt_text50" id=migrate_time_4 name="migrate_time_4" disabled></input></TD>
+							</TR>
+							<!-- <TR> -->
+								<!-- <TD><b>Идентификатор VLAN</b></TD> -->
+								<!-- <TD><input class="table_tt_text50" id=vlan_id_1 name="vlan_id_1" disabled></input></TD> -->
+								<!-- <TD><input class="table_tt_text50" id=vlan_id_2 name="vlan_id_2" disabled></input></TD> -->
+								<!-- <TD><input class="table_tt_text50" id=vlan_id_3 name="vlan_id_3" disabled></input></TD> -->
+								<!-- <TD><input class="table_tt_text50" id=vlan_id_4 name="vlan_id_4" disabled></input></TD> -->
+							<!-- </TR> -->
+						</TABLE>
+					</TD>
+					<TD></TD>
+				</TR>
+				<TR><TD><P><BR></P></TD></TR>
+				<!-- Здесь - таблицы состояний -->
+				<TR><TD><H3>Состояние:</H3></TD></TR>
+				<TR>
+					<TD>
+						<TABLE class="table_t2">
+							<TR><TD colspan="2">Состояние свитча</TD></TR>
+							<TR><TD>Роль</TD><TD><span id=sw_role></span></TD></TR>
+							<TR><TD>№ корневого порта</TD><TD><span id=root_port_num></span></TD></TR>
+							<TR><TD>MAC-адрес корневого моста</TD><TD><span id=root_bridge></span></TD></TR>
+						</TABLE>
+					</TD>
+					<TD></TD>
+					<TD>
+						<TABLE class="table_tl">
+							<TR>
+								<TD><b>Состояние портов</b></TD>
+								<!--<TD><b>1 (внутр)</b></TD><TD><b>2 (Eth5)</b></TD><TD><b>3 (F.Eth2)</b></TD><TD><b>4 (F.Eth1)</b></TD>-->
+								<TD><b>Eth1</b></TD><TD><b>Eth2</b></TD><TD><b>F.Eth3</b></TD><TD><b>F.Eth4</b></TD>
+							</TR>
+							<TR>
+								<TD><b>Роль</b></TD>
+								<TD><span id=port_role_1></span></TD>
+								<TD><span id=port_role_2></span></TD>
+								<TD><span id=port_role_3></span></TD>
+								<TD><span id=port_role_4></span></TD>
+							</TR>
+							<TR>
+								<TD><b>Состояние</b></TD>
+								<TD><span id=port_state_1></span></TD>
+								<TD><span id=port_state_2></span></TD>
+								<TD><span id=port_state_3></span></TD>
+								<TD><span id=port_state_4></span></TD>
+							</TR>
+							<TR>
+								<TD><b>Прием RSTP кадров</b></TD>
+								<TD><span id=port_rx_1></span></TD>
+								<TD><span id=port_rx_2></span></TD>
+								<TD><span id=port_rx_3></span></TD>
+								<TD><span id=port_rx_4></span></TD>
+							</TR>
+						</TABLE>
+					</TD>
+				</TR>
+				
+				<TR><TD><BR></TD></TR>
+				<!-- Сохранение настроек во Flash -->
+				<TR>
+					<TABLE class="table_t3">
+						<input value='0' name="applying" id=id_applying type="hidden" ></input>
+						<TR width=50% align="center">
+							<TD><b>
+								<input value="Восстановить настройки" type="submit" style="width:45%" onclick="sm0()"></input>
+								<input value="Применить настройки" type="submit" style="width:45%" onclick="sm1()" ></input>
+							</b></TD>
+						</TR>
+					</TABLE>
+				</TR>
+				
+			</TABLE>
+		</form>
+	</BODY>
+</HTML>

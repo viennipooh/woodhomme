@@ -1,0 +1,100 @@
+<HTML>
+	<HEAD>
+		<LINK href="css/main.css" rel=stylesheet type=text/css>
+		<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+		<TITLE>Настройка RS485</TITLE>
+	</HEAD>
+	<SCRIPT language=JavaScript src="js/portrs.js"></SCRIPT>
+	<BODY onload=window_onload()>
+		<form action="portrs.htm" method="get">
+			<TABLE width=100% border=0 align=center>
+				<TR><TD><P><BR></P></TD></TR>
+				<TR><TD><P><BR></P></TD></TR>
+				<TR align="center"><TD><H2>Настройки RS485</H2></TD></TR>
+				<TR>
+					<TD>
+						<TABLE class="table_tt" align="center">
+							<P>
+								<TR><TD colspan=100%><b>НАСТРОЙКИ RS485</b></TD></TR>
+								<TR>
+									<TD><b>Номер порта</b></TD>
+									<TD><b>Скорость</b></TD>
+									<TD><b>Биты данных</b></TD>
+									<TD><b>Стоп биты</b></TD>
+									<TD><b>Четность</b></TD>
+									<!--<TD><b>Упр. потоком</b></TD>-->
+								</TR>
+								<TR>
+									<TD><b>1 RS485</b></TD>
+									<TD><select name="rs_baudrate_1"></select></TD>
+									<TD>
+										<select name="rs_databits_1">
+											<option value="8" selected>8</option>
+											<option value="7">7</option>
+										</select>
+									</TD>
+									<TD>
+										<select name="rs_stopbits_1">
+											<option value="1" selected>1</option>
+											<option value="2">2</option>
+										</select>
+									</TD>
+									<TD>
+										<select name="rs_parity_1">
+											<option value="none" selected>none</option>
+											<option value="even">even</option>
+											<option value="odd">odd</option>
+										</select>
+									</TD>
+									<!--<TD>
+										<select name="rs_fctrl_1">
+											<option value="none" selected>none</option>
+										</select>
+									</TD>-->
+								</TR>
+								<!--<TR>
+									<TD><b>2 RS485</b></TD>
+									<TD><select name="rs_baudrate_2"></select></TD>
+									<TD>
+										<select name="rs_databits_2">
+											<option value="8" selected>8</option>
+											<option value="7">7</option>
+										</select>
+									</TD>
+									<TD>
+										<select name="rs_stopbits_2">
+											<option value="1" selected>1</option>
+											<option value="2">2</option>
+										</select>
+									</TD>
+									<TD>
+										<select name="rs_parity_2">
+											<option value="none" selected>none</option>
+											<option value="even">even</option>
+											<option value="odd">odd</option>
+										</select>
+									</TD>
+									<TD>
+										<select name="rs_fctrl_2">
+											<option value="none" selected>none</option>
+										</select>
+									</TD>
+								</TR>-->
+							</P>
+						</TABLE>
+					</TD>
+				</TR>	
+				<TR><TD><P><BR></P></TD></TR>
+				<input value='0' name="applying" type="hidden" ></input>
+				<TR><TD><P><BR></P></TD></TR>
+				<TR width=90% align="center">
+					<TD>
+						<input value="Отменить" type="submit" style="width:45%" onclick="sm0()"></input>
+						<input value="Применить настройки" type="submit" style="width:45%" onclick="sm1()" ></input>
+					</TD>			
+				</TR>
+				<TR><TD><P><BR></P></TD></TR>
+			</TABLE>
+		</form>
+	</BODY>
+</HTML>

@@ -1,0 +1,77 @@
+﻿<HTML>
+	<HEAD>
+		<LINK href="css/time.css" rel=stylesheet type=text/css>
+		<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+		<TITLE>Контроль связи</TITLE>
+		<SCRIPT language=JavaScript src="js/ping.js"></SCRIPT>
+	</HEAD>
+	<BODY onload=window_onload()>
+		<TABLE width=80% border=0 align=center >
+			<TR><TD><P><BR></P></TD></TR>
+			<TR><TD><P><BR></P></TD></TR>
+			<TR align="center" class=HEADER_BLUE><TD><H2>Контроль связи</H2></TD></TR>
+			<TR><TD><P><BR></P></TD></TR>
+			<TR>
+				<TD>
+					<FORM name=network method=GET action=ping.htm onsubmit="return check_value(this)"> 
+						<TABLE border=1 align=center class="table_t2">
+							<TR>
+								<TD colspan=100%>Параметры контроля связи</TD>
+							</TR>
+							<TR>
+								<TD>Режим контроля связи</TD>
+								<TD><SELECT size=1 name=ping_mode>
+										<OPTION value="0">Выкл</OPTION><OPTION value="1">Вкл</OPTION>
+									</SELECT>
+								</TD>
+							</TR>
+							<!--<TR>
+								<TD>Аппаратный Watchdog таймер</TD>
+								<TD><SELECT size=1 name=hd_wdog>
+										<OPTION value="0">Выкл</OPTION><OPTION value="1">Вкл</OPTION>
+									</SELECT>
+								</TD>
+							</TR>-->
+							<TR><TD>IP адрес контроля связи</TD><TD><INPUT class=input_align type=text name=ping_ip size=15 maxlength=15 value=127.0.0.1></TD>
+							</TR>
+							<TR>
+								<TD>Пуск проверки после загрузки (час: мин)</TD>
+								<TD>
+									<span></span>
+									<INPUT class=input_align type=text name=start_hour size=1 maxlength=2 value=00>:
+									<INPUT class=input_align type=text name=start_min size=1 maxlength=2 value=05>
+								</TD>
+							</TR>
+							<TR>
+								<TD>Интервал между проверками (мин: сек)</TD>
+								<TD>
+									<span></span>
+									<INPUT class=input_align type=text name=int_min size=1 maxlength=2 value=03>:
+									<INPUT class=input_align type=text name=int_sec size=1 maxlength=2 value=00>
+								</TD>
+							</TR>
+							<TR>
+								<TD>Количество пингов в пакете проверки</TD>
+								<TD>
+									<span></span>
+									<INPUT class=input_align type=text name=ping_num size=1 maxlength=2 value=4>
+								</TD>
+							</TR>
+							<TR>
+								<TD>Количество ошибочных проверок max</TD>
+								<TD>
+									<span></span>
+									<INPUT class=input_align type=text name=ping_err_num size=1 maxlength=2 value=3>
+								</TD>
+							</TR>
+						</TABLE>
+						<P align=center><INPUT type=submit value="Установить параметры" name=submit onclick="OnParamChg()"></P>
+						<Input type=hidden name=setparam value="0">
+					</FORM>
+				</TD>
+			</TR>
+			<TR><TD><BR></TD></TR>
+			<TR><TD><BR></TD></TR>
+		</TABLE>
+	</BODY>
+</HTML>

@@ -1,0 +1,41 @@
+<HTML>
+<HEAD><TITLE>Contets</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+<STYLE type="TEXT/CSS">A:link{COLOR:#000000;TEXT-DECORATION:none}A:visited{color:#000000;text-decoration:none}A:hover{COLOR:#FF0000;TEXT-DECORATION:none}</STYLE>
+<SCRIPT	language="JavaScript" src="js/contents.js"></SCRIPT>
+</HEAD>
+<BODY leftMargin=1 topMargin=1 style="font-family: Verdana;	font-size: 18pt" bgcolor="#1E5B9B">
+<SCRIPT	language=JavaScript>
+    foldersTree =gFld("Главное меню")
+    insDoc(foldersTree, gLnk(0, "Состояние", "main.htm"))
+    folder_ext = insFld(foldersTree, gFld("Настройки",	"port.htm"))
+	insDoc(folder_ext, gLnk(0, "Настройка Ethernet",  "port.htm"))
+	insDoc(folder_ext, gLnk(0, "Настройка RS485",  "portrs.htm"))
+	insDoc(folder_ext, gLnk(0, "Настройка IP доступа", "portip.htm"))
+	//insDoc(folder_ext, gLnk(0, "Настройка Питания", "portpwr.htm"))
+	insDoc(folder_ext, gLnk(0, "Поллинг каналов RS485", "portpoll.htm"))
+	//insDoc(folder_ext, gLnk(0, "Настройка VLAN", "vlan.htm"))
+	insDoc(folder_ext, gLnk(0, "Настройка RSTP", "stp.htm"))
+	insDoc(folder_ext, gLnk(0, "Настройка даты и времени", "time.htm"))
+	insDoc(folder_ext, gLnk(0, "Контроль температуры", "temp.htm"))
+ 	insDoc(folder_ext, gLnk(0, "Контроль связи", "ping.htm"))
+    insDoc(folder_ext, gLnk(0, "Загрузка", "upload_fw.html"))
+	
+	insDoc(foldersTree, gLnk(0, "Статистика", "stat.htm"))
+	
+    folder_ext = insFld(foldersTree, gFld("MAC таблица","dmac.htm"))
+    insDoc(folder_ext, gLnk(0, "Динамическая", "dmac.htm"))
+	
+    insDoc(foldersTree, gLnk(0, "Состояние RSTP","stp_ro.htm"))
+	
+    insDoc(foldersTree, gLnk(0, "События","events.htm"))
+    insDoc(foldersTree, gLnk(0, "Состояние кабелей","cable.htm"))
+	
+    insDoc(foldersTree, gLnk(0, "Настройки сети", "ip.htm"))
+    insDoc(foldersTree, gLnk(0, "Настройки доступа", "pass.htm"))
+    insDoc(foldersTree, gLnk(0, "Сохранить/Перезагрузить", "save_restart.htm"))
+
+    initializeDocument()
+</SCRIPT>
+</BODY>
+</HTML>

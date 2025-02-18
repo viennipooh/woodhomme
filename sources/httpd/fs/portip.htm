@@ -1,0 +1,49 @@
+<HTML>
+	<HEAD>
+		<LINK href=css/main.css rel=stylesheet type=text/css>
+		<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+		<TITLE>Настройка RS485</TITLE>
+	</HEAD>
+	<SCRIPT language=JavaScript src="js/portip.js"></SCRIPT>
+	<BODY onload=window_onload()>
+		<form name=submit action=portip.htm method=get>
+			<TABLE width=100% border=0 align=center>
+				<TR><TD><P><BR></P></TD></TR>
+				<TR><TD><P><BR></P></TD></TR>
+				<TR align=center><TD><H2>Настройка IP доступа к RS485</H2></TD></TR>
+				<TR>
+					<TD>
+						<TABLE class=table_tt align=center>
+							<P>
+								<TR><TD colspan=100%><b>Настройки IP доступа</b></TD></TR>
+								<TR>
+									<TD><b>Номер порта</b></TD>
+									<TD><b>Режим работы *</b></TD>
+									<TD><b>IP адрес подсоединения</b></TD>
+									<TD><b>Порт подсоединения</b></TD>
+									<TD><b>Локальный порт</b></TD>
+								</TR>
+								<TR>
+									<TD><b>RS485</b></TD>
+									<TD><select name=ip_mode_1></select></TD>
+									<TD><input name=ip_addr_1 value=192.168.1.1></input></TD>
+									<TD><input name=ip_port_conn_1 value=502></input></TD>
+									<TD><input name=ip_port_local_1 value=502></input></TD>
+								</TR>
+							</P>
+						</TABLE>
+					</TD>
+				</TR>
+				<TR width=90% align=center><TD><notice1>* При смене режима работы будет выполнена перезагрузка устройства</notice1><P><BR></P></TD></TR>
+				<input value='0' name="applying" type="hidden" ></input>
+				<TR width=90% align=center>
+					<TD>
+						<input value="Отменить" type="submit" style="width:45%" ></input>
+						<input value="Сохранить настройки" type="submit" style="width:45%" onclick="sm1()" ></input>
+					</TD>
+				</TR>
+				<TR><TD><P><BR></P></TD></TR>
+			</TABLE>
+		</form>
+	</BODY>
+</HTML>

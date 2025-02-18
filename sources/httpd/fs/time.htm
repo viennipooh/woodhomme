@@ -1,0 +1,106 @@
+﻿<HTML>
+	<HEAD>
+		<LINK href="css/time.css" rel=stylesheet type=text/css>
+		<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+		<TITLE>Настройка даты и времени</TITLE>
+		<SCRIPT language=JavaScript src="js/time.js"></SCRIPT>
+	</HEAD>
+	<BODY onload=window_onload()>
+		<TABLE width=80% border=0 align=center >
+			<TR><TD><P><BR></P></TD></TR>
+			<TR><TD><P><BR></P></TD></TR>
+			<TR align="center" class=HEADER_BLUE><TD><H2>Настройка даты и времени</H2></TD></TR>
+			<TR><TD><P><BR></P></TD></TR>
+			<TR>
+				<TD>
+					<FORM name=network method=GET action=time.htm onsubmit="return check_value(this)"> 
+						<TABLE border=1 align=center class="table_tl">
+							<TR>
+								<TD colspan=100%></TD>
+							</TR>
+							<TR>
+								<TD>Дата и время устройства:</TD>
+								<TD><INPUT class=input_align type=text name=day size=2 maxlength=2 min=1 max=31> .
+								<INPUT class=input_align type=text name=month size=2 maxlength=2 min=1 max=12> .
+								<INPUT class=input_align type=text name=year size=4 maxlength=4> г.</TD>
+								<TD><INPUT class=input_align type=text name=hour size=2 maxlength=2 min=0 max=23> :
+								<INPUT class=input_align type=text name=minute size=2 maxlength=2 min=0 max=59></TD>
+								<TD><span id=assigned size=30 maxlength=30>Время установлено .</span></TD>
+							</TR>
+						</TABLE>
+						<P align=center>
+							<INPUT type=submit value="Установить время" name=submit_time onclick="OnTimeChg()">
+							<INPUT type=submit value="Установить текущее время" name=submit_time onclick="OnCurrTimeChg()">
+						</P>
+						<P></P>
+						<TABLE border=1 align=center class="table_t2">
+							<TR>
+								<TD colspan=100%>Параметры коррекции времени</TD>
+							</TR>
+							<TR><TD>IP адрес NTP сервера</TD><TD><INPUT class=input_align type=text name=ntp_ip size=15 maxlength=15></TD>
+							</TR>
+							<TR>
+								<TD>Режим коррекции времени</TD>
+								<TD><SELECT size=1 name=ntp_mode>
+										<OPTION value="0">Ручной</OPTION><OPTION value="1">Авто (SNTP)</OPTION>
+									</SELECT>
+								</TD>
+							</TR>
+							<TR>
+								<TD>Период коррекции времени (49 дней MAX)</TD>
+								<TD>
+									<span></span>
+									<INPUT class=input_align type=text name=period_num size=3 maxlength=3>
+									<SELECT size=1 name=period_kind>
+										<OPTION value="0">мин</OPTION>
+										<OPTION value="1">час</OPTION>
+										<OPTION value="2">сут</OPTION>
+										<!--<OPTION value="3">нед</OPTION>-->
+									</SELECT>
+								</TD>
+							</TR>
+							<TR>
+								<TD>Часовой пояс</TD>
+								<TD><SELECT size=1 name=time_zone>
+										<OPTION value="-12">(UTC-12)</OPTION>
+										<OPTION value="-11">(UTC-11)</OPTION>
+										<OPTION value="-10">(UTC-10)</OPTION>
+										<OPTION value="-9">(UTC-09)</OPTION>
+										<OPTION value="-8">(UTC-08)</OPTION>
+										<OPTION value="-7">(UTC-07)</OPTION>
+										<OPTION value="-6">(UTC-06)</OPTION>
+										<OPTION value="-5">(UTC-05)</OPTION>
+										<OPTION value="-4">(UTC-04)</OPTION>
+										<OPTION value="-3">(UTC-03)</OPTION>
+										<OPTION value="-2">(UTC-02)</OPTION>
+										<OPTION value="-1">(UTC-01)</OPTION>
+										<OPTION value="0">(UTC-00) Лондон</OPTION>
+										<OPTION value="1">(UTC+01) Белград, Будапешт</OPTION>
+										<OPTION value="2">(UTC+02) Калининград</OPTION>
+										<OPTION value="3">(UTC+03) Москва, Минск</OPTION>
+										<OPTION value="4">(UTC+04) Волгоград, Ижевск</OPTION>
+										<OPTION value="5">(UTC+05) Екатеринбург</OPTION>
+										<OPTION value="6">(UTC+06) Омск</OPTION>
+										<OPTION value="7">(UTC+07) Новосибирск, Кемерово, Томск</OPTION>
+										<OPTION value="8">(UTC+08) Иркутск</OPTION>
+										<OPTION value="9">(UTC+09) Чита, Якутск</OPTION>
+										<OPTION value="10">(UTC+10) Владивосток</OPTION>
+										<OPTION value="11">(UTC+11) Магадан, Сахалин</OPTION>
+										<OPTION value="12">(UTC+12) Анадырь</OPTION>
+									</SELECT>
+								</TD>
+							</TR>
+							<TR>
+								<TD>Коррекция системного времени (ppm):</TD><TD><span id=id_corr_value></span></TD>
+							</TR>
+						</TABLE>
+						<P align=center><INPUT type=submit value="Установить параметры" name=submit onclick="OnParamChg()"></P>
+						<Input type=hidden name=setparam value="0">
+					</FORM>
+				</TD>
+			</TR>
+			<TR><TD><BR></TD></TR>
+			<TR><TD><BR></TD></TR>
+		</TABLE>
+	</BODY>
+</HTML>

@@ -1,0 +1,45 @@
+<HTML>
+	<HEAD>
+		<LINK href=css/main.css rel=stylesheet type=text/css>
+		<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+		<TITLE>Сетевые настройки</TITLE>
+		<SCRIPT language=JavaScript src="js/ip.js"></SCRIPT>
+	</HEAD>
+	<BODY onload=window_onload()>
+		<TABLE width=60% border=0 align=center >
+			<TR><TD><P><BR></P></TD></TR>
+			<TR><TD><P><BR></P></TD></TR>
+			<TR align=center class=HEADER_BLUE><TD><H2>Настройки сети</H2></TD></TR>
+			<TR><TD><P><BR></P></TD></TR>
+			<TR>
+				<TD>
+					<FORM name=network method=GET action=ip.htm onsubmit="return check_value(this)">
+						<TABLE border=1 align=center class=table_tl>
+							<TR>
+								<TD colspan=100%>НАСТРОЙКИ СЕТИ</TD>
+							</TR>
+							<TR>
+								<TD>IP аддрес</TD>
+								<TD><INPUT type=text name=ip size=15 maxlength=15></TD>
+							</TR>
+							<TR>
+								<TD>Маска подсети</TD>
+								<TD><INPUT type=text name=netmask size=15 maxlength=15></TD>
+							</TR>
+							<TR>
+								<TD>Шлюз</TD>
+								<TD><INPUT type=text name=gateway size=15 maxlength=15></TD>
+								<INPUT type=hidden name=mac size=17 maxlength=17 value=FF:FF:FF:FF:FF:FF>
+							</TR>
+							<INPUT type=hidden name=ipconfig value="static">
+						</TABLE>
+						<P align=center><INPUT type=submit value="Отправить" name=submit></P>
+						<Input type=hidden name=setfunc value=network>
+					</FORM>
+				</TD>
+			</TR>
+			<TR><TD><BR></TD></TR>
+			<TR><TD><BR></TD></TR>
+		</TABLE>
+	</BODY>
+</HTML>

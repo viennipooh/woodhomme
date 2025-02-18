@@ -1,0 +1,42 @@
+<HTML>
+	<HEAD>
+		<LINK href="css/stp.css" rel=stylesheet type=text/css>
+		<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+		<TITLE>Контроль температуры</TITLE>
+		<SCRIPT language=JavaScript src="js/temp.js"></SCRIPT>
+	</HEAD>
+	<BODY onload=window_onload()>
+		<TABLE width=40% border=0 align=center >
+			<TR><TD><P><BR></P></TD></TR>
+			<TR align="center" class=HEADER_BLUE><TD><H2>Контроль температуры</H2></TD></TR>
+			<TR><TD><P><BR></P></TD></TR>
+			<TR>
+				<TD>
+					<FORM name=network method=GET action=temp.htm onsubmit="return check_value(this)"> 
+						<TABLE border=1 align=center class="table_t2">
+							<TR>
+								<TD colspan=100%>Параметры температуры</TD>
+							</TR>
+							<TR>
+								<TD>Температура корпуса (°C)</TD>
+								<TD><span id=dev_temp >45</span></TD>
+							</TR>
+							<TR>
+								<TD>Уровень предупреждения (°C)</TD>
+								<TD><INPUT class="table_tt_text100" type=text name=dev_warn_temp align=center size=5 maxlength=5></TD>
+							</TR>
+							<TR>
+								<TD>Уровень отключения (°C)</TD>
+								<TD><INPUT class="table_tt_text100" type=text name=dev_fault_temp align=center size=5 maxlength=5></TD>
+							</TR>
+						</TABLE>
+						<P align=center><INPUT type=submit value="Сохранить" name=submit></P>
+						<Input type=hidden name=setfunc value=network>
+					</FORM>
+				</TD>
+			</TR>
+			<TR><TD><BR></TD></TR>
+			<TR><TD><BR></TD></TR>
+		</TABLE>
+	</BODY>
+</HTML>

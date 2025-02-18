@@ -1,0 +1,139 @@
+<HTML>
+	<HEAD>
+		<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+		<LINK href=css/main.css rel=stylesheet type=text/css>
+		<TITLE>Состояние</TITLE>
+	</HEAD>
+	<SCRIPT language=JavaScript src="js/main.js"></SCRIPT>
+	<BODY onload=window_onload()>
+		<TABLE width=90% border=0 align=center>
+			<TR><TD><H2>Добро пожаловать в интерфейс пользователя УТЗШ Пиксель!</H2></TD></TR>
+			<TR>
+				<TD>
+					<TABLE class=table_tl>
+						<P>
+						<TR><TD colspan=2>Пиксель (вы на <!--#sw_src_port--> порту)</TD></TR>
+						<TR><TD>Имя устройства</TD><TD><span id=dev_name></span></TD></TR>
+						<TR><TD>IP Адрес</TD><TD><span id=ip></span></TD></TR>
+						<TR><TD>Маска подсети</TD><TD><span id=netmask></span></TD></TR>
+						<TR><TD>Адрес шлюза</TD><TD><span id=gateway></span></TD></TR>
+						<TR><TD>MAC Адрес</TD><TD><span id=mac></span></TD></TR>
+						<TR><TD>Версия ПО</TD><TD><span id=ver_fw></span></TD></TR>
+						<TR><TD>Версия АО</TD><TD><span id=ver_hw></span></TD></TR>
+						<TR><TD>Серийный №</TD><TD><span id=serial_no></span></TD></TR>
+						<TR><TD>Время работы</TD><TD><span id=uptime></span></TD></TR>
+						</P>
+					</TABLE>
+				</TD>
+			</TR>
+			<TR><TD><BR></TD></TR>
+			<TR><TD><H2>Состояние портов</H2></TD></TR>
+			<TR>
+				<TD>
+					<TABLE class=table_tl>
+						<TR>
+							<TD><b>Номер порта</b></TD>
+							<TD><b>Eth.1</b></TD><TD><b>Eth.2</b></TD><TD><b>F.Eth.3</b></TD><TD><b>F.Eth.4</b></TD>
+						</TR>
+						<TR>
+							<TD><b>Описание</b></TD>
+							<TD><span id=pstr_1></span></TD>
+							<TD><span id=pstr_2></span></TD>
+							<TD><span id=pstr_3></span></TD>
+							<TD><span id=pstr_4></span></TD>
+						</TR>
+						<TR>
+							<TD><b>Символ</b></TD>
+							<TD><span id=pconn_1></span></TD>
+							<TD><span id=pconn_2></span></TD>
+							<TD><span id=pconn_3></span></TD>
+							<TD><span id=pconn_4></span></TD>
+						</TR>
+						<TR>
+							<TD><b>Включен</b></TD>
+							<TD><span id=pen_1></span></TD>
+							<TD><span id=pen_2></span></TD>
+							<TD><span id=pen_3></span></TD>
+							<TD><span id=pen_4></span></TD>
+						</TR>
+						<TR>
+							<TD><b>Автоопределение</b></TD>
+							<TD><span id=pauto_1></span></TD>
+							<TD><span id=pauto_2></span></TD>
+							<TD><span id=pauto_3></span></TD>
+							<TD><span id=pauto_4></span></TD>
+						</TR>
+						<TR>
+							<TD><b>Скорость</b></TD>
+							<TD><span id=pspeed_1></span></TD>
+							<TD><span id=pspeed_2></span></TD>
+							<TD><span id=pspeed_3></span></TD>
+							<TD><span id=pspeed_4></span></TD>
+						</TR>
+						<TR>
+							<TD><b>Режим</b></TD>
+							<TD><span id=pduplex_1></span></TD>
+							<TD><span id=pduplex_2></span></TD>
+							<TD><span id=pduplex_3></span></TD>
+							<TD><span id=pduplex_4></span></TD>
+						</TR>
+						<TR>
+							<TD><b>Контроль потока</b></TD>
+							<TD><span id=pcflw_1></span></TD>
+							<TD><span id=pcflw_2></span></TD>
+							<TD><span id=pcflw_3></span></TD>
+							<TD><span id=pcflw_4></span></TD>
+						</TR>
+						<TR>
+							<TD><b>Трафик Tx (Кбит/сек)</b></TD>
+							<TD><span id=load_tx_1></span></TD>
+							<TD><span id=load_tx_2></span></TD>
+							<TD><span id=load_tx_3></span></TD>
+							<TD><span id=load_tx_4></span></TD>
+						</TR>
+						<TR>
+							<TD><b>Трафик Rx (Кбит/сек)</b></TD>
+							<TD><span id=load_rx_1></span></TD>
+							<TD><span id=load_rx_2></span></TD>
+							<TD><span id=load_rx_3></span></TD>
+							<TD><span id=load_rx_4></span></TD>
+						</TR>
+					</TABLE>
+				</TD>
+			</TR>
+			<TR><TD><BR></TD></TR>
+			<TR><TD><H2>Внутреннее состояние</H2></TD></TR>
+			<TR>
+				<TD>
+					<TABLE  width=100% border=0 align=center >
+						<TR>
+							<TD>
+								<TABLE class="table_t2">
+									<TR><TD colspan="2">Внутренние параметры</TD></TR>
+									<TR><TD>Напряжение питания</TD><TD><span id=dev_vcc></span></TD></TR>
+								</TABLE>
+							</TD>
+							<TD>
+								<TABLE class="table_t2">
+									<TR><TD>Порт RS485</TD><TD>Скорость</TD><TD>Порт</TD><TD>Подключен</TD><TD>Передача</TD><TD>Прием</TD><TD>Питание</TD></TR>
+									<TR><TD>RS485 1:</TD>
+										<TD><span id=rs_baudrate_1></span></TD>
+										<TD><span id=ip_port_local_1></span></TD>
+										<TD><span id=rs_conn_1></span></TD>
+										<TD><span id=rs_tx_1></span></TD>
+										<TD><span id=rs_rx_1></span></TD>
+										<TD><span id=power_rs485_1></span></TD>
+									</TR>
+								</TABLE>
+							</TD>
+						</TR>
+					</TABLE>
+				</TD>
+			</TR>
+			<TR><TD><BR></TD></TR>
+			<TR><TD><BR></TD></TR>
+			<TR><TD><BR></TD></TR>
+			<TR><TD><BR></TD></TR>
+		</TABLE>
+	</BODY>
+</HTML>

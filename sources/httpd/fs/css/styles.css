@@ -1,0 +1,123 @@
+body, html, * {
+  font-family: Arial;
+  margin: 0;
+  padding: 0; }
+
+h2 {
+  margin-left: 30px;
+  margin-top: 10px;
+  color: #333; }
+
+table tr td:not(:first-child) {
+  padding-left: 20px; }
+
+a {
+  text-decoration: none; }
+
+.table__primary {
+  margin: 1em 0;
+  width: calc(100% - 20px);
+  margin: 10px auto;
+  overflow: hidden;
+  background: #FFF;
+  color: #024457;
+  border-radius: 10px;
+  border: 1px solid #167F92; }
+  .table__primary .first_col {
+    width: 300px; }
+  .table__primary tr {
+    border: 1px solid #D9E4E6; }
+    .table__primary tr:nth-child(odd) {
+      background-color: #EAF3F3; }
+  .table__primary th {
+    display: none;
+    border: 1px solid #FFF;
+    background-color: #167F92;
+    color: #FFF;
+    padding: 1em; }
+    .table__primary th:first-child {
+      display: table-cell;
+      text-align: center; }
+    .table__primary th:nth-child(2) {
+      display: table-cell; }
+      .table__primary th:nth-child(2) span {
+        display: none; }
+      .table__primary th:nth-child(2):after {
+        content: attr(data-th); }
+    @media (min-width: 480px) {
+      .table__primary th:nth-child(2) span {
+        display: block; }
+      .table__primary th:nth-child(2):after {
+        display: none; } }
+  .table__primary td {
+    display: block;
+    word-wrap: break-word;
+    max-width: 7em; }
+    .table__primary td:first-child {
+      display: table-cell;
+      text-align: center;
+      border-right: 1px solid #D9E4E6; }
+    @media (min-width: 480px) {
+      .table__primary td {
+        border: 1px solid #D9E4E6; } }
+  .table__primary th, .table__primary td {
+    text-align: left;
+    margin: .5em 1em; }
+    @media (min-width: 480px) {
+      .table__primary th, .table__primary td {
+        display: table-cell;
+        padding: .2em; } }
+
+.btn__primary {
+  border-radius: 150px;
+  background-color: #388be9;
+  padding: .5rem 2rem;
+  border: none;
+  color: white; }
+
+.navbar {
+  overflow: hidden;
+  background-color: #1565c0; }
+
+.centered {
+  text-align: center; }
+  .centered * {
+    margin: .4rem .2rem; }
+
+.navbar h2 {
+  margin: 15px 20px;
+  color: #fff; }
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #fff; }
+
+/* Style the buttons inside the tab */
+.tab a {
+  background-color: inherit;
+  text-decoration: none;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  color: #222; }
+
+/* Change background color of buttons on hover */
+.tab a:hover {
+  background-color: #eee; }
+
+/* Create an active/current tablink class */
+.tab a.active {
+  background-color: #eee; }
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  /*border: 1px solid #ccc;*/
+  border-top: none; }

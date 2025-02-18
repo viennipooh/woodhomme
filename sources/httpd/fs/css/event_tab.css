@@ -1,0 +1,40 @@
+body         { background-color: #ECF3F9; font-family: Verdana; font-size: 14pt }
+font         { font-family: Verdana }
+h2           { font-family: Verdana; font-size: 16pt; color: #5789C6; font-style: italic }
+h3           { font-family: Verdana; font-size: 12pt; font-weight: bold }
+*.BLUE		{ COLOR:0000FF}
+*.HEADER	{ font-family: Verdana; font-size: 12pt; font-weight: bold}
+*.HEADER_BLUE	{ font-family: Verdana; font-size: 12pt; color: #0000FF; font-weight: bold}
+*.TITLE		{ font-family: Verdana; font-size: 14pt; color: #0000FF; font-weight: bold; text-align: center }
+A:link 		{COLOR:#000000; TEXT-DECORATION: none}
+a:visited 	{color:#000000; text-decoration: none}
+A:hover 	{COLOR:#FF0000; TEXT-DECORATION: none}
+
+.table_tl {
+	width:100%;
+	border: 2px solid lightgray;
+	border-collapse: collapse;
+	text-align:center;
+	background-color: white; 
+}
+.table_tl tr:first-child td{
+	background-color: #1E5B9B; 
+	text-align:center;
+	color:white;
+	font-weight: bold;
+}
+.table_tl td:first-child{
+	border: 2px solid DarkGray;
+	border-collapse: collapse;
+	text-align:center;
+	background-color: #1E5B9B; 
+	color:white;
+	font-weight: bold;
+	/* width: 8%; */
+}
+.table_tl td{
+	border: 2px solid gray;
+	border-collapse: collapse;
+	text-align:center;
+}
+

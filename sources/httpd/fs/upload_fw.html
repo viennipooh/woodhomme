@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml' >
+  <head>
+    <title>Загрузка ПО коммутатора</title>
+	<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+	<LINK href="css/upload_fw.css" rel=stylesheet type=text/css>
+	<SCRIPT language=JavaScript src="js/upload_fw.js"></SCRIPT>
+  </head>
+  <body onload=window_onload()>
+	<H2>Загрузка ПО коммутатора</H2>
+    <span id="uploadFrameHolder" style="display:none"><iframe name="uploadFrame" ></iframe></span>
+      
+    <table class="table_t2" align="center">
+        <tr><td colspan=100%>Загрузка ПО</td></tr>
+        <tr><td>Имя файла: </td><td id="fileName">
+			<form id="frm" method="post" enctype="multipart/form-data" target="uploadFrame" onsubmit="formSubmit()">
+				<TABLE class="table_t3">
+					<tr><td class="in_text" style="line-height: 30px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 16px;">
+					    <div class="file_upload">
+							<div id="upload_file_name" >Файл не выбран</div>
+							<input type="file" id="file_upl" name="dummyname" onchange="prepareUpload()" accept="application/x-binary" >
+						</div>
+					</td>
+					<td><input type="submit" id="button_upload" style="font-size: 16px;" value="Загрузить" /></td> <!-- <input type="button" style="font-size: 16px;" value="Загрузить" onclick="startUpload()" />-->
+					<td><input id="cancelUploadBtn" style="font-size: 16px;" disabled="true" type="button" value="Отменить" onclick="cancelUpload()" />
+					<span style="line-height: 20px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px;"
+						data-mce-style="line-height: 20px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px;"></span></td></tr>
+				</TABLE>
+			</form>
+		</td></tr>
+        <tr><td>Загружается в: </td><td id="target"></td></tr>
+        <tr><td>Размер файла (Байт): </td><td id="fileSize"></td></tr>
+        <tr><td>Загружено байт: </td><td id="bytesUploaded"></td></tr>
+        <tr>
+            <td>% загрузки: </td>
+            <td>
+                <table class="table_t3">
+                    <tr>
+                        <td>
+							<div style="text-align:center; width:99%; height:25px; border: solid 2px black; font-size:0px"><div id="uploadProgressBar" style="background-color: #1E5B9B; height:95%; width:0%"></div>
+                            </div>
+                        </td>
+                        <td class="in_text" id="percentUploaded"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+  </body>
+</html>
