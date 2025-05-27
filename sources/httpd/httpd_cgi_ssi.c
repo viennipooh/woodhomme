@@ -267,7 +267,7 @@ enum {
   CGI_SYSTEM_RESET_SAVE = 9,
   CGI_SYSTEM_DMAC = 10,
   CGI_SYSTEM_BOOT = 11,
-  CGI_SYSTEM_PORTRS = 12,
+  CGI_SYSTEM_PORTRS = 12,		// найтсрйоки портов
   CGI_SYSTEM_PORTIP = 13,
   CGI_SYSTEM_PORTPOLL = 14,
   CGI_SYSTEM_FRAMEPOLL = 15,
@@ -2273,7 +2273,7 @@ u16_t httpd_handler(int iIndex, char *pcInsert, int iInsertLen)
         }
         //--------------------------------
         length += sprintf ( pcInsert+length, "\"pconn_\":[");
-        for(int i = 0; i < PORT_NUMBER - 1; i++)
+        for(int i = 0; i < PORT_NUMBER ; i++)
         {
           length += sprintf ( pcInsert+length, "\"%d\",", ((status_sw[i][1]>>5)&1));
         }
@@ -2281,7 +2281,7 @@ u16_t httpd_handler(int iIndex, char *pcInsert, int iInsertLen)
 
         //--------------------------------
         length += sprintf ( pcInsert+length, "\"pen_\":[");
-        for(int i = 0; i < PORT_NUMBER - 1; i++)
+        for(int i = 0; i < PORT_NUMBER ; i++)
         {
           length += sprintf ( pcInsert+length, "\"%d\",", rsettings->sw.ports[i].port_enabled);
         }
@@ -2316,7 +2316,7 @@ u16_t httpd_handler(int iIndex, char *pcInsert, int iInsertLen)
 
         //--------------------------------
         length += sprintf ( pcInsert+length, "\"pduplex_\":[");
-        for(int i = 0; i < PORT_NUMBER - 1; i++)
+        for(int i = 0; i < PORT_NUMBER ; i++)
         {
           length += sprintf ( pcInsert+length, "\"%d\",", (rsettings->sw.ports[i].autonegotiation)?((((status_sw[i][0])>>1)&1 > 0)?1:0):(rsettings->sw.ports[i].full_duplex) );
         }
@@ -2324,7 +2324,7 @@ u16_t httpd_handler(int iIndex, char *pcInsert, int iInsertLen)
 
         //--------------------------------
         length += sprintf ( pcInsert+length, "\"pcflw_\":[");
-        for(int i = 0; i < PORT_NUMBER - 1; i++)
+        for(int i = 0; i < PORT_NUMBER ; i++)
         {
           length += sprintf ( pcInsert+length, "\"%d\",", (rsettings->sw.ports[i].autonegotiation)?(((status_sw[i][0]>>3)&3)?1:0):(rsettings->sw.ports[i].flow_control) );
         }
@@ -2342,22 +2342,24 @@ u16_t httpd_handler(int iIndex, char *pcInsert, int iInsertLen)
                            (rsettings->sw.ports[5].mdi == 2)?((((status_sw[5][1]>>7)&1)>0)?1:0):((rsettings->sw.ports[5].mdi == 1)?1:0),
                            (rsettings->sw.ports[6].mdi == 2)?((((status_sw[6][1]>>7)&1)>0)?1:0):((rsettings->sw.ports[6].mdi == 1)?1:0));
  #endif
- #if (IMC_FTX_MC != 0)
+
         length += sprintf ( pcInsert+length, "\"pamdi_\":[\"%d\",\"%d\",\"-\",\"-\"],",
                            (rsettings->sw.ports[0].mdi == 2)?1:0,
-                           (rsettings->sw.ports[1].mdi == 2)?1:0);
+                           (rsettings->sw.ports[1].mdi == 2)?1:0,
+														(rsettings->sw.ports[2].mdi == 2)?1:0 );
         //--------------------------------
         length += sprintf ( pcInsert+length, "\"pmdi_\":[\"%d\",\"%d\",\"-\",\"-\"],",
                            (rsettings->sw.ports[0].mdi == 2)?((((status_sw[0][1]>>7)&1)>0)?1:0):((rsettings->sw.ports[0].mdi == 1)?1:0),
-                           (rsettings->sw.ports[1].mdi == 2)?((((status_sw[1][1]>>7)&1)>0)?1:0):((rsettings->sw.ports[1].mdi == 1)?1:0));
- #endif
+                           (rsettings->sw.ports[1].mdi == 2)?((((status_sw[1][1]>>7)&1)>0)?1:0):((rsettings->sw.ports[1].mdi == 1)?1:0),
+													 (rsettings->sw.ports[2].mdi == 2)?((((status_sw[2][1]>>7)&1)>0)?1:0):((rsettings->sw.ports[2].mdi == 1)?1:0)	 );
+
         //--------------------------------
         length += sprintf ( pcInsert+length, "\"palias_\":[");
-        for(int i = 0; i < PORT_NUMBER - 1; i++)
+        for(int i = 0; i < PORT_NUMBER ; i++)
         {
           length += sprintf ( pcInsert+length, "\"%s\",", rsettings->sw.ports[i].alias );
         }
-        length += sprintf ( pcInsert+length, "\"%s\"],", rsettings->sw.ports[PORT_NUMBER - 1].alias );
+        length += sprintf ( pcInsert+length, "\"%s\"],", rsettings->sw.ports[PORT_NUMBER ].alias );
         //--------------------------------
 #endif //USE_SWITCH
 
