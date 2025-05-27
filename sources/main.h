@@ -1,6 +1,6 @@
 //******************************************************************************
 // Имя файла    :       main.h
-// Заголовок    :
+// Заголовок    :       
 // Автор        :       Вахрушев Д.В.
 // Дата         :       03.02.2016
 //
@@ -8,7 +8,7 @@
 // 2016.02.03 - Интерфейс настроек сети
 //            - Интерфейс обзора
 //            - Интерфейс настроек последовательных портов
-//
+//            
 //            - Интерфейс настройки портов TCP/UDP
 //            - Интерфейс настройки портов ethernet
 //******************************************************************************
@@ -30,14 +30,14 @@
 
 
 #define MAIN_TASK_PRIO   ( tskIDLE_PRIORITY + 1 )
-#define DHCP_TASK_PRIO   ( tskIDLE_PRIORITY + 4 )
+#define DHCP_TASK_PRIO   ( tskIDLE_PRIORITY + 4 )      
 #define LED_TASK_PRIO    ( tskIDLE_PRIORITY + 1 )
 
 #include "defconf.h" // Настройки по умолчанию
 
 
-/* Сделано переназначение define-ов в первую очерель для
- * избавления от ошибок, установки MAC адреса (групповой бит сброшен и
+/* Сделано переназначение define-ов в первую очерель для 
+ * избавления от ошибок, установки MAC адреса (групповой бит сброшен и 
  * бит локального адреса выставлен)
  */
 
@@ -63,10 +63,10 @@
 #define GW_ADDR2                GW_ADDR_2
 #define GW_ADDR3                GW_ADDR_3
 
-#define DEBUG_IP_ADDR0           (192)
-#define DEBUG_IP_ADDR1         (168)
-#define DEBUG_IP_ADDR2          (1)
-#define DEBUG_IP_ADDR3          (68)
+#define DEBUG_IP_ADDR0          255
+#define DEBUG_IP_ADDR1          255
+#define DEBUG_IP_ADDR2          255
+#define DEBUG_IP_ADDR3          255
 
 #define DEBUG_PORT              50000
 

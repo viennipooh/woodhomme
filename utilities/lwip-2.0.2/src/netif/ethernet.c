@@ -1,7 +1,7 @@
 /**
  * @file
  * Ethernet common functions
- *
+ * 
  * @defgroup ethernet Ethernet
  * @ingroup callbackstyle_api
  */
@@ -81,7 +81,7 @@ const struct eth_addr ethrstp = {{0x01,0x80,0xc2,0x00,0x00,0x00}};
  *
  * @param p the received packet, p->payload pointing to the ethernet header
  * @param netif the network interface on which the packet was received
- *
+ * 
  * @see LWIP_HOOK_UNKNOWN_ETH_PROTOCOL
  * @see ETHARP_SUPPORT_VLAN
  * @see LWIP_HOOK_VLAN_CHECK
@@ -336,7 +336,7 @@ ethernet_output(struct netif* netif, struct pbuf* p,
     (netif->hwaddr_len == ETH_HWADDR_LEN));
   LWIP_DEBUGF(ETHARP_DEBUG | LWIP_DBG_TRACE,
     ("ethernet_output: sending packet %p\n", (void *)p));
-
+  
   /* send the packet */
   return netif->linkoutput(netif, p);
 

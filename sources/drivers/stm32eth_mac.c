@@ -37,7 +37,7 @@ static eth_mac_signalevent_t _mac_event = 0;
 
 //
 //  Registers
-//
+// 
 /* Private macro -------------------------------------------------------------*/
 
 #define MODE_IN  0
@@ -126,15 +126,15 @@ static uint8_t transmit_bufer[ETHERNET_DESCRIPTOR_TRANSMIT_COUNT][ETHERNET_PACKE
 //
 static int eth_mac_init_rcc()
 {
-  RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN |
-                  RCC_AHB1ENR_GPIOBEN |
+  RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | 
+                  RCC_AHB1ENR_GPIOBEN | 
                   RCC_AHB1ENR_GPIOCEN |
                   RCC_AHB1ENR_GPIOEEN |
                   RCC_AHB1ENR_GPIOGEN;
-
+  
   RCC->AHB1RSTR |= RCC_AHB1RSTR_ETHMACRST;
   RCC->AHB1RSTR &= ~RCC_AHB1RSTR_ETHMACRST;
-
+  
   RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN |
                   RCC_AHB1ENR_GPIOBEN |
                   RCC_AHB1ENR_GPIOCEN |
@@ -146,13 +146,13 @@ static int eth_mac_init_rcc()
 
 static int eth_mac_deinit_rcc()
 {
-  RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN |
-                  RCC_AHB1ENR_GPIOBEN |
+  RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | 
+                  RCC_AHB1ENR_GPIOBEN | 
                   RCC_AHB1ENR_GPIOCEN;
-
+  
   RCC->AHB1RSTR |= RCC_AHB1RSTR_ETHMACRST;
   RCC->AHB1RSTR &= ~RCC_AHB1RSTR_ETHMACRST;
-
+  
   RCC->AHB1ENR  |= RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOCEN | RCC_AHB1ENR_GPIOGEN | RCC_AHB1ENR_GPIOEEN;
   RCC->AHB1ENR  |= RCC_AHB1ENR_ETHMACEN | RCC_AHB1ENR_ETHMACTXEN | RCC_AHB1ENR_ETHMACRXEN;
   return 0;
@@ -160,7 +160,7 @@ static int eth_mac_deinit_rcc()
 
 #include "extio.h"
 static int eth_mac_init_gpio( void )
-{
+{  
   /**
    * GPIO init
    *
@@ -169,21 +169,21 @@ static int eth_mac_init_gpio( void )
   GPIO_INIT(GPIOA, 0,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_CRS
   GPIO_INIT(GPIOA, 3,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_COL
   GPIO_INIT(GPIOA, 7,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_RX_DV
-
+  
   GPIO_INIT(GPIOA, 1,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_RXCLK
   GPIO_INIT(GPIOC, 4,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_RXD0
   GPIO_INIT(GPIOC, 5,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_RXD1
   GPIO_INIT(GPIOB, 0,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_RXD2
   GPIO_INIT(GPIOB, 1,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_RXD3
-
+  
   GPIO_INIT(GPIOC, 3,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_TXCLK
   GPIO_INIT(GPIOG,13,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_TXD0
   GPIO_INIT(GPIOB,13,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_TXD1
   GPIO_INIT(GPIOC, 2,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_TXD2
   GPIO_INIT(GPIOE, 2,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_TXD3
-
+  
   GPIO_INIT(GPIOB,11,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_TXen
-
+  
 #endif
 #ifdef LQFP_100
   GPIO_INIT(GPIOA, 0,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_CRS
@@ -197,15 +197,15 @@ static int eth_mac_init_gpio( void )
   GPIO_INIT(GPIOC, 5,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_RXD1
   GPIO_INIT(GPIOB, 0,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_RXD2
   GPIO_INIT(GPIOB, 1,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_RXD3
-
+  
   GPIO_INIT(GPIOC, 3,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_TXCLK
   GPIO_INIT(GPIOB,12,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_TXD0
   GPIO_INIT(GPIOB,13,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_TXD1
   GPIO_INIT(GPIOC, 2,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_TXD2
   GPIO_INIT(GPIOE, 2,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_TXD3
-
+  
   GPIO_INIT(GPIOB,11,MODE_AF,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MII_TXen
-
+  
  #if ((UTD_M != 0) || (IIP != 0))
   GPIO_INIT(GPIOA, 8, MODE_AF, OTYPE_PP, OSPEED_VHS, PUPD_N,  0, 0); // CLKIN
   RCC_MCO1Config(RCC_MCO1Source_HSE, RCC_MCO1Div_1);
@@ -241,18 +241,18 @@ static int eth_mac_deinit_gpio( void )
 static int eth_mac_init_desc()
 {
   uint32_t index = 0;
-
+  
   for( index = 0 ; index < ETHERNET_DESCRIPTOR_TRANSMIT_COUNT ; index++ )
   {
     descriptor_transmit[index].status                    = DESCRIPTOR_TRANSMIT_STATUS_CTRL_TCH | DESCRIPTOR_TRANSMIT_STATUS_CTRL_IC;
-
+    
     //if(_driver_capabilities->checksum_offload_tx_ip4)
     {
         descriptor_transmit[index].status |= DESCRIPTOR_TRANSMIT_STATUS_CTRL_CIC_ALL_HARDWARE;
     }
     descriptor_transmit[index].buffer_count              = ((/*ETHERNET_PACKET_SIZE*/0 & 0x00001FFF) << 16) | ((ETHERNET_PACKET_SIZE & 0x00001FFF) << 0);
     descriptor_transmit[index].buffer_address            = (uint32_t)transmit_bufer[index];
-
+    
     if(index == ETHERNET_DESCRIPTOR_TRANSMIT_COUNT - 1)
     {
       descriptor_transmit[index].buffer_next_address       = (uint32_t)&descriptor_transmit[0];
@@ -269,7 +269,7 @@ static int eth_mac_init_desc()
     descriptor_transmit[index].time_stamp_high           = 0;
 #endif
   }
-
+  
   for( index = 0 ; index < ETHERNET_DESCRIPTOR_RECEIVE_COUNT ; index++ )
   {
     descriptor_receive[index].status                    = DESCRIPTOR_RECEIVE_STATUS_OWN;
@@ -277,7 +277,7 @@ static int eth_mac_init_desc()
     descriptor_receive[index].status                    |= DESCRIPTOR_RECEIVE_STATUS_IPHCE_TSV;
     descriptor_receive[index].status                    |= DESCRIPTOR_RECEIVE_STATUS_PCE_ESA;
     descriptor_receive[index].buffer_count              = DESCRIPTOR_BUFFER_COUNT_RCH | ((/*ETHERNET_PACKET_SIZE*/0 & 0x00001FFF) << 16) | ((ETHERNET_PACKET_SIZE & 0x00001FFF) << 0);
-
+      
     if(index == ETHERNET_DESCRIPTOR_RECEIVE_COUNT - 1)
     {
       //descriptor_receive[index].buffer_count              = DESCRIPTOR_BUFFER_COUNT_RCH/* | DESCRIPTOR_BUFFER_COUNT_RER | */((/*ETHERNET_PACKET_SIZE*/0 & 0x00001FFF) << 16) | ((ETHERNET_PACKET_SIZE & 0x00001FFF) << 0);
@@ -295,7 +295,7 @@ static int eth_mac_init_desc()
     descriptor_receive[index].time_stamp_high           = 0;
 #endif
   }
-
+  
 //  for( index = 0 ; index <= sizeof(transmit_buffer_test); index++ )
 //  {
 //    transmit_bufer[0][index] = transmit_buffer_test[index];
@@ -303,12 +303,12 @@ static int eth_mac_init_desc()
 //    transmit_bufer[2][index] = transmit_buffer_test[index];
 //    transmit_bufer[3][index] = transmit_buffer_test[index];
 //    transmit_bufer[4][index] = transmit_buffer_test[index];
-//
+//    
 //  }
 //  descriptor_transmit[0].buffer_count = sizeof(transmit_buffer_test);
 //  descriptor_transmit[0].status |= DESCRIPTOR_TRANSMIT_STATUS_CTRL_FS | DESCRIPTOR_TRANSMIT_STATUS_CTRL_LS;
 //  //descriptor_transmit[0].status |= DESCRIPTOR_TRANSMIT_STATUS_OWN;
-//
+//  
 //  descriptor_transmit[1].buffer_count = sizeof(transmit_buffer_test);
 //  descriptor_transmit[1].status |= DESCRIPTOR_TRANSMIT_STATUS_CTRL_FS | DESCRIPTOR_TRANSMIT_STATUS_CTRL_LS;
 //  //descriptor_transmit[1].status |= DESCRIPTOR_TRANSMIT_STATUS_OWN;
@@ -325,7 +325,7 @@ static int eth_mac_init_desc()
 //  descriptor_transmit[4].status |= DESCRIPTOR_TRANSMIT_STATUS_CTRL_FS | DESCRIPTOR_TRANSMIT_STATUS_CTRL_LS;
 //  //descriptor_transmit[4].status |= DESCRIPTOR_TRANSMIT_STATUS_OWN;
 
-//
+//    
 ///* Bit definition for Ethernet DMA Interrupt Enable Register */
 //#define ETH_DMAIER_NISE      ((uint32_t)0x00010000)  /* Normal interrupt summary enable */
 //#define ETH_DMAIER_AISE      ((uint32_t)0x00008000)  /* Abnormal interrupt summary enable */
@@ -361,7 +361,7 @@ static int eth_mac_deinit_desc()
 extern void __reboot__();
 static int eth_mac_init_regs()
 {
-
+   
   /**
    * ETHERNET init
    */
@@ -370,23 +370,23 @@ static int eth_mac_init_regs()
 
   RCC_GetClocksFreq(&RCC_Clocks);
   //Задать ETH->MACMIIAR в соответствии с частотой
-
+  
   ETH->MACMIIAR = ETH_MACMIIAR_CR_Div;
-
+  
   ETH->MACCR    = ETH_MACCR_IPCO | ETH_MACCR_FES | ETH_MACCR_IFG_64Bit; //LQFP100 = ETH_MACCR_IFG_96Bit
   ETH->MACFFR   = ETH_MACFFR_RA | ETH_MACFFR_PCF_ForwardPassedAddrFilter | ETH_MACFFR_PAM;
-
+  
   // !!! //Переключение в дуплекс
   ETH->MACCR   |= ETH_MACCR_DM;
   // !!!
-
+  
   ETH->DMARDLAR = (uint32_t)descriptor_receive;
   ETH->DMATDLAR = (uint32_t)descriptor_transmit;
   ETH->MACA0LR  = 0x12345678;
   ETH->MACA0HR  = 0x00000330;
-
-
-    /* Enable transmit state machine of the MAC for transmission on the MII */
+  
+  
+    /* Enable transmit state machine of the MAC for transmission on the MII */  
   ETH->MACCR   |= ETH_MACCR_TE;//ETH_MACTransmissionCmd(ENABLE);
   /* Flush Transmit FIFO */
   ETH->DMAOMR  |= ETH_DMAOMR_FTF | ETH_DMAOMR_TSF; // ETH_FlushTransmitFIFO();
@@ -402,46 +402,46 @@ static int eth_mac_init_regs()
   while (ETH->DMAOMR & ETH_DMAOMR_FTF) { } // Wait Elush End
 #endif
 
-  /* Enable receive state machine of the MAC for reception from the MII */
+  /* Enable receive state machine of the MAC for reception from the MII */  
   ETH->MACCR |= ETH_MACCR_RE;  //ETH_MACReceptionCmd(ENABLE);
-
+ 
   /* Start DMA transmission */
-  ETH->DMAOMR |= ETH_DMAOMR_ST; //ETH_DMATransmissionCmd(ENABLE);
+  ETH->DMAOMR |= ETH_DMAOMR_ST; //ETH_DMATransmissionCmd(ENABLE); 
   /* Start DMA reception */
-  ETH->DMAOMR |= ETH_DMAOMR_SR; //ETH_DMAReceptionCmd(ENABLE);
+  ETH->DMAOMR |= ETH_DMAOMR_SR; //ETH_DMAReceptionCmd(ENABLE);  
 
   ETH->DMABMR   = ETH_DMABMR_USP | ETH_DMABMR_RDP_1Beat | ETH_DMABMR_PBL_32Beat; //LQFP100 = <Нет>
-
+  
   //ETH->DMAOMR   = ETH_DMAOMR_SR | ETH_DMAOMR_ST;
-
+  
 //  (void)ETH->DMABMR;
 //  ETH->DMABMR   = ETH_DMABMR_SR;
 //  ETH->DMABMR   = ETH_DMABMR_USP | ETH_DMABMR_RDP_4xPBL_32Beat | ETH_DMABMR_PBL_4xPBL_32Beat | ETH_DMABMR_RTPR_1_1;
 //  ETH->DMAIER   = ETH_DMAIER_NISE | ETH_DMAIER_TIE | ETH_DMAIER_RIE;
-//
+//  
 //  ETH->DMARDLAR = (uint32_t)descriptor_receive;
 //  ETH->DMATDLAR = (uint32_t)descriptor_transmit;
-//
+//  
 //  ETH->DMARPDR  = (uint32_t)descriptor_receive;
 //  ETH->DMATPDR = (uint32_t)descriptor_transmit;
-//
+//  
 //  ETH->MACA0LR  = 0x12345678;
 //  ETH->MACA0HR  = 0x00000030;
-//
+//  
 //  ETH->MACCR    = ETH_MACCR_TE | ETH_MACCR_RE | ETH_MACCR_FES | ETH_MACCR_DM | ETH_MACCR_IFG_64Bit | ETH_MACCR_BL_1;
-//
+//  
 //  ETH->DMAOMR   = ETH_DMAOMR_SR;
 //  ETH->DMAOMR  |= ETH_DMAOMR_ST;
-//
-
+//  
+  
   ETH->DMAIER = ETH_DMAIER_NISE/* | ETH_DMAIER_AISE*/;
   ETH->DMAIER |= ETH_DMAIER_RIE | ETH_DMAIER_TIE;
-
+  
   NVIC->IP[((uint32_t)(int32_t)ETH_IRQn)]               = (uint8_t)(((1<<__NVIC_PRIO_BITS) - 1 << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL);
   //NVIC_SetPriority (ETH_IRQn, (1<<__NVIC_PRIO_BITS) - 1);  /* set Priority for Systick Interrupt */
   NVIC->ISER[(((uint32_t)(int32_t)ETH_IRQn) >> 5UL)] = (uint32_t)(1UL << (((uint32_t)(int32_t)ETH_IRQn) & 0x1FUL));
   //NVIC_EnableIRQ(ETH_IRQn);
-
+  
   return 0;
 }
 
@@ -470,19 +470,19 @@ static void eth_mac_init_phy() {
   volatile int i;
   for (i = 0; i < 200000; ++i) { }
   GPIOC->BSRRH = GPIO_Pin_9; //Сброс PHY - начало
-
+  
   GPIO_INIT(GPIOC, 9, MODE_OUT, OTYPE_PP, OSPEED_VHS, PUPD_N, 11, 0); // RESET_PHYLAN
-
+  
   GPIO_INIT(GPIOB,10,MODE_OUT,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // PHYAD0   0
   GPIO_INIT(GPIOA, 1,MODE_OUT,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // PHYAD1   0
   GPIO_INIT(GPIOB, 1,MODE_OUT,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // PHYAD2   0
-
+  
   GPIO_INIT(GPIOC, 4,MODE_OUT,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MODE0    0
   GPIO_INIT(GPIOC, 5,MODE_OUT,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MODE1    0
   GPIO_INIT(GPIOA, 3,MODE_OUT,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // MODE2    0
-
+  
   GPIO_INIT(GPIOB, 0,MODE_OUT,OTYPE_PP,OSPEED_VHS,PUPD_N,11,0); // RMIISEL  0
-
+  
   GPIOB->BSRRH = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_10; // 000 000 0
   GPIOA->BSRRH = GPIO_Pin_1;
   GPIOA->BSRRL = GPIO_Pin_3;
@@ -494,13 +494,13 @@ static void eth_mac_init_phy() {
   GPIO_INIT(GPIOC, 1, MODE_AF, OTYPE_PP, OSPEED_VHS, PUPD_N, 11, 0); // MDC
   GPIO_INIT(GPIOA, 2, MODE_AF, OTYPE_PP, OSPEED_VHS, PUPD_N, 11, 0); // MDIO
   for (i = 0; i <  10000; ++i) { }
-
+  
   ETH->MACMIIAR = ETH_MACMIIAR_CR_Div;
 
 //  int32_t cRes;
 //  cRes = eth_mac_phy_write(0, 0, 0x8000);
 //  cRes = eth_mac_phy_write(0, 0, 0x3300);
-
+  
 }
 uint8_t aRegIndexes[] = { 0, 1, 2, 3, 4, 5, 6, 17, 18, 26, 27, 29, 30, 31 };
 uint16_t aRegValues[sizeof(aRegIndexes)];
@@ -525,9 +525,9 @@ static int32_t eth_mac_initialize(eth_mac_signalevent_t cb_event)
   eth_mac_init_desc();
 #endif
   eth_mac_init_regs();
-
+  
   _mac_event = cb_event;
-
+  
   return DRIVER_OK;
 }
 
@@ -537,9 +537,9 @@ static int32_t eth_mac_uninitialize(void)
   eth_mac_deinit_gpio();
   eth_mac_deinit_desc();
   eth_mac_deinit_regs();
-
+  
   _mac_event = 0;
-
+  
   return DRIVER_OK;
 }
 
@@ -674,10 +674,10 @@ static int32_t eth_mac_read_frame(uint8_t *frame, uint32_t len)
 //    descriptor_receive_p->status                    |= DESCRIPTOR_RECEIVE_STATUS_IPHCE_TSV;
 //    descriptor_receive_p->status                    |= DESCRIPTOR_RECEIVE_STATUS_PCE_ESA;
 //    descriptor_receive_p->buffer_count              = DESCRIPTOR_BUFFER_COUNT_RCH | ((/*ETHERNET_PACKET_SIZE*/0 & 0x00001FFF) << 16) | ((ETHERNET_PACKET_SIZE & 0x00001FFF) << 0);
-//
+//      
     descriptor_receive_p = (ethernet_descriptor_t*)(descriptor_receive_p->buffer_next_address);
   } else return DRIVER_ERROR_PARAMETER;
-
+  
   return DRIVER_OK;
 }
 
@@ -867,7 +867,7 @@ static int32_t eth_mac_phy_read(uint8_t phy_addr, uint8_t reg_addr, uint16_t *da
   ETH->MACMIIAR |= (phy_addr << 11) & ETH_MACMIIAR_PA;
   ETH->MACMIIAR |= (reg_addr << 6)  & ETH_MACMIIAR_MR;
   ETH->MACMIIAR |= ETH_MACMIIAR_MB; // read start
-
+  
   if(data)
   {
     do {}
@@ -875,7 +875,7 @@ static int32_t eth_mac_phy_read(uint8_t phy_addr, uint8_t reg_addr, uint16_t *da
     *data = ETH->MACMIIDR; // read data
   }
   else return DRIVER_ERROR_PARAMETER;
-
+  
   return DRIVER_OK;
 }
 
@@ -886,7 +886,7 @@ static int32_t eth_mac_phy_write(uint8_t phy_addr, uint8_t reg_addr, uint16_t da
   ETH->MACMIIAR |= (reg_addr << 6)  & ETH_MACMIIAR_MR;
   ETH->MACMIIDR = data; // write data
   ETH->MACMIIAR |= ETH_MACMIIAR_MW | ETH_MACMIIAR_MB; // write start
-
+  
   if(data)
   {
     do {}
@@ -968,7 +968,7 @@ void ETH_IRQHandler( void )
         if(0){
           ethernet_descriptor_t *temp;
           {
-            temp = (ethernet_descriptor_t *)ETH->DMACHRDR;
+            temp = (ethernet_descriptor_t *)ETH->DMACHRDR;            
             if(!(temp->status & DESCRIPTOR_RECEIVE_STATUS_OWN))
             {
               temp->buffer_count              = DESCRIPTOR_BUFFER_COUNT_RCH | ((/*ETHERNET_PACKET_SIZE*/0 & 0x00001FFF) << 16) | ((ETHERNET_PACKET_SIZE & 0x00001FFF) << 0);
@@ -976,7 +976,7 @@ void ETH_IRQHandler( void )
             }
           }
         }
-
+        
       }
       ETH->DMAIER |= ETH_DMAIER_RIE;
     }
@@ -985,7 +985,7 @@ void ETH_IRQHandler( void )
      */
     ETH->DMASR = ETH_DMASR_NIS;
   }
-
+  
   /**
    * @brief ethernet interrupt handler
    */

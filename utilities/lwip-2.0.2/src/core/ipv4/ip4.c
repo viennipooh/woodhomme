@@ -676,7 +676,7 @@ ip4_input(struct pbuf *p, struct netif *inp)
 #if LWIP_UDPLITE
     case IP_PROTO_UDPLITE:
 #endif /* LWIP_UDPLITE */
-      MIB2_STATS_INC(mib2.ipindelivers);    //
+      MIB2_STATS_INC(mib2.ipindelivers);
       udp_input(p, inp);
       break;
 #endif /* LWIP_UDP */

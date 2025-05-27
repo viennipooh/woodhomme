@@ -3,7 +3,7 @@
  * User Datagram Protocol module\n
  * The code for the User Datagram Protocol UDP & UDPLite (RFC 3828).\n
  * See also @ref udp_raw
- *
+ * 
  * @defgroup udp_raw UDP
  * @ingroup callbackstyle_api
  * User Datagram Protocol module\n
@@ -258,7 +258,7 @@ udp_input(struct pbuf *p, struct netif *inp)
         uncon_pcb = pcb;
       }
 
-      /* compare PCB remote addr+port to UDP source addr+port  первая полностью соответствующая печатная плата*/
+      /* compare PCB remote addr+port to UDP source addr+port */
       if ((pcb->remote_port == src) &&
           (ip_addr_isany_val(pcb->remote_ip) ||
           ip_addr_cmp(&pcb->remote_ip, ip_current_src_addr()))) {

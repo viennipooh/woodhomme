@@ -116,13 +116,11 @@ ksz8895fmq_t sw[1] = {
     .pspi = SPI2,
     .cs = {GPIOB, 9},
     .rst= {GPIOE, 4},               // pixel  через этот сбрасывается свитч
-
   #if (PIXEL!=0)
     .pwr= {NULL , NULL},               // no in Pixel debug
   #else
     .pwr= {GPIOG, 6},               //
   #endif
-
     .fb = {{GPIOD, 8},{GPIOD, 9}},    // in pixel not  VKL_op1/2
   }
 };

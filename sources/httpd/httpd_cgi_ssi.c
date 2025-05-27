@@ -2297,7 +2297,8 @@ u16_t httpd_handler(int iIndex, char *pcInsert, int iInsertLen)
  #if (IMC_FTX_MC != 0)
         length += sprintf ( pcInsert+length, "\"pauto_\":[\"%d\",\"%d\",\"-\",\"-\"],",
                            rsettings->sw.ports[0].autonegotiation,
-                           rsettings->sw.ports[1].autonegotiation);
+                           rsettings->sw.ports[1].autonegotiation,
+													 rsettings->sw.ports[2].autonegotiation);
  #endif
         //--------------------------------
  #if (MKPSH10 != 0)
@@ -2309,7 +2310,8 @@ u16_t httpd_handler(int iIndex, char *pcInsert, int iInsertLen)
  #if (IMC_FTX_MC != 0)
         length += sprintf ( pcInsert+length, "\"pspeed_\":[\"%d\",\"%d\",\"-\",\"-\"],",
                            (rsettings->sw.ports[0].autonegotiation)?(((status_sw[0][0]>>2)&1)):(rsettings->sw.ports[0].speed),
-                           (rsettings->sw.ports[1].autonegotiation)?(((status_sw[1][0]>>2)&1)):(rsettings->sw.ports[1].speed));
+                           (rsettings->sw.ports[1].autonegotiation)?(((status_sw[1][0]>>2)&1)):(rsettings->sw.ports[1].speed),
+													 (rsettings->sw.ports[3].autonegotiation)?(((status_sw[1][0]>>2)&1)):(rsettings->sw.ports[1].speed));
  #endif
 
         //--------------------------------

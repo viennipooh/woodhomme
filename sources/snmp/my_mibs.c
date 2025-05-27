@@ -22,115 +22,115 @@ statistics_port_get_value(const int iPort, const struct snmp_scalar_array_node_d
 {
   u64_t *uint_ptr = (u64_t*)value;
   switch (node->oid) {
-  case 1: 
+  case 1:
     *uint_ptr = stat[iPort].RxLoPriorityByte;
     break;
-  case 2: 
+  case 2:
     *uint_ptr = stat[iPort].RxHiPriorityByte;
     break;
-  case 3: 
+  case 3:
     *uint_ptr = stat[iPort].RxUndersizePkt;
     break;
-  case 4: 
+  case 4:
     *uint_ptr = stat[iPort].RxFragments;
     break;
-  case 5: 
+  case 5:
     *uint_ptr = stat[iPort].RxOversize;
     break;
-  case 6: 
+  case 6:
     *uint_ptr = stat[iPort].RxJabbers;
     break;
-  case 7: 
+  case 7:
     *uint_ptr = stat[iPort].RxSymbolError;
     break;
-  case 8: 
+  case 8:
     *uint_ptr = stat[iPort].RxCRCerror;
     break;
-  case 9: 
+  case 9:
     *uint_ptr = stat[iPort].RxAlignmentError;
     break;
-  case 10: 
+  case 10:
     *uint_ptr = stat[iPort].RxControl8808Pkts;
     break;
-  case 11: 
+  case 11:
     *uint_ptr = stat[iPort].RxPausePkts;
     break;
-  case 12: 
+  case 12:
     *uint_ptr = stat[iPort].RxBroadcast;
     break;
-  case 13: 
+  case 13:
     *uint_ptr = stat[iPort].RxMulticast;
     break;
-  case 14: 
+  case 14:
     *uint_ptr = stat[iPort].RxUnicast;
     break;
-  case 15: 
+  case 15:
     *uint_ptr = stat[iPort].Rx64Octets;
     break;
-  case 16: 
+  case 16:
     *uint_ptr = stat[iPort].Rx65to127Octets;
     break;
-  case 17: 
+  case 17:
     *uint_ptr = stat[iPort].Rx128to255Octets;
     break;
-  case 18: 
+  case 18:
     *uint_ptr = stat[iPort].Rx256to511Octets;
     break;
-  case 19: 
+  case 19:
     *uint_ptr = stat[iPort].Rx512to1023Octets;
     break;
-  case 20: 
+  case 20:
     *uint_ptr = stat[iPort].Rx1024to1522Octets;
     break;
-  case 21: 
+  case 21:
     *uint_ptr = stat[iPort].TxLoPriorityByte;
     break;
-  case 22: 
+  case 22:
     *uint_ptr = stat[iPort].TxHiPriorityByte;
     break;
-  case 23: 
+  case 23:
     *uint_ptr = stat[iPort].TxLateCollision;
     break;
-  case 24: 
+  case 24:
     *uint_ptr = stat[iPort].TxPausePkts;
     break;
-  case 25: 
+  case 25:
     *uint_ptr = stat[iPort].TxBroadcastPkts;
     break;
-  case 26: 
+  case 26:
     *uint_ptr = stat[iPort].TxMulticastPkts;
     break;
-  case 27: 
+  case 27:
     *uint_ptr = stat[iPort].TxUnicastPkts;
     break;
-  case 28: 
+  case 28:
     *uint_ptr = stat[iPort].TxDeferred;
     break;
-  case 29: 
+  case 29:
     *uint_ptr = stat[iPort].TxTotalCollision;
     break;
-  case 30: 
-    *uint_ptr = stat[iPort].TxExcessiveCollision; 
+  case 30:
+    *uint_ptr = stat[iPort].TxExcessiveCollision;
     break;
-  case 31: 
-    *uint_ptr = stat[iPort].TxSingleCollision; 
+  case 31:
+    *uint_ptr = stat[iPort].TxSingleCollision;
     break;
-  case 32: 
-    *uint_ptr = stat[iPort].TxMultipleCollision; 
+  case 32:
+    *uint_ptr = stat[iPort].TxMultipleCollision;
     break;
-  case 33: 
-    *uint_ptr = stat[iPort].TxDropPackets; 
+  case 33:
+    *uint_ptr = stat[iPort].TxDropPackets;
     break;
-  case 34: 
-    *uint_ptr = stat[iPort].RxDropPackets; 
+  case 34:
+    *uint_ptr = stat[iPort].RxDropPackets;
     break;
-  case 35: 
-    *uint_ptr = GetPortTraffic(1, iPort); 
+  case 35:
+    *uint_ptr = GetPortTraffic(1, iPort);
     break;
-  case 36: 
-    *uint_ptr = GetPortTraffic(0, iPort); 
+  case 36:
+    *uint_ptr = GetPortTraffic(0, iPort);
     break;
-  default:    
+  default:
     return 0;
   }
 
@@ -214,26 +214,26 @@ info_get_value(const struct snmp_scalar_array_node_def *node, void *value)
   u16_t result;
   float cTemp = 0;
   char cMAC[20], mac[6];
-  
+
   switch (node->oid) {
-  case 1:    
+  case 1:
     var     = rsettings->alias;
     break;
-  case 2: 
+  case 2:
     var     = GetInfo_fw();
     break;
-  case 3: 
+  case 3:
     var     = GetInfo_sw();
     break;
-  case 4:    
+  case 4:
     *(s32_t*)value = GetInfo_sID();
     return sizeof(s32_t);
     break;
-  case 5: 
+  case 5:
     *(u32_t*)value = CurrTimeInSecs();
 //    MIB2_COPY_SYSUPTIME_TO((u32_t*)value);
     return sizeof(u32_t);
-    break;  
+    break;
   case 6: //Количество оставшихся блоков для записи sID, FW
     sresult = current_pos();
     *(s32_t*)value = 15 - sresult;
@@ -259,7 +259,7 @@ info_get_value(const struct snmp_scalar_array_node_def *node, void *value)
     LWIP_DEBUGF(SNMP_MIB_DEBUG,("system_get_value(): unknown id: %"S32_F"\n", node->oid));
     return 0;
   }
-  
+
   LWIP_ASSERT("", (value != NULL));
   if (var_len == 0) {
     result = (s16_t)strlen((const char*)var);
@@ -780,38 +780,38 @@ static snmp_err_t set_savereboot(struct snmp_node_instance* instance, u16_t len,
 
 #ifdef USE_SWITCH //Использовать свитч kmz8895
 static const struct snmp_scalar_array_node_def statistics_port_nodes[] = {
-  { 1, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  { 2, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  { 3, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  { 4, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
+  { 1, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  { 2, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  { 3, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  { 4, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
   { 5, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
-  { 6, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  { 7, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  { 8, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  { 9, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  {10, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  {11, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  {12, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  {13, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  {14, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  {15, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  {16, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY}, 
-  {17, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  {18, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  {19, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  {20, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  {21, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
+  { 6, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  { 7, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  { 8, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  { 9, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {10, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {11, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {12, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {13, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {14, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {15, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {16, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {17, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {18, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {19, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {20, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {21, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
   {22, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
-  {23, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  {24, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  {25, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  {26, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY}, 
-  {27, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  {28, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  {29, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY}, 
-  {30, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY}, 
-  {31, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
-  {32, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},  
+  {23, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {24, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {25, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {26, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {27, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {28, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {29, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {30, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {31, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
+  {32, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
   {33, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
   {34, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
   {35, SNMP_ASN1_TYPE_COUNTER64, SNMP_NODE_INSTANCE_READ_ONLY},
@@ -833,22 +833,22 @@ static const struct snmp_scalar_array_node_def my_info[] = {
 
 //static const struct snmp_scalar_array_node_def settings_port_eth_nodes[] = {
 //  { 1, SNMP_ASN1_TYPE_INTEGER, SNMP_NODE_INSTANCE_READ_WRITE},                 //pStatus
-//  { 2, SNMP_ASN1_TYPE_INTEGER, SNMP_NODE_INSTANCE_READ_WRITE},                 //pAutoNeg        
-//  { 3, SNMP_ASN1_TYPE_INTEGER, SNMP_NODE_INSTANCE_READ_WRITE},                 //pSpeed        
+//  { 2, SNMP_ASN1_TYPE_INTEGER, SNMP_NODE_INSTANCE_READ_WRITE},                 //pAutoNeg
+//  { 3, SNMP_ASN1_TYPE_INTEGER, SNMP_NODE_INSTANCE_READ_WRITE},                 //pSpeed
 //  { 4, SNMP_ASN1_TYPE_INTEGER, SNMP_NODE_INSTANCE_READ_WRITE},                 //pDuplex
 //  { 5, SNMP_ASN1_TYPE_INTEGER, SNMP_NODE_INSTANCE_READ_WRITE},                 //pFlowCtrl
 //  { 6, SNMP_ASN1_TYPE_INTEGER, SNMP_NODE_INSTANCE_READ_WRITE}                  //pAutoMDIX
 //};
 //
 //static const struct snmp_scalar_array_node_def settings_port_feth_nodes[] = {
-//  { 1, SNMP_ASN1_TYPE_INTEGER, SNMP_NODE_INSTANCE_READ_WRITE},                 //pStatus         
+//  { 1, SNMP_ASN1_TYPE_INTEGER, SNMP_NODE_INSTANCE_READ_WRITE},                 //pStatus
 //  { 2, SNMP_ASN1_TYPE_INTEGER, SNMP_NODE_INSTANCE_READ_WRITE},                 //pDuplex
-//  { 3, SNMP_ASN1_TYPE_INTEGER, SNMP_NODE_INSTANCE_READ_WRITE}                  //pFlowCtrl  
+//  { 3, SNMP_ASN1_TYPE_INTEGER, SNMP_NODE_INSTANCE_READ_WRITE}                  //pFlowCtrl
 //};
 //
 //static const struct snmp_scalar_array_node_def my_service[] = {
 //  { 1, SNMP_ASN1_TYPE_INTEGER, SNMP_NODE_INSTANCE_READ_WRITE},              //sRestart
-//  { 2, SNMP_ASN1_TYPE_INTEGER, SNMP_NODE_INSTANCE_READ_WRITE}               //sSaveRestart  
+//  { 2, SNMP_ASN1_TYPE_INTEGER, SNMP_NODE_INSTANCE_READ_WRITE}               //sSaveRestart
 //};
 
 const struct snmp_scalar_array_node info_mib2_root = SNMP_SCALAR_CREATE_ARRAY_NODE(1, my_info, info_get_value, NULL, NULL);
@@ -1030,7 +1030,7 @@ static const struct snmp_node* const my_settings_nodes[] = {
 
 static const struct snmp_node* const my_service_nodes[] = {
   &service_reboot.node.node,
-  &service_savereboot.node.node    
+  &service_savereboot.node.node
 };
 
 #ifdef USE_SWITCH //Использовать свитч kmz8895

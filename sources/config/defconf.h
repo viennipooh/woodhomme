@@ -67,7 +67,7 @@
  */
 #define IP_ADDR_0       (192)
 #define IP_ADDR_1       (168)
-#define IP_ADDR_2       (20)
+#define IP_ADDR_2       (1)
 #define IP_ADDR_3       (69)
 /**
  * Настройка адрес шлюза по умолчанию

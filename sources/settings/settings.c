@@ -153,10 +153,10 @@ static const struct settings_flash_s    dsettings = {
         {
           .port_enabled         = 1,
 
-
           .autonegotiation      = SWITCH_AUTO_ENABLE,
+
           .speed                = SWITCH_SPEED_100,
-          .full_duplex          = SWITCH_HALF_DUPLEX,
+          .full_duplex          = SWITCH_FULL_DUPLEX,
           .flow_control         = SWITCH_ENABLE_FLOW_CONTROL,
           .mdi                  = SWITCH_AUTO,
           .alias                = "Eth.1"
@@ -165,30 +165,29 @@ static const struct settings_flash_s    dsettings = {
         {
           .port_enabled         = 1,
 
+          .autonegotiation      = SWITCH_AUTO_ENABLE,
 
-          .autonegotiation      = SWITCH_AUTO_DISABLE,
-
-           .autonegotiation      = SWITCH_AUTO_ENABLE,
           .speed                = SWITCH_SPEED_100,
-          .full_duplex          = SWITCH_HALF_DUPLEX,
+          .full_duplex          = SWITCH_FULL_DUPLEX,
           .flow_control         = SWITCH_ENABLE_FLOW_CONTROL,
           .mdi                  = SWITCH_AUTO,
           .alias                = "Eth.2"
         },
 
-
-        {
+         {
           .port_enabled         = 1,
           .autonegotiation      = SWITCH_AUTO_ENABLE,
           .speed                = SWITCH_SPEED_100,
-          .full_duplex          = SWITCH_HALF_DUPLEX,
+          .full_duplex          = SWITCH_FULL_DUPLEX,
           .flow_control         = SWITCH_ENABLE_FLOW_CONTROL,
           .mdi                  = SWITCH_AUTO,
           .alias                = "Eth.3"
         },
       },
     },
-
+#if (MKPSH10 != 0)
+    .alias        = "MKPSH-10",
+#endif
 #if (IMC_FTX_MC != 0)
     #if (PIXEL !=0)
       .alias        = "PIXEL",
@@ -196,7 +195,12 @@ static const struct settings_flash_s    dsettings = {
       .alias        = "IMC-FTX-MC",
     #endif
 #endif
-
+#if (UTD_M != 0)
+    .alias        = "UTD-M",
+#endif
+#if (IIP != 0)
+    .alias        = "IIP",
+#endif
     .serial       = "1",
     .password     = "pass",
     .user         = "admin",
@@ -370,7 +374,7 @@ static const struct settings_flash_s    dsettings = {
  * Указатели на настройки с CRC, для хранения
  */
 static struct settings_flash_s          rfsettings;
-static struct settings_flash_s         *ffsettings = &rfsettings;
+static struct settings_flash_s         *ffsettings = &rfsettings; // указвыет на скетор на флэше с настройками
 
 bool gSettingsRight = false;
 #if (MKPSH10 != 0)
@@ -464,15 +468,15 @@ void settings_load(settings_load_complete_t cb)
     /**
      * Загружаем настройки либо с флешки, либо по умолчанию
      */
-    if(check_flash_crc() && ChecPokVersion())
+    if(check_flash_crc() && ChecPokVersion()) // проверяем CRC и если верссии ПО не обновилась
     {
-      settings_flash();
+      settings_flash();            // загружаем настройки сохраненые во флэше
       settings_is_load = 1;
       gSwitchStarted = true;
     }
     else
     {
-      settings_default(false);
+      settings_default(false);       // загружаем настройки по умолчанию
       settings_is_load = 2;
     }
   }

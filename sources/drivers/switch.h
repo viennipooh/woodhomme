@@ -9,8 +9,8 @@
   * @attention
   *
   ******************************************************************************
-  */
-
+  */ 
+  
 #ifndef _SWITCH_H__
 #define _SWITCH_H__
 
@@ -62,11 +62,11 @@ enum switch_port_e {
   PORT1 = 0,
   PORT2 = 1,
   PORT3 = 2,
-  PORT4 = 3,
+  PORT4 = 3,  
   OT1   = PORT3,
-  OT2   = PORT4,
+  OT2   = PORT4,  
   ETH1  = PORT1,
-  ETH2  = PORT2,
+  ETH2  = PORT2,  
 #endif
 };
 
@@ -75,7 +75,7 @@ enum switch_flow_control_e {
   SWITCH_ENABLE_FLOW_CONTROL,
 };
 typedef enum switch_flow_control_e switch_flow_control_t;
-
+  
 enum switch_speed_e {
   SWITCH_SPEED_10,
   SWITCH_SPEED_100,
@@ -118,12 +118,12 @@ typedef struct ksz8895fmq_read_dmac_s{
 typedef struct ksz8895fmq_read_smac_s{
   uint8_t fid:7;
   uint8_t use_fid:1;
-
+  
   uint8_t reserved:1;
   uint8_t override:1;
   uint8_t valid:1;
   uint8_t ports:5;
-
+  
   uint8_t mac[6];
 }ksz8895fmq_read_smac_t;
 
@@ -168,7 +168,7 @@ typedef struct s_PowerOnItem {
   bool    On;     //Объект включен
   enum e_PowerOnState PowerOnState; //Состояние включения
   uint8_t Stage;  //Стадия ШИМ-пуска (от 0 до 50)
-
+  
 } t_PowerOnItem;
 
 int switch_select_mdi( uint8_t port,switch_mdi_t);
