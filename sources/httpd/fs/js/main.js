@@ -181,7 +181,7 @@ function window_onload(){
 				}else if(id=="pconn_"){
 					//document.getElementById(id+i).innerHTML="<img src=\"img/port_00.gif\"></img>";
 					var text="";
-					if(i>=3){
+					if(i>=4){		// было 3 , у нас 3 порта все они медь
 						if(port_src == i){
 							text="<img src=\"img/port_12.gif\"></img>";
 						} else if(ports["pen_"][it]>0){

@@ -7,10 +7,10 @@
 const struct info_s default_info = {
   .timestamp = 0x00000000,
   .hw_version = {
-    .major = 0x00,
-    .minor = 0x00
+    .major = 1,
+    .minor = 2
   },
-  .serial_number = 0x0000,
+  .serial_number = 0x0002,
   .serial_str = "NONE",
   .mac = {0x00,0x11,0x22,0x33,0x44,0x55},
   .crc = 0x00
@@ -138,7 +138,7 @@ otp_result_t info_write(struct info_s * _info)
 {
 //  // !!! Для проверок - отключение фактической записи
 //  return otp_result_ok;
-//  // !!! 
+//  // !!!
   uint16_t crc16;
   int index = current_pos();
   int i = 0;
@@ -239,19 +239,19 @@ char info_sw_1[6] = "0.0";
 
 const char * GetInfo_fw() {
   struct info_s info_id;
-  
+
   if(info_current(&info_id) == 0) {
     if ((info_id.hw_version.major != 0) || (info_id.hw_version.minor != 0)) {
       sprintf(info_fw_1, "%d.%d", info_id.hw_version.major, info_id.hw_version.minor);
     }
   }
-  
+
   return info_fw_1;
 }
 
 uint32_t GetInfo_sID() {
   struct info_s info_id;
-  
+
   uint32_t sID = 0;
   if(info_current(&info_id) == 0) {
     sID = info_id.serial_number;

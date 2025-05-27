@@ -2252,40 +2252,35 @@ u16_t httpd_handler(int iIndex, char *pcInsert, int iInsertLen)
         uint32_t length = 0;
 #ifdef USE_SWITCH //Использовать свитч kmz8895
         extern uint8_t read_switch_status(uint8_t port, uint8_t reg);
-        for(int i=0;i<PORT_NUMBER;i++)
+        for(int i=0;i<PORT_NUMBER+1;i++)
         {
           status_sw[i][0] = read_switch_status(i,0);//0xnA
           status_sw[i][1] = read_switch_status(i,1);//0xnE
           status_sw[i][2] = read_switch_status(i,2);//0xnF
-  #if (MKPSH10 != 0)
-          if ((i >= 4) && (i <= 6)) {
-  #endif
-  #if (IMC_FTX_MC != 0)
-          if ((i >= 0) && (i <= 1)) {
-  #endif
+
             if (rsettings->sw.ports[i].autonegotiation) {
               //При autonegotiation эти параметры назначаяются свитчом автоматически
               rsettings->sw.ports[i].speed        = (switch_speed_t)(((status_sw[i][0]>>2)&1)?1:0);
               rsettings->sw.ports[i].full_duplex  = (switch_duplex_t)(((status_sw[i][0]>>1)&1)?1:0);
               rsettings->sw.ports[i].flow_control = (switch_flow_control_t)(((status_sw[i][0]>>3)&3)?1:0);
             }
-          }
+
         }
         //--------------------------------
         length += sprintf ( pcInsert+length, "\"pconn_\":[");
-        for(int i = 0; i < PORT_NUMBER ; i++)
+        for(int i = 0; i < PORT_NUMBER+1 ; i++)
         {
           length += sprintf ( pcInsert+length, "\"%d\",", ((status_sw[i][1]>>5)&1));
         }
-        length += sprintf ( pcInsert+length, "\"%d\"],", ((status_sw[PORT_NUMBER - 1][1]>>5)&1));
+//        length += sprintf ( pcInsert+length, "\"%d\"],", ((status_sw[PORT_NUMBER ][1]>>5)&1));
 
         //--------------------------------
         length += sprintf ( pcInsert+length, "\"pen_\":[");
-        for(int i = 0; i < PORT_NUMBER ; i++)
+        for(int i = 0; i < PORT_NUMBER+1 ; i++)
         {
           length += sprintf ( pcInsert+length, "\"%d\",", rsettings->sw.ports[i].port_enabled);
         }
-        length += sprintf ( pcInsert+length, "\"%d\"],", rsettings->sw.ports[PORT_NUMBER - 1].port_enabled);
+//        length += sprintf ( pcInsert+length, "\"%d\"],", rsettings->sw.ports[PORT_NUMBER].port_enabled);
 
         //--------------------------------
  #if (MKPSH10 != 0)
@@ -2311,24 +2306,24 @@ u16_t httpd_handler(int iIndex, char *pcInsert, int iInsertLen)
         length += sprintf ( pcInsert+length, "\"pspeed_\":[\"%d\",\"%d\",\"-\",\"-\"],",
                            (rsettings->sw.ports[0].autonegotiation)?(((status_sw[0][0]>>2)&1)):(rsettings->sw.ports[0].speed),
                            (rsettings->sw.ports[1].autonegotiation)?(((status_sw[1][0]>>2)&1)):(rsettings->sw.ports[1].speed),
-													 (rsettings->sw.ports[3].autonegotiation)?(((status_sw[1][0]>>2)&1)):(rsettings->sw.ports[1].speed));
+													 (rsettings->sw.ports[2].autonegotiation)?(((status_sw[2][0]>>2)&1)):(rsettings->sw.ports[2].speed));
  #endif
 
         //--------------------------------
         length += sprintf ( pcInsert+length, "\"pduplex_\":[");
-        for(int i = 0; i < PORT_NUMBER ; i++)
+        for(int i = 0; i < PORT_NUMBER+1 ; i++)
         {
           length += sprintf ( pcInsert+length, "\"%d\",", (rsettings->sw.ports[i].autonegotiation)?((((status_sw[i][0])>>1)&1 > 0)?1:0):(rsettings->sw.ports[i].full_duplex) );
         }
-        length += sprintf ( pcInsert+length, "\"%d\"],", (rsettings->sw.ports[PORT_NUMBER - 1].autonegotiation)?((((status_sw[PORT_NUMBER - 1][0]>>1)&1)<<1 > 0)?1:0):(rsettings->sw.ports[PORT_NUMBER - 1].full_duplex));
+//        length += sprintf ( pcInsert+length, "\"%d\"],", (rsettings->sw.ports[PORT_NUMBER ].autonegotiation)?((((status_sw[PORT_NUMBER ][0]>>1)&1)<<1 > 0)?1:0):(rsettings->sw.ports[PORT_NUMBER - 1].full_duplex));
 
         //--------------------------------
         length += sprintf ( pcInsert+length, "\"pcflw_\":[");
-        for(int i = 0; i < PORT_NUMBER ; i++)
+        for(int i = 0; i < PORT_NUMBER+1 ; i++)
         {
           length += sprintf ( pcInsert+length, "\"%d\",", (rsettings->sw.ports[i].autonegotiation)?(((status_sw[i][0]>>3)&3)?1:0):(rsettings->sw.ports[i].flow_control) );
         }
-        length += sprintf ( pcInsert+length, "\"%d\"],", (rsettings->sw.ports[PORT_NUMBER - 1].autonegotiation)?(((status_sw[PORT_NUMBER - 1][0]>>3)&3)?1:0):(rsettings->sw.ports[PORT_NUMBER - 1].flow_control));
+//        length += sprintf ( pcInsert+length, "\"%d\"],", (rsettings->sw.ports[PORT_NUMBER - 1].autonegotiation)?(((status_sw[PORT_NUMBER ][0]>>3)&3)?1:0):(rsettings->sw.ports[PORT_NUMBER - 1].flow_control));
 
         //--------------------------------
  #if (MKPSH10 != 0)
@@ -2355,11 +2350,11 @@ u16_t httpd_handler(int iIndex, char *pcInsert, int iInsertLen)
 
         //--------------------------------
         length += sprintf ( pcInsert+length, "\"palias_\":[");
-        for(int i = 0; i < PORT_NUMBER ; i++)
+        for(int i = 0; i < PORT_NUMBER+1 ; i++)
         {
           length += sprintf ( pcInsert+length, "\"%s\",", rsettings->sw.ports[i].alias );
         }
-        length += sprintf ( pcInsert+length, "\"%s\"],", rsettings->sw.ports[PORT_NUMBER ].alias );
+//        length += sprintf ( pcInsert+length, "\"%s\"],", rsettings->sw.ports[PORT_NUMBER ].alias );
         //--------------------------------
 #endif //USE_SWITCH
 
