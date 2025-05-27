@@ -11,7 +11,7 @@
 	"power_sw1":"<!--#system_power_sw1-->",	
 };
 var ports = {
-	"pstr_":["Eth.1","Eth.2","F.Eth.3","F.Eth.4"],
+	"pstr_":["Eth.1","Eth.2","Eth.3"],
 	<!--#system_ports-->
 };
 

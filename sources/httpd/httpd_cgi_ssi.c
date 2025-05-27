@@ -2268,19 +2268,19 @@ u16_t httpd_handler(int iIndex, char *pcInsert, int iInsertLen)
         }
         //--------------------------------
         length += sprintf ( pcInsert+length, "\"pconn_\":[");
-        for(int i = 0; i < PORT_NUMBER+1 ; i++)
+        for(int i = 0; i < PORT_NUMBER ; i++)
         {
           length += sprintf ( pcInsert+length, "\"%d\",", ((status_sw[i][1]>>5)&1));
         }
-//        length += sprintf ( pcInsert+length, "\"%d\"],", ((status_sw[PORT_NUMBER ][1]>>5)&1));
+        length += sprintf ( pcInsert+length, "\"%d\"],", ((status_sw[PORT_NUMBER ][1]>>5)&1));
 
         //--------------------------------
         length += sprintf ( pcInsert+length, "\"pen_\":[");
-        for(int i = 0; i < PORT_NUMBER+1 ; i++)
+        for(int i = 0; i < PORT_NUMBER ; i++)
         {
           length += sprintf ( pcInsert+length, "\"%d\",", rsettings->sw.ports[i].port_enabled);
         }
-//        length += sprintf ( pcInsert+length, "\"%d\"],", rsettings->sw.ports[PORT_NUMBER].port_enabled);
+        length += sprintf ( pcInsert+length, "\"%d\"],", rsettings->sw.ports[PORT_NUMBER].port_enabled);
 
         //--------------------------------
  #if (MKPSH10 != 0)
@@ -2290,7 +2290,7 @@ u16_t httpd_handler(int iIndex, char *pcInsert, int iInsertLen)
                            rsettings->sw.ports[6].autonegotiation);
  #endif
  #if (IMC_FTX_MC != 0)
-        length += sprintf ( pcInsert+length, "\"pauto_\":[\"%d\",\"%d\",\"-\",\"-\"],",
+        length += sprintf ( pcInsert+length, "\"pauto_\":[\"%d\",\"%d\",\"%d\"],",
                            rsettings->sw.ports[0].autonegotiation,
                            rsettings->sw.ports[1].autonegotiation,
 													 rsettings->sw.ports[2].autonegotiation);
@@ -2303,7 +2303,7 @@ u16_t httpd_handler(int iIndex, char *pcInsert, int iInsertLen)
                            (rsettings->sw.ports[6].autonegotiation)?(((status_sw[6][0]>>2)&1)):(rsettings->sw.ports[6].speed));
  #endif
  #if (IMC_FTX_MC != 0)
-        length += sprintf ( pcInsert+length, "\"pspeed_\":[\"%d\",\"%d\",\"-\",\"-\"],",
+        length += sprintf ( pcInsert+length, "\"pspeed_\":[\"%d\",\"%d\",\"%d\"],",
                            (rsettings->sw.ports[0].autonegotiation)?(((status_sw[0][0]>>2)&1)):(rsettings->sw.ports[0].speed),
                            (rsettings->sw.ports[1].autonegotiation)?(((status_sw[1][0]>>2)&1)):(rsettings->sw.ports[1].speed),
 													 (rsettings->sw.ports[2].autonegotiation)?(((status_sw[2][0]>>2)&1)):(rsettings->sw.ports[2].speed));
@@ -2311,19 +2311,19 @@ u16_t httpd_handler(int iIndex, char *pcInsert, int iInsertLen)
 
         //--------------------------------
         length += sprintf ( pcInsert+length, "\"pduplex_\":[");
-        for(int i = 0; i < PORT_NUMBER+1 ; i++)
+        for(int i = 0; i < PORT_NUMBER; i++)
         {
           length += sprintf ( pcInsert+length, "\"%d\",", (rsettings->sw.ports[i].autonegotiation)?((((status_sw[i][0])>>1)&1 > 0)?1:0):(rsettings->sw.ports[i].full_duplex) );
         }
-//        length += sprintf ( pcInsert+length, "\"%d\"],", (rsettings->sw.ports[PORT_NUMBER ].autonegotiation)?((((status_sw[PORT_NUMBER ][0]>>1)&1)<<1 > 0)?1:0):(rsettings->sw.ports[PORT_NUMBER - 1].full_duplex));
+        length += sprintf ( pcInsert+length, "\"%d\"],", (rsettings->sw.ports[PORT_NUMBER ].autonegotiation)?((((status_sw[PORT_NUMBER ][0]>>1)&1)<<1 > 0)?1:0):(rsettings->sw.ports[PORT_NUMBER - 1].full_duplex));
 
         //--------------------------------
         length += sprintf ( pcInsert+length, "\"pcflw_\":[");
-        for(int i = 0; i < PORT_NUMBER+1 ; i++)
+        for(int i = 0; i < PORT_NUMBER ; i++)
         {
           length += sprintf ( pcInsert+length, "\"%d\",", (rsettings->sw.ports[i].autonegotiation)?(((status_sw[i][0]>>3)&3)?1:0):(rsettings->sw.ports[i].flow_control) );
         }
-//        length += sprintf ( pcInsert+length, "\"%d\"],", (rsettings->sw.ports[PORT_NUMBER - 1].autonegotiation)?(((status_sw[PORT_NUMBER ][0]>>3)&3)?1:0):(rsettings->sw.ports[PORT_NUMBER - 1].flow_control));
+        length += sprintf ( pcInsert+length, "\"%d\"],", (rsettings->sw.ports[PORT_NUMBER - 1].autonegotiation)?(((status_sw[PORT_NUMBER ][0]>>3)&3)?1:0):(rsettings->sw.ports[PORT_NUMBER - 1].flow_control));
 
         //--------------------------------
  #if (MKPSH10 != 0)
@@ -2338,23 +2338,23 @@ u16_t httpd_handler(int iIndex, char *pcInsert, int iInsertLen)
                            (rsettings->sw.ports[6].mdi == 2)?((((status_sw[6][1]>>7)&1)>0)?1:0):((rsettings->sw.ports[6].mdi == 1)?1:0));
  #endif
 
-        length += sprintf ( pcInsert+length, "\"pamdi_\":[\"%d\",\"%d\",\"-\",\"-\"],",
+        length += sprintf ( pcInsert+length, "\"pamdi_\":[\"%d\",\"%d\",\"%d\"],",
                            (rsettings->sw.ports[0].mdi == 2)?1:0,
                            (rsettings->sw.ports[1].mdi == 2)?1:0,
 														(rsettings->sw.ports[2].mdi == 2)?1:0 );
         //--------------------------------
-        length += sprintf ( pcInsert+length, "\"pmdi_\":[\"%d\",\"%d\",\"-\",\"-\"],",
+        length += sprintf ( pcInsert+length, "\"pmdi_\":[\"%d\",\"%d\",\"%d\"],",
                            (rsettings->sw.ports[0].mdi == 2)?((((status_sw[0][1]>>7)&1)>0)?1:0):((rsettings->sw.ports[0].mdi == 1)?1:0),
                            (rsettings->sw.ports[1].mdi == 2)?((((status_sw[1][1]>>7)&1)>0)?1:0):((rsettings->sw.ports[1].mdi == 1)?1:0),
 													 (rsettings->sw.ports[2].mdi == 2)?((((status_sw[2][1]>>7)&1)>0)?1:0):((rsettings->sw.ports[2].mdi == 1)?1:0)	 );
 
         //--------------------------------
         length += sprintf ( pcInsert+length, "\"palias_\":[");
-        for(int i = 0; i < PORT_NUMBER+1 ; i++)
+        for(int i = 0; i < PORT_NUMBER ; i++)
         {
           length += sprintf ( pcInsert+length, "\"%s\",", rsettings->sw.ports[i].alias );
         }
-//        length += sprintf ( pcInsert+length, "\"%s\"],", rsettings->sw.ports[PORT_NUMBER ].alias );
+        length += sprintf ( pcInsert+length, "\"%s\"],", rsettings->sw.ports[PORT_NUMBER ].alias );
         //--------------------------------
 #endif //USE_SWITCH
 

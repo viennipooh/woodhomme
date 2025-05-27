@@ -87,7 +87,7 @@
 #define MAIN_VER_MIN            VER_MIN
 #else
 #error "VER_MIN not found"
-#define MAIN_VER_MIN            1     //1- верся с управлениенп повроткой из web
+#define MAIN_VER_MIN            2     //1- верся с управлениенп повроткой из web
 #endif
 
 #ifdef VER_DATE
