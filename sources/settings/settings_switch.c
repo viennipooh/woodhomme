@@ -8,7 +8,7 @@
 
 void settings_load_switch(struct switch_settings_s* sw)
 {
-  for(int i=0;i<PORT_NUMBER;i++)
+  for(int i=0;i<PORT_NUMBER+1;i++)
   {
     // !!! Только разрешение приема/передачи
     switch_port_state(i, sw->ports[i].port_enabled);

@@ -3,6 +3,47 @@
 		<LINK href=css/main.css rel=stylesheet type=text/css>
 		<META content="text/html; charset=utf-8" http-equiv=Content-Type>
 		<TITLE>Настройка портов Ethernet</TITLE>
+		<style>
+			body {
+			  display: flex;
+			  justify-content: center;
+			  align-items: center;
+			  height: 100vh;
+			  margin: 0;
+			  font-family: Arial, sans-serif;
+			}
+			.container {
+			  display: grid;
+			  grid-template-columns: 100px 100px 100px;
+			  grid-template-rows: 100px 100px 100px;
+			  gap: 10px;
+			  justify-items: center;
+			  align-items: center;
+			}
+			button {
+			  width: 80px;
+			  height: 40px;
+			  font-size: 16px;
+			  cursor: pointer;
+			}
+			/* Расположение кнопок */
+			.up {
+			  grid-column: 2;
+			  grid-row: 1;
+			}
+			.left {
+			  grid-column: 1;
+			  grid-row: 2;
+			}
+			.right {
+			  grid-column: 3;
+			  grid-row: 2;
+			}
+			.down {
+			  grid-column: 2;
+			  grid-row: 3;
+			}
+		 </style>
 	</HEAD>
 	<SCRIPT language=JavaScript src="js/port.js"></SCRIPT>
 	<BODY onload=window_onload()>
@@ -47,13 +88,13 @@
 								</TR>
 								<TR>
 									<TD><b>Eth.3</b></TD>
-									<TD><input type=radio name=pen_2 value=1 checked disabled>Вкл.</input></br><input type=radio name=pen_2 value=0 disabled>Выкл.</input></TD>
-									<TD><input type=radio name=pauto_2 value=1 disabled>Вкл.</input></br><input type=radio name=pauto_2 value=0 disabled>Выкл.</input></TD>
-									<TD><input type=radio name=pspeed_2 value=1 disabled>100Мбит</input></br><input type=radio name=pspeed_2 value=0 disabled>10Мбит</input></TD>
-									<TD><input type=radio name=pduplex_2 value=1 checked disabled>FDX</input></br><input type=radio name=pduplex_2 value=0 disabled>HDX</input></TD>
-									<TD><input type=radio name=pcflw_2 value=1 checked disabled>Вкл.</input></br><input type=radio name=pcflw_2 value=0 disabled>Выкл.</input></TD>
-									<TD><span>Auto</span></br> <input type=checkbox name=pamdi_2 value=1 disabled></input></TD>
-									<TD><input type=radio name=pmdi_2 value=1 disabled>MDI</input> </br><input type=radio name=pmdi_2 value=0 disabled>MDIX</input></TD>
+									<TD><input type=radio name=pen_3 value=1 checked disabled>Вкл.</input></br><input type=radio name=pen_3 value=0 disabled>Выкл.</input></TD>
+									<TD><input type=radio name=pauto_3 value=1 disabled>Вкл.</input></br><input type=radio name=pauto_3 value=0 disabled>Выкл.</input></TD>
+									<TD><input type=radio name=pspeed_3 value=1 disabled>100Мбит</input></br><input type=radio name=pspeed_3 value=0 disabled>10Мбит</input></TD>
+									<TD><input type=radio name=pduplex_3 value=1 checked disabled>FDX</input></br><input type=radio name=pduplex_3 value=0 disabled>HDX</input></TD>
+									<TD><input type=radio name=pcflw_3 value=1 checked disabled>Вкл.</input></br><input type=radio name=pcflw_3 value=0 disabled>Выкл.</input></TD>
+									<TD><span>Auto</span></br> <input type=checkbox name=pamdi_3 value=1 disabled></input></TD>
+									<TD><input type=radio name=pmdi_3 value=1 disabled>MDI</input> </br><input type=radio name=pmdi_3 value=0 disabled>MDIX</input></TD>
 								</TR>
 								
 							</P>
@@ -103,7 +144,22 @@
 					<input value="Применить настройки" type=submit style=width:45% disabled onclick="sm1()"></input></TD>
 				</TR>
 				<TR><TD><P><BR></P></TD></TR>
+				<TR width=50% align=center>
+					<TD><input value=вперед type=reset style=width:45%></input> 
+					<input value="Вверх" type=submit style=width:45% disabled onclick="sm1()"></input></TD>
+				</TR>
 			</TABLE>
 		</form>
+		
+		 <div class="container">
+				<button class="up" id="btnUp">Вверх</button>
+				<button class="left" id="btnLeft">Влево</button>
+				<button class="right" id="btnRight">Вправо</button>
+				<button class="down" id="btnDown">Вниз</button>
+		</div>
+
+		<script src="move.js"></script>
+		
+		
 	</BODY>
 </HTML>

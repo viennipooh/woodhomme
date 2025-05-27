@@ -2252,7 +2252,7 @@ u16_t httpd_handler(int iIndex, char *pcInsert, int iInsertLen)
         uint32_t length = 0;
 #ifdef USE_SWITCH //Использовать свитч kmz8895
         extern uint8_t read_switch_status(uint8_t port, uint8_t reg);
-        for(int i=0;i<PORT_NUMBER+1;i++)
+        for(int i=0;i<PORT_NUMBER;i++)
         {
           status_sw[i][0] = read_switch_status(i,0);//0xnA
           status_sw[i][1] = read_switch_status(i,1);//0xnE

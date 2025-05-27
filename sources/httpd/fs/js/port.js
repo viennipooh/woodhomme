@@ -57,7 +57,7 @@ function window_onload(){
 			inp[i].disabled = false;
 		}
 	}
-}
+}	
 
 var member = [
 	"subnet_member_"

@@ -468,17 +468,19 @@ void settings_load(settings_load_complete_t cb)
     /**
      * Загружаем настройки либо с флешки, либо по умолчанию
      */
-    if(check_flash_crc() && ChecPokVersion()) // проверяем CRC и если верссии ПО не обновилась
-    {
-      settings_flash();            // загружаем настройки сохраненые во флэше
-      settings_is_load = 1;
-      gSwitchStarted = true;
-    }
-    else
-    {
-      settings_default(false);       // загружаем настройки по умолчанию
-      settings_is_load = 2;
-    }
+		settings_default(false);       // загружаем настройки по умолчанию
+    settings_is_load = 2;
+//    if(check_flash_crc() && ChecPokVersion()) // проверяем CRC и если верссии ПО не обновилась
+//    {
+//      settings_flash();            // загружаем настройки сохраненые во флэше
+//      settings_is_load = 1;
+//      gSwitchStarted = true;
+//    }
+//    else
+//    {
+//      settings_default(false);       // загружаем настройки по умолчанию
+//      settings_is_load = 2;
+//    }
   }
   settings_apply();
 }
