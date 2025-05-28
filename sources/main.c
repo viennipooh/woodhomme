@@ -338,6 +338,7 @@ void checkPortMigration() {
 struct SDrive_s gDriveParam = {
   .time   = 200,      //Канал RS485
   .drive_ev   = STOP,      //Адрес
+	.autoMove = true,
 };
 
 
@@ -346,38 +347,76 @@ void AutoMove(void ){
 	//	TickType_t startTick = xTaskGetTickCount();
 	//	TickType_t waitTicks = pdMS_TO_TICKS(20000);
 	//	if ((xTaskGetTickCount() - startTick) >= waitTicks) {
+	if ( gDriveParam.autoMove ){
+			PWM_OFF;
+			POWER_OFF;
+			DRIVE_MODE;		                          //extio_gpio_out(GPIOD, 0, ON);                 // DRIVE_O
+			FORWARD;
+			DRIVE_X;
+			POWER_ON;
+			PWM_ON;
+			vTaskDelay(3000);
+			PWM_OFF;
+			if ( !gDriveParam.autoMove ) return;
+			BACK;
+			DRIVE_X;
+			PWM_ON;
+			vTaskDelay(3000);
+			PWM_OFF;
+			if ( gDriveParam.autoMove ) return;
 
-	PWM_OFF;
-	POWER_OFF;
-	DRIVE_MODE;		                          //extio_gpio_out(GPIOD, 0, ON);                 // DRIVE_O
-	FORWARD;
-	DRIVE_X;
-	POWER_ON;
-	PWM_ON;
-	vTaskDelay(2000);
+			BACK;
+			DRIVE_Y;
 
-	PWM_OFF;
-	BACK;
-	DRIVE_X;
-	PWM_ON;
-	vTaskDelay(2000);
-	PWM_OFF;
+			PWM_ON;
+			vTaskDelay(5000);
+			PWM_OFF;
+			if ( gDriveParam.autoMove ) return;
 
-	BACK;
-	DRIVE_Y;
+			FORWARD;
+			DRIVE_Y;
 
-	PWM_ON;
-	vTaskDelay(2000);
-	PWM_OFF;
-
-	FORWARD;
-	DRIVE_Y;
-
-	PWM_ON;
-	vTaskDelay(2000);
-
-	PWM_OFF;
-	POWER_OFF;
+			PWM_ON;
+			vTaskDelay(5000);
+			PWM_OFF;
+			if ( gDriveParam.autoMove ) return;
+			POWER_OFF;
+	}
+	else {
+			switch (gDriveParam.drive_ev) {
+				case UP:
+						BACK;
+						DRIVE_Y;
+						PWM_ON;
+						vTaskDelay(500);
+						PWM_OFF;
+						break;
+				case DOWN:
+						FORWARD;
+						DRIVE_Y;
+						PWM_ON;
+						vTaskDelay(500);
+						PWM_OFF;
+						break;
+				case LEFT:
+						PWM_OFF;
+						BACK;
+						DRIVE_X;
+						PWM_ON;
+						vTaskDelay(500);
+						PWM_OFF;
+						break;
+				case RIGHT:
+						PWM_OFF;
+						FORWARD;
+						DRIVE_X;
+						PWM_ON;
+						vTaskDelay(500);
+						PWM_OFF;
+						break;
+			}
+			gDriveParam.drive_ev= NONE;
+	}
 }
 
 void main_task(void * pvParameters)
@@ -494,7 +533,8 @@ void main_task(void * pvParameters)
   while(1)
   {
 #if (PIXEL != 0)
-	//		AutoMove();
+			AutoMove();
+
 #if (PIXEL_TEPLO != 0)
       uint32_t cTickCount1 = xTaskGetTickCount();
       if (((cTickCount1 - cTickCount) >= gPowerDelayPixel) ) {

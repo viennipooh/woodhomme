@@ -114,11 +114,14 @@ enum drive_mode_e {
 		LEFT,
 		RIGHT,
 		STOP,
+		START,
+		NONE,
 } ;
 typedef enum drive_mode_e drive_mode_t;
  struct SDrive_s{
   uint32_t time ;
   drive_mode_t drive_ev;
+	bool autoMove;
 };
 extern struct SDrive_s gDriveParam;
 #endif // __MAIN_H_

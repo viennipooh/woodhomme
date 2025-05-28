@@ -4,6 +4,19 @@
 		<META content="text/html; charset=utf-8" http-equiv=Content-Type>
 		<TITLE>Настройка портов Ethernet</TITLE>
 		<style>
+			 /* Заголовок над кнопками */
+			  .header {
+				background-color: #0074D9; /* синий фон */
+				color: white;
+				padding: 15px;
+				text-align: center;
+				font-size: 24px;
+				font-weight: bold;
+				margin-bottom: 30px;
+				border-radius: 5px;
+			  }
+				
+				
 			body {
 			  display: flex;
 			  justify-content: center;
@@ -14,8 +27,8 @@
 			}
 			.container {
 			  display: grid;
-			  grid-template-columns: 100px 100px 100px;
-			  grid-template-rows: 100px 100px 100px;
+			  grid-template-columns: 50px 50px 50px;
+			  grid-template-rows: 50px 50px 50px;
 			  gap: 10px;
 			  justify-items: center;
 			  align-items: center;
@@ -144,21 +157,19 @@
 					<input value="Применить настройки" type=submit style=width:45% disabled onclick="sm1()"></input></TD>
 				</TR>
 				<TR><TD><P><BR></P></TD></TR>
-				<TR width=50% align=center>
-					<TD><input value=вперед type=reset style=width:45%></input> 
-					<input value="Вверх" type=submit style=width:45% disabled onclick="sm1()"></input></TD>
-				</TR>
+				
 			</TABLE>
-			
-			<div class="container">
-				<button type="button" name="move_up">Вверх</button>
-				<button type="button" name="move_left">Влево</button>
-				<button type="button" name="move_right">Вправо</button>
-				<button type="button" name="move_down">Вниз</button>
+			 <div class="header">Управление приводом камеры</div>
+			 <div class="container">
+				<button class="up" name="move_up">Вверх</button>
+				<button class="left" name="move_left">Влево</button>
+				<button class="right" name="move_righ">Вправо</button>
+				<button class="down" name="move_down">Вниз</button>				
 			</div>
-
-			<script src="move.js"></script>
-			
+			 <div class="button-row">
+				<button name="stop">Стоп</button>
+				<button name="start">Старт</button>
+			  </div>
 		</form>
 		
 		

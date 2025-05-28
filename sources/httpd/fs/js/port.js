@@ -90,21 +90,27 @@ function sm1(){
 	}
 }
 
-document.querySelector('button[name="move_up"]').onclick = function() {
-    sendCommand('up');
-};
-document.querySelector('button[name="move_left"]').onclick = function() {
-    sendCommand('left');
-};
-document.querySelector('button[name="move_right"]').onclick = function() {
-    sendCommand('right');
-};
-document.querySelector('button[name="move_down"]').onclick = function() {
-    sendCommand('down');
-};
+window.addEventListener('DOMContentLoaded', function() {
+    // Найдём все кнопки управления движением в контейнере
+    var moveButtons = document.querySelectorAll('.container button[name^="move_"]');
+    moveButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            // Получаем имя команды, например move_up, move_down и т.д.
+            var cmd = btn.name;
+            // Формируем параметры для GET-запроса (или используйте POST, если нужно)
+            var params = cmd + '=1';
+            // Отправляем запрос на сервер (замените URL на ваш CGI-обработчик)
+            fetch('/cgi-bin/system_port.cgi?' + params, {
+                method: 'GET'
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Ответ сервера:', data);
+            })
+            .catch(error => {
+                console.error('Ошибка отправки команды:', error);
+            });
+        });
+    });
+});
 
-function sendCommand(cmd) {
-    // Здесь ваша логика отправки команды, например:
-    console.log('Команда:', cmd);
-    // fetch('/move', { ... });
-}

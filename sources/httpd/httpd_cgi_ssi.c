@@ -1059,17 +1059,19 @@ const char * SYSTEM_PORT_CGI_Handler(int iIndex, int iNumParams, char *pcParam[]
           {
 						int value;
 
-				if (strncmp(pcParam[i], "move_up", 7) == 0)
+							if (strcmp(pcParam[i], "move_up") == 0)
+								{
+										gDriveParam.drive_ev = UP;
+										sscanf(pcValue[i], "%d", &value);
+										if (value)
+										{
+												// Действие для "вверх"
+												cApplying = true;
+										}
+								}
+							else if (strcmp(pcParam[i], "move_down") == 0)
 							{
-									sscanf(pcValue[i], "%d", &value);
-									if (value)
-									{
-											// Действие для "вверх"
-											cApplying = true;
-									}
-							}
-							else if (strncmp(pcParam[i], "move_down", 9) == 0)
-							{
+									gDriveParam.drive_ev = DOWN;
 									sscanf(pcValue[i], "%d", &value);
 									if (value)
 									{
@@ -1077,8 +1079,9 @@ const char * SYSTEM_PORT_CGI_Handler(int iIndex, int iNumParams, char *pcParam[]
 											cApplying = true;
 									}
 							}
-							else if (strncmp(pcParam[i], "move_left", 9) == 0)
+							else if (strcmp(pcParam[i], "move_left") == 0)
 							{
+									gDriveParam.drive_ev = LEFT;
 									sscanf(pcValue[i], "%d", &value);
 									if (value)
 									{
@@ -1086,8 +1089,9 @@ const char * SYSTEM_PORT_CGI_Handler(int iIndex, int iNumParams, char *pcParam[]
 											cApplying = true;
 									}
 							}
-							else if (strncmp(pcParam[i], "move_right", 10) == 0)
+							else if (strcmp(pcParam[i], "move_righ") == 0)
 							{
+									gDriveParam.drive_ev = RIGHT;
 									sscanf(pcValue[i], "%d", &value);
 									if (value)
 									{
@@ -1095,8 +1099,19 @@ const char * SYSTEM_PORT_CGI_Handler(int iIndex, int iNumParams, char *pcParam[]
 											cApplying = true;
 									}
 							}
-							else if (strncmp(pcParam[i], "move_stop", 9) == 0)
+							else if (strcmp(pcParam[i], "stop") == 0)
 							{
+									gDriveParam.autoMove = false;
+									sscanf(pcValue[i], "%d", &value);
+									if (value)
+									{
+											// Действие для "стоп"
+											cApplying = true;
+									}
+							}
+							else if (strcmp(pcParam[i], "start") == 0)
+							{
+									gDriveParam.autoMove = true;
 									sscanf(pcValue[i], "%d", &value);
 									if (value)
 									{
