@@ -108,4 +108,17 @@
 extern const struct fw_version_s firmware_data;
 
 
+enum drive_mode_e {
+		UP,
+		DOWN,
+		LEFT,
+		RIGHT,
+		STOP,
+} ;
+typedef enum drive_mode_e drive_mode_t;
+ struct SDrive_s{
+  uint32_t time ;
+  drive_mode_t drive_ev;
+};
+extern struct SDrive_s gDriveParam;
 #endif // __MAIN_H_

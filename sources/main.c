@@ -321,6 +321,25 @@ void checkPortMigration() {
 #define PWM_ON extio_gpio_out(GPIOE, 11, OFF)
 
 #endif
+//
+// enum drive_mode_e {
+//		UP,
+//		DOWN,
+//		LEFT,
+//		RIGHT,
+//		STOP,
+//} ;
+//typedef enum drive_mode_e drive_mode_t;
+// struct SDrive_s{
+//  uint32_t time ;
+//  drive_mode_t drive_ev;
+//};
+
+struct SDrive_s gDriveParam = {
+  .time   = 200,      //Канал RS485
+  .drive_ev   = STOP,      //Адрес
+};
+
 
 void AutoMove(void ){
 

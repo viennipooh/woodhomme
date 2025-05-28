@@ -906,6 +906,118 @@ const char * SYSTEM_PORTPOLL_CGI_Handler(int iIndex, int iNumParams, char *pcPar
   return "/portpoll.htm";
 }
 
+//#include "main.h"
+//const char * SYSTEM_MOVE_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[])
+//{ //
+//  uint8_t i;
+//  int value;
+//  bool cApplying = false, cStoping = false;
+//
+////	struct SDrive_s gDriveParam = {
+////  .time   = 200,      //Канал RS485
+////  .drive_ev   = STOP,      //Адрес
+////};
+//
+//  switch(iIndex){
+//    case CGI_SYSTEM_PORTPOLL:
+//      {
+//        if(iNumParams>0)
+//        {
+//          for (i=0; i<iNumParams; i++)
+//          {
+//            if (strcmp(pcParam[i] , "startpoll") == 0) {
+//              sscanf(pcValue[i],"%d",&value);
+//              if (value)
+//                cApplying = true;
+//            }
+//            if (strcmp(pcParam[i] , "for_change") == 0) {
+//              sscanf(pcValue[i],"%d",&value);
+//              if (value)
+//                cStoping = true;
+//            }
+//            if (strncmp(pcParam[i] , "rs_tx_count", 11) == 0) {
+//              sscanf(pcValue[i],"%d",&value);
+//              gTxCount = value;
+//            }
+//            if (strncmp(pcParam[i] , "rs_err_count", 12) == 0) {
+//              sscanf(pcValue[i],"%d",&value);
+//              gErrCount = value;
+//            }
+//          }
+//          gApplying = cApplying;
+//          gStoping = cStoping;
+//          if (gApplying) {
+//            bool cChanged = false;
+//            for (i=0; i<iNumParams; i++)
+//            {
+//              if (strncmp(pcParam[i] , "rs_dev_addr_1", 13) == 0)
+//              {
+//                sscanf(pcValue[i],"%d",&value);
+//                if (value < 0)
+//                  value = 0;
+//                if (value > 254)
+//                  value = 254;
+//                if (cpMBParam->Addr != value) {
+//                  cpMBParam->Addr = value;
+//                  cChanged = true;
+//                }
+//              } else if (strncmp(pcParam[i] , "rs_modbus_func_1", 15) == 0) {
+//                sscanf(pcValue[i],"%d",&value);
+//                if (cpMBParam->Func != value) {
+//                  cpMBParam->Func = value;
+//                  cChanged = true;
+//                }
+//              } else if (strncmp(pcParam[i] , "rs_start_reg_1", 12) == 0) {
+//                sscanf(pcValue[i],"%d",&value);
+//                if (value < 0)
+//                  value = 0;
+//                if (value > 65635)
+//                  value = 65635;
+//                if (cpMBParam->Start != value) {
+//                  cpMBParam->Start = value;
+//                  cChanged = true;
+//                }
+//              } else if (strncmp(pcParam[i] , "rs_reg_number_1", 14) == 0) {
+//                sscanf(pcValue[i],"%d",&value);
+//                if (value < 1)
+//                  value = 1;
+//                if (value > 65635)
+//                  value = 65635;
+//                if (cpMBParam->Number != value) {
+//                  cpMBParam->Number = value;
+//                  cChanged = true;
+//                }
+//              } else if (strncmp(pcParam[i] , "rs_poll_period_1", 15) == 0) {
+//                sscanf(pcValue[i],"%d",&value);
+//                if (value < 500)
+//                  value = 500;
+//                if (value > 10000)
+//                  value = 10000;
+//                if (cpMBParam->Period != value) {
+//                  cpMBParam->Period = value;
+//                  cChanged = true;
+//                }
+//              } else if (strncmp(pcParam[i] , "rs_poll_channel_1", 16) == 0) {
+//                sscanf(pcValue[i],"%d",&value);
+//                if (cpMBParam->Chan != value) {
+//                  cpMBParam->Chan = value;
+//                  cChanged = true;
+//                }
+//              }
+//            }
+//            if (cChanged) {
+//            }
+//            cpMBParam->Error = mbrNone;
+//          } else { //Останов
+//          }
+//        }
+//      }
+//      break;
+//  }
+//  return "/portpoll.htm";
+//}
+
+
 const char * SYSTEM_FRAMEPOLL_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[])
 { //
   struct sMBParam * cpMBParam = GetPollMBParam();
@@ -929,6 +1041,7 @@ uint8_t status_sw[7][3]; //Состояния портов свитча (фактические)
 const char * SYSTEM_PORT_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[])
 {
   uint8_t i;
+	bool cApplying ;
   switch(iIndex){
     case CGI_SYSTEM_PORT:
       {
@@ -944,7 +1057,53 @@ const char * SYSTEM_PORT_CGI_Handler(int iIndex, int iNumParams, char *pcParam[]
 #endif
           for (i=0; i<iNumParams; i++)
           {
-            int value;
+						int value;
+
+				if (strncmp(pcParam[i], "move_up", 7) == 0)
+							{
+									sscanf(pcValue[i], "%d", &value);
+									if (value)
+									{
+											// Действие для "вверх"
+											cApplying = true;
+									}
+							}
+							else if (strncmp(pcParam[i], "move_down", 9) == 0)
+							{
+									sscanf(pcValue[i], "%d", &value);
+									if (value)
+									{
+											// Действие для "вниз"
+											cApplying = true;
+									}
+							}
+							else if (strncmp(pcParam[i], "move_left", 9) == 0)
+							{
+									sscanf(pcValue[i], "%d", &value);
+									if (value)
+									{
+											// Действие для "влево"
+											cApplying = true;
+									}
+							}
+							else if (strncmp(pcParam[i], "move_right", 10) == 0)
+							{
+									sscanf(pcValue[i], "%d", &value);
+									if (value)
+									{
+											// Действие для "вправо"
+											cApplying = true;
+									}
+							}
+							else if (strncmp(pcParam[i], "move_stop", 9) == 0)
+							{
+									sscanf(pcValue[i], "%d", &value);
+									if (value)
+									{
+											// Действие для "стоп"
+											cApplying = true;
+									}
+							}
             if (strncmp(pcParam[i] , "palias_", 7) == 0)
             {
               if(strlen(pcValue[i]) < SETTINGS_MAX_PORT_NAME)
@@ -2749,6 +2908,15 @@ u16_t httpd_handler(int iIndex, char *pcInsert, int iInsertLen)
         return length;
       }
       break;
+//////////////////////////////////////////////////////////////////////
+//		case D_UP:
+//      {
+//        uint32_t length = 0;
+//        length += sprintf ( pcInsert+length, "%d", (uint8_t)gApplying );
+//        return length;
+//      }
+//      break;
+/////////////////////////////////////////////////////////////////////
     case RS_STOPPOLL:
       {
         uint32_t length = 0;

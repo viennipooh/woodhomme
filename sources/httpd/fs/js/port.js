@@ -89,3 +89,22 @@ function sm1(){
 		}
 	}
 }
+
+document.querySelector('button[name="move_up"]').onclick = function() {
+    sendCommand('up');
+};
+document.querySelector('button[name="move_left"]').onclick = function() {
+    sendCommand('left');
+};
+document.querySelector('button[name="move_right"]').onclick = function() {
+    sendCommand('right');
+};
+document.querySelector('button[name="move_down"]').onclick = function() {
+    sendCommand('down');
+};
+
+function sendCommand(cmd) {
+    // Здесь ваша логика отправки команды, например:
+    console.log('Команда:', cmd);
+    // fetch('/move', { ... });
+}

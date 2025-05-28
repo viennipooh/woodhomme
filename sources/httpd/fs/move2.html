@@ -1,479 +1,63 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.84.0">
-    <title>Поворотная платформа</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/checkout/">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-    <!-- Bootstrap core CSS -->
-    <link href="bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="form-validation.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Управление движением</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .controls {
+            display: inline-block;
+        }
+        .row {
+            margin: 10px 0;
+        }
+        button {
+            width: 80px;
+            height: 50px;
+            font-size: 18px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body class="bg-light">
-  <div class="container">
-    <main>
-      <div class="row g-5">
-			  <div class="col-md-7 col-lg-8">
-				  <h4 id="ID-info" class="mb-4 text-center">Поворотная платформа</h4>
-				  <form class="needs-validation" novalidate>
-					  <div class="row g-3" style="text-align: center;">
-							<div class="col-sm-6">
-								<label class="form-label" style="font-weight: 500; font-size: 110%;">Местоположение:</label>
-							</div>
-							<div class="col-sm-6 border-left">
-								<label class="form-label" style="font-weight: 500; font-size: 110%;">Напряжение:</label>
-							</div>
-							<div class="col-sm-3">
-								<label for="ID-horizontal" class="form-label">по горизонтали</label>
-								<input type="number" class="form-control" id="ID-horizontal" name="horizontal_angle" placeholder="0" readonly>
-							</div>
-							<div class="col-sm-3">
-								<label for="ID-vertical" class="form-label">по вертикали</label>
-								<input type="number" class="form-control" id="ID-vertical" name="vertical_angle" placeholder="0" readonly>
-							</div>
-							<div class="col-sm-3 border-left">
-								<label for="ID-full_battery" class="form-label">аккумул. сборки</label>
-								<input type="number" class="form-control" id="ID-full_battery" name="full_battery" placeholder="0" readonly>
-							</div>
-							<div class="col-sm-3">
-								<label for="ID-one_battery" class="form-label">одного элемента</label>
-								<div class="input-group mb-3">
-									<input type="number" class="form-control" id="ID-one_battery" name="one_battery" placeholder="0" readonly>
-									<div class="input-group-append" id="ID-low_batt"> </div>
-								</div>
-							</div>
-					  </div>
-				  </form>
-				  <hr class="my-4">
-				  <div class="container">
-					  <div class="row justify-content-center">
-						  <h5 class="mb-3">Настройка вращения для обоих осей</h5>                        
-					  </div>
-				  </div>		
-				  <form class="needs-validation" novalidate>
-				    <div class="row g-3">
-					    <div class="col-sm-4">
-						    <label align="center" for="ID-PWM_Duty_Cycle" class="form-label"> Скорость поворота (проценты)</label>
-						    <input type="number" class="form-control" id="ID-PWM_Duty_Cycle" name="PWM_Duty_Cycle" placeholder="20" min="20" max="100" step="1" required>
-						    <div class="invalid-feedback">Значение должно содержать целое число не менее 20 и не более 100, кратное 1</div>
-					    </div>
-					    <div class="col-sm-4">
-						    <label style="display: inline-block; width: 180px;" align="center" for="ID-Angle_of_rotation" class="form-label"> Угол поворота (градусы)</label>
-						    <input type="number" class="form-control" id="ID-Angle_of_rotation" name="Angle_of_rotation" placeholder="1" min="1" max="360" step="1" required>
-						    <div class="invalid-feedback">Значение должно содержать целое число не менее 1 и не более 360, кратное 1</div>
-					    </div>
-						<div class="col-sm-4">
-						    <label align="center" for="ID-Upside_Down" class="form-label"> Положение платформы в пространстве </label>
-						    <select class="form-control" id="ID-Upside_Down" name="Upside_Down" required>
-								<option value="false">Стандарное</option>
-								<option value="true">Вверх ногами</option> 
-							  </select>
-					    </div>
-				    </div>
-				  </form>	
-				  <hr class="my-4"> 
-				  <input class="w-100 btn btn-primary btn-lg" type="button" id="ID-Send-PTZ-config" name="Send" onclick="SendPTZConfig()" value="Задать новые параметры">
-				  <hr class="my-4"> 
-  				<div class="container">
-					<div class="row g-3 vertical-align">
-						<div class="col-sm-5">
-							<div class="row justify-content-center">
-								<h5 class="mb-3">Ручное управление</h5>
-							</div>
-							<div class="row justify-content-center">
-								<div class="btn-group-vertical">
-									<input class="w-100 btn btn-outline-primary btn-lg" type="button" id="ID-Send-UP" name="Send" onclick="MovingUP()" value="Вверх">
-									<div class="btn-group btn-group-toggle" data-toggle="buttons">
-										<input class="w-55 btn btn-outline-primary btn-lg" type="button" id="ID-Send-LEFT" name="Send" onclick="MovingLEFT()" value="Влево">
-										<input class="w-55 btn btn-outline-primary btn-lg" type="button" id="ID-Send-RIGHT" name="Send" onclick="MovingRIGHT()" value="Вправо">
-									</div>
-									<input class="w-100 btn btn-outline-primary btn-lg" type="button" id="ID-Send-DOWN" name="Send" onclick="MovingDOWN()" value="Вниз">
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-7 border-left">
-							<div class="row justify-content-center">
-								<div class="col-sm-5 justify-content-center">
-									<h5 class="mb-2">Очередь</h5>
-								</div>
-							</div>
-							<div class="col-sm justify-content-center" style="margin-top: 4px;">
-								<div style="display:flex; flex-direction: row; align-items: center;">	
-									<label for="ID-cmds_in_queue" class="form-label" style="margin: 2px;">Количество команд в очереди:</label>
-									<input type="number" class="form-control" id="ID-cmds_in_queue" 
-											name="cmds_in_queue" style="width: 50px; height: 30px;" placeholder="0" readonly>
-								</div>
-							</div>
-							<div class="row justify-content-center">
-								<div class="col-sm-11 justify-content-center" style="margin: 1px; margin-top: 12px;">
-									<label class="form-label" style="margin: 1px; font-weight: 500">Следующая команда </label>
-										<form class="needs-validation border" novalidate style="outline: 1px solid rgb(175, 179, 182);">
-											<div class="justify-content-center" style="display:flex; flex-direction: row; align-items: center; margin: 5px;">	
-												<label for="ID-next_dir" class="form-label" style="margin: 3px; font-size: small;">Направление:</label>
-												<input type="text" class="form-control" id="ID-next_dir" 
-													name="next_dir" style="width: 70px; height: 30px; font-size: small;" placeholder="-" readonly>
-											</div>
-											<div class="justify-content-center" style="display:flex; flex-direction: row; align-items: center; margin: 5px;">	
-												<label for="ID-next_speed" class="form-label" style="margin: 3px; font-size: small;">Скорость, % :</label>
-												<input type="number" class="form-control" id="ID-next_speed" 
-													name="next_speed" style="width: 70px; height: 30px; font-size: small; margin-right: 3px;" placeholder="0" readonly>
-												<label for="ID-next_angle" class="form-label" style="margin: 3px; font-size: small;">Угол, ° :</label>
-												<input type="number" class="form-control" id="ID-next_angle" 
-													name="next_angle" style="width: 70px; height: 30px; font-size: small;" placeholder="0" readonly>
-											</div>
-										</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="ID-moving_err" style="height:10px;"></div>
-					<hr class="my-4">
-					<input class="w-100 btn btn-danger btn-lg" type="button" id="ID-Send-Stop" name="Send" onclick="StopMoving()" value="СТОП">
-					<hr class="my-4">		
-					<div class="col-sm">
-						<div class="row">
-							<div class="col-sm bg-primary text-white text-center border"><a href="/web/" class="text-white">Main</a></div>					
-							<div class="col-sm bg-primary text-white text-center border"><a href="/web/wifi" class="text-white">Wi-Fi</a></div>
-							<div class="col-sm bg-primary text-white text-center border"><a href="/web/eth"  class="text-white">Eth</a></div>
-							<div class="col-sm bg-primary text-white text-center border"><a href="/web/ota"  class="text-white">OTA</a></div>
-						</div>
-					</div>
-				  <hr class="my-4">
-				</div>
-      		</div>
-		</div>
-    </main>
-  </div>
+<body>
+    <h2>Управление движением</h2>
+    <div class="controls">
+        <div class="row">
+            <button onclick="sendCommand('up')">Вверх</button>
+        </div>
+        <div class="row">
+            <button onclick="sendCommand('left')">Влево</button>
+            <button onclick="sendCommand('stop')">Стоп</button>
+            <button onclick="sendCommand('right')">Вправо</button>
+        </div>
+        <div class="row">
+            <button onclick="sendCommand('down')">Вниз</button>
+        </div>
+    </div>
+
+    <script>
+        function sendCommand(direction) {
+            // Пример отправки команды на сервер
+            fetch('/move', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ command: direction })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Ответ сервера:', data);
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+            });
+        }
+    </script>
 </body>
-
-<script>
-setInterval(function() { getData(); }, 1000);
-setInterval(function() { getQueueState();}, 250);
-
-var num_cmd;
-
-function getData()
-{
-	var xhttp = new XMLHttpRequest();
-	xhttp.overrideMimeType("application/json");
-	xhttp.onreadystatechange = function()
-	{
-		if(this.readyState == 4 && this.status == 200)
-		{			
-			var jsonResponse = JSON.parse(this.responseText);
-			document.getElementById("ID-full_battery").value = jsonResponse.voltage.full_battery.toFixed(2);
-			document.getElementById("ID-one_battery").value = jsonResponse.voltage.one_battery.toFixed(2);
-
-			if (jsonResponse.voltage.one_battery.toFixed(2) <= 2.99)
-			{
-				document.getElementById('ID-low_batt').innerHTML = 
-				'<span class="input-group-text">\
-					<i class="inline-icon material-icons"\
-					title="Критически низкий уровень заряда батареи! Движение платформы заблокировано."\
-					style="color:red">warning</i>\
-				</span>';
-			}
-			else if (jsonResponse.voltage.one_battery.toFixed(2) <= 2.89)
-			{
-				document.getElementById('ID-low_batt').innerHTML =
-				'<span class="input-group-text">\
-					<i class="inline-icon material-icons" title="Внимание: низкий уровень заряда батареи!" \
-					style="color:orange">warning</i>\
-				</span>';
-			}
-			else document.getElementById('ID-low_batt').innerHTML = ' ';
-			
-			document.getElementById("ID-horizontal").value = jsonResponse.position.horizontal_angle.toFixed(2);
-			document.getElementById("ID-vertical").value = jsonResponse.position.vertical_angle.toFixed(2);
-		}
-	};
-	xhttp.open("GET", "/info/sensors", true);
-	xhttp.send();
-	delete xhttp;
-}
-
-function getQueueState()
-{
-	var xhttp = new XMLHttpRequest();
-	xhttp.overrideMimeType("application/json");
-	xhttp.onreadystatechange = function()
-	{
-		if(this.readyState == 4 && this.status == 200)
-		{
-			var jsonResponse = JSON.parse(this.responseText);
-			num_cmd = jsonResponse.cmds_in_queue;
-			document.getElementById("ID-cmds_in_queue").value = num_cmd;
-			if (!jsonResponse.hasOwnProperty("next_command"))
-			{
-				document.getElementById("ID-next_dir").value = "-";
-				document.getElementById("ID-next_speed").value = 0;
-				document.getElementById("ID-next_angle").value = 0;
-			}
-			else
-			{
-				document.getElementById("ID-next_dir").value = jsonResponse.next_command.direction;
-				document.getElementById("ID-next_speed").value = jsonResponse.next_command.speed;
-				document.getElementById("ID-next_angle").value = jsonResponse.next_command.angle;
-			}
-		}
-	};
-	xhttp.open("GET", "/ptz/queue", true);
-	xhttp.send();
-	delete xhttp;
-}
-
-async function PtzConfig()
-{
-    var xhttp = new XMLHttpRequest();
-    xhttp.overrideMimeType("application/json");
-    xhttp.onreadystatechange = function()
-    {
-        if(this.readyState == 4 && this.status == 200)
-        {
-            var jsonResponse = JSON.parse(this.responseText);
-            document.getElementById("ID-PWM_Duty_Cycle").value = jsonResponse.std_speed;
-            document.getElementById("ID-Angle_of_rotation").value = jsonResponse.std_angle;
-			document.getElementById("ID-Upside_Down").value = jsonResponse.upside_down;
-        }
-    };
-    xhttp.open("GET", "/ptz/config", true);
-    xhttp.send();
-    delete xhttp;
-}
-
-async function VersionInfo()
-{
-    var xhttp = new XMLHttpRequest();
-    xhttp.overrideMimeType("application/json");
-    xhttp.onreadystatechange = function()
-    {
-        if(this.readyState == 4 && this.status == 200)
-        {
-            var jsonResponse = JSON.parse(this.responseText);
-            document.getElementById("ID-info").textContent = "Поворотная платформа v" +
-																jsonResponse.number + ", " + 
-																	jsonResponse.date;
-        }
-    };
-    xhttp.open("GET", "/info/version", true);
-    xhttp.send();
-    delete xhttp;
-}
-
-function deleteMovErr()
-{
-	document.getElementById('ID-moving_err').innerHTML = "";
-}
-
-function MovingUP()
-{
-	var SendSettings = new XMLHttpRequest();
-	SendSettings.open("POST", "/ptz/move", true);
-	SendSettings.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-	let json = JSON.stringify({
-  		direction: "up",
-	});
-	SendSettings.onreadystatechange = function()
-	{
-		if(this.readyState == 4 && this.status == 507)
-		{
-			document.getElementById('ID-moving_err').innerHTML = 
-			'<div style="color:red; font-size:small;"> Достигнут максимальный размер очереди (5), повторите запрос позже </div>';
-			setTimeout(deleteMovErr, 3000);
-
-		}
-	};
-	SendSettings.send(json);
-	delete SendSettings;
-}
-
-function MovingDOWN()
-{
-	var SendSettings = new XMLHttpRequest();
-	SendSettings.open("POST", "/ptz/move", true);
-	SendSettings.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-	let json = JSON.stringify({
-  		direction: "down",
-	});
-	SendSettings.onreadystatechange = function()
-	{
-		if(this.readyState == 4 && this.status == 507)
-		{
-			document.getElementById('ID-moving_err').innerHTML = 
-			'<div style="color:red; font-size:small;"> Достигнут максимальный размер очереди (5), повторите запрос позже </div>';
-			setTimeout(deleteMovErr, 3000);
-
-		}
-	};
-	SendSettings.send(json);
-	delete SendSettings;
-}
-
-function MovingLEFT()
-{
-	var SendSettings = new XMLHttpRequest();
-	SendSettings.open("POST", "/ptz/move", true);
-	SendSettings.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-	let json = JSON.stringify({
-  		direction: "left",
-	});
-	SendSettings.onreadystatechange = function()
-	{
-		if(this.readyState == 4 && this.status == 507)
-		{
-			document.getElementById('ID-moving_err').innerHTML = 
-			'<div style="color:red; font-size:small;"> Достигнут максимальный размер очереди (5), повторите запрос позже </div>';
-			setTimeout(deleteMovErr, 3000);
-
-		}
-	};
-	SendSettings.send(json);
-	delete SendSettings;
-}
-
-function MovingRIGHT()
-{
-	var SendSettings = new XMLHttpRequest();
-	SendSettings.open("POST", "/ptz/move", true);
-	SendSettings.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-	let json = JSON.stringify({
-  		direction: "right",
-	});
-	SendSettings.onreadystatechange = function()
-	{
-		if(this.readyState == 4 && this.status == 507)
-		{
-			document.getElementById('ID-moving_err').innerHTML = 
-			'<div style="color:red; font-size:small;"> Достигнут максимальный размер очереди (5), повторите запрос позже </div>';
-			setTimeout(deleteMovErr, 3000);
-
-		}
-	};
-	SendSettings.send(json);
-	delete SendSettings;
-}
-
-function StopMoving()
-{
-	// var readyToSend = 1;
-	// var forms = document.querySelectorAll('.needs-validation');
-	// Array.prototype.slice.call(forms)
-
-	// .forEach(function (form)
-	// {
-	// 	if (!form.checkValidity())
-	// 		readyToSend = 0;
-		
-	// 	form.classList.add('was-validated')
-	// })
-
-	// if (!readyToSend)
-	// 	return;
-
-	document.getElementById("ID-Send-Stop").value = "СТОП";
- 
-    var request = new XMLHttpRequest();
-	request.open("POST", "/ptz/stop", true);
-    request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-	request.timeout = 5000;
-    request.send();
-	delete request;
-}
-
-function SendPTZConfig()
-{
-	var readyToSend = 1;
-	var forms = document.querySelectorAll('.needs-validation');
-	Array.prototype.slice.call(forms)
-
-	.forEach(function (form)
-	{
-		if (!form.checkValidity())
-			readyToSend = 0;
-		
-		form.classList.add('was-validated')
-	})
-
-	if (!readyToSend)
-		return;
-
-	document.getElementById("ID-Send-PTZ-config").value = "Отправлено";
-	setTimeout(returnBtnValue, 2000);
-
-    var d = document.getElementById("ID-PWM_Duty_Cycle").value;
-    var a = document.getElementById("ID-Angle_of_rotation").value;
-	var u = document.getElementById("ID-Upside_Down").value;
-    let data =
-    {
-        std_speed: d,
-        std_angle: a,
-		upside_down: u
-    };
-
-	var request = new XMLHttpRequest();
-	request.open("POST", "/ptz/config", true);
-    request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-	request.timeout = 5000;
-    request.send( JSON.stringify( data ) );
-	delete request;
-}
-
-function returnBtnValue()
-{
-	document.getElementById("ID-Send-PTZ-config").value = "Задать новые параметры";
-}
-
-function SendSettings()
-{
-	var readyToSend = 1;
-	var forms = document.querySelectorAll('.needs-validation');
-
-	Array.prototype.slice.call(forms)
-	.forEach(function (form)
-	{
-		if (!form.checkValidity())
-			readyToSend = 0;
-
-		form.classList.add('was-validated')
-	})
-
-	if (!readyToSend)
-		return;
-
-	//document.getElementById("ID-Send").value = "Отправлено";
-
-	var portA = 0;
-	var portB = 0;
-
-	portA = ~~document.getElementById("ID-Charge").value  + (~~document.getElementById("ID-StMot_change").value << 1) +
-	(~~document.getElementById("ID-Front/Rear").value << 2);
-
-	portB = ~~document.getElementById("ID-bldc_F/R").value + (~~document.getElementById("ID-bldc_OE").value << 1) + 
-	(~~document.getElementById("ID-bldc_60/120").value << 2) + (~~document.getElementById("ID-RS485_RE/DE").value << 3) + 
-	(~~document.getElementById("ID-RS485_ON").value << 4) + (~~document.getElementById("ID-lan_enable").value << 5);
-
-	var PostBody = 'portA=' + portA + '&' + 'portB=' + portB + '&' + 'hz=' + document.getElementById("ID-CLK_MCU_HZ").value + '&' + 
-	'duty=' + document.getElementById("ID-CLK_MCU_duty").value + '&0';
-
-	var SendSettings = new XMLHttpRequest();
-	SendSettings.open("POST", "/devtools/expander", true);
-	SendSettings.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	SendSettings.timeout = 5000;
-	SendSettings.send(PostBody);
-	delete SendSettings;
-}
-PtzConfig();
-VersionInfo();
-</script>
-<script src="bootstrap.min.js"></script>
-<script src="form-validation.js"></script>
 </html>

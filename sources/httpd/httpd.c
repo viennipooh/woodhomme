@@ -379,11 +379,11 @@ struct http_state {
 };
 
 
-#ifdef LWIP_HTTPD_SSI 
+#ifdef LWIP_HTTPD_SSI
 extern void httpd_ssi_init(void);
 #endif
 
-#ifdef LWIP_HTTPD_CGI 
+#ifdef LWIP_HTTPD_CGI
 extern void httpd_cgi_init(void);
 #endif
 
@@ -426,7 +426,7 @@ static char* strnstr(const char* buffer, const char* token, size_t n)
     }
   }
   return NULL;
-} 
+}
 #endif /* LWIP_HTTPD_STRNSTR_PRIVATE */
 
 /** Allocate a struct http_state. */
@@ -639,7 +639,7 @@ static void get_tag_insert(struct http_state *hs)
 #endif /* LWIP_HTTPD_SSI_MULTIPART */
 
   if(g_pfnSSIHandler && g_ppcTags && g_iNumTags) {
-    
+
 #ifdef LWIP_SRC_FIND
 //  char mac_src_enabled;
 //  char mac_src[6];
@@ -739,7 +739,7 @@ static void get_http_headers(struct http_state *pState, char *pszURI)
       pState->hdrs[0] = g_psHTTPHeaderStrings[HTTP_HDR_OK];
     }
 
-    /* Determine if the URI has any variables and, if so, temporarily remove 
+    /* Determine if the URI has any variables and, if so, temporarily remove
        them. */
     pszVars = strchr(pszURI, '?');
     if(pszVars) {
@@ -1671,13 +1671,13 @@ static err_t http_parse_request(struct pbuf **inp, struct http_state *hs, struct
     }
   }
 #endif
-  
+
 #if LWIP_HTTPD_SUPPORT_REQUESTLIST
 
   LWIP_DEBUGF(HTTPD_DEBUG, ("Received %d bytes\n", p->tot_len));
 
   /* first check allowed characters in this pbuf? */
-  
+
   /* enqueue the pbuf */
   if (hs->req == NULL) {
     LWIP_DEBUGF(HTTPD_DEBUG, ("First pbuf\n"));
@@ -1758,15 +1758,15 @@ static err_t http_parse_request(struct pbuf **inp, struct http_state *hs, struct
               if(auth_field!=0 && auth_end!=0)
               {
                 strncpy(auth_str,auth_field+1,auth_end-auth_field-1);
-                
+
                 //strcpy(check_str,"YWRtaW46YWRtaW4="); // admin:admin
-                
+
                 //memset(check_str,0,sizeof(check_str));
                 //strcpy(orign_str,"admin:admin");
-                
+
                 sprintf(orign_str,"%s:%s",rsettings->user,rsettings->password);
                 Base64encode(check_str,orign_str,strlen(orign_str));
-                
+
                 /* Insert PassLogin */
                 if(strcmp(auth_str,check_str) == 0)
                 {
@@ -1815,6 +1815,7 @@ static err_t http_parse_request(struct pbuf **inp, struct http_state *hs, struct
             "upload_fw.html",
             "upload_fw.htm",
             "conv_wifi.htm"
+						"move2.htm"
           };
           hs->auth_enabled = 0;
           for (int i=0; i < AUTH_PAGES_NUM; i++) {
@@ -1868,7 +1869,7 @@ static err_t http_parse_request(struct pbuf **inp, struct http_state *hs, struct
           data));
         return http_find_error_file(hs, 501);
       }
-      
+
       /* if authorization error */
       if(hs->auth_checked_ok == 0 && hs->auth_enabled == 1)
       {
@@ -2114,7 +2115,7 @@ static err_t http_init_file(struct http_state *hs, struct fs_file *file, int is_
 #if LWIP_HTTPD_DYNAMIC_HEADERS
     /* Determine the HTTP headers to send based on the file extension of
    * the requested URI. */
-  if ((hs->handle == NULL) || !hs->handle->http_header_included || 
+  if ((hs->handle == NULL) || !hs->handle->http_header_included ||
       (hs->auth_enabled == 1 && hs->auth_checked_ok == 0)) {
     get_http_headers(hs, (char*)uri);
   }
@@ -2361,11 +2362,11 @@ void httpd_init(void)
 #if LWIP_HTTPD_SSI
   httpd_ssi_init();
 #endif
-  
+
 #if LWIP_HTTPD_CGI
   httpd_cgi_init();
 #endif
-  
+
   httpd_init_addr();
 }
 
@@ -2404,7 +2405,7 @@ void http_set_cgi_handlers(const tCGI *cgis, int num_handlers)
 {
   LWIP_ASSERT("no cgis given", cgis != NULL);
   LWIP_ASSERT("invalid number of handlers", num_handlers > 0);
-  
+
   g_pCGIs = cgis;
   g_iNumCGIs = num_handlers;
 }
