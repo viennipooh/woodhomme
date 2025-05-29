@@ -350,6 +350,7 @@ void AutoMove(void ){
 	//	TickType_t startTick = xTaskGetTickCount();
 	//	TickType_t waitTicks = pdMS_TO_TICKS(20000);
 	//	if ((xTaskGetTickCount() - startTick) >= waitTicks) {
+
 	if ( gDriveParam.autoMove ){
 			PWM_OFF;
 			POWER_OFF;
@@ -386,37 +387,48 @@ void AutoMove(void ){
 	else {
 			switch (gDriveParam.drive_ev) {
 				case UP:
+						DRIVE_MODE;
+						POWER_ON;
 						BACK;
 						DRIVE_Y;
 						PWM_ON;
 						vTaskDelay(500);
 						PWM_OFF;
+						gDriveParam.drive_ev= NONE;
 						break;
 				case DOWN:
+						DRIVE_MODE;
+						POWER_ON;
 						FORWARD;
 						DRIVE_Y;
 						PWM_ON;
 						vTaskDelay(500);
 						PWM_OFF;
+						gDriveParam.drive_ev= NONE;
 						break;
 				case LEFT:
+						DRIVE_MODE;
+						POWER_ON;
 						PWM_OFF;
 						BACK;
 						DRIVE_X;
 						PWM_ON;
 						vTaskDelay(500);
 						PWM_OFF;
+						gDriveParam.drive_ev= NONE;
 						break;
 				case RIGHT:
+						DRIVE_MODE;
+						POWER_ON;
 						PWM_OFF;
 						FORWARD;
 						DRIVE_X;
 						PWM_ON;
 						vTaskDelay(500);
 						PWM_OFF;
+						gDriveParam.drive_ev= NONE;
 						break;
 			}
-			gDriveParam.drive_ev= NONE;
 	}
 }
 
