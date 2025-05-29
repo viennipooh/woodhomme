@@ -10,7 +10,7 @@
 				color: white;
 				padding: 15px;
 				text-align: center;
-				font-size: 24px;
+				font-size: 20px;
 				font-weight: bold;
 				margin-bottom: 30px;
 				border-radius: 5px;
@@ -18,15 +18,20 @@
 			
 			 table {
 				margin-left: 20px;
-				margin-bottom: 20px;
+				margin-top: 20px; /* Отступ сверху */
+				margin-bottom: 5px;
 				border-collapse: collapse;
+				font-size: 12px; 
+				width: 70%; 				
 			  }
 
 			  table, th, td {
+			    padding: 2px 4px; 
 				border: 1px solid #ccc;
+				white-space: nowrap;
 			  }
 			  th, td {
-				padding: 8px 12px;
+				padding: 2px 4px;
 			  }		
 				
 			body {
@@ -68,6 +73,26 @@
 			  grid-column: 2;
 			  grid-row: 3;
 			}
+			.camera-button {
+				width: 120px;   /* в 2 раза больше 60px */
+				height: 120px;  /* в 2 раза больше 60px */
+				border-radius: 50%;
+				border: 2px solid #0074D9;
+				background-color: white;
+				color: #0074D9;
+				font-size: 48px; /* увеличенный размер иконки */
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				cursor: pointer;
+				transition: background-color 0.3s, color 0.3s;
+			  }
+
+			  .camera-button:hover {
+				background-color: #0074D9;
+				color: white;
+			  }
+			
 		 </style>
 	</HEAD>
 	<SCRIPT language=JavaScript src="js/port.js"></SCRIPT>
@@ -182,10 +207,15 @@
 				<button name="stop">Стоп</button>
 				<button name="start">Старт</button>
 			  </div>
+			   <button class="camera-button" title="Открыть камеру" aria-label="Открыть камеру">
+				📷
+			  </button>
 		</form>
-		
-		
-		
+		<script>
+				document.querySelector('.camera-button').addEventListener('click', () => {
+			window.open('http://192.168.1.138/login.asp', '_blank');
+		  });
+		</script>
 		
 	</BODY>
 </HTML>
