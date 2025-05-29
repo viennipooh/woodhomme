@@ -634,7 +634,7 @@ void main_task(void * pvParameters)
   * @param  None
   * @retval None
   */
-int main(void)
+	int main(void)
 {
   /**
    * Проверяем контрольную сумму прошивки, если что перезагружаем.

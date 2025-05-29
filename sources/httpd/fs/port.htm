@@ -35,13 +35,29 @@
 			  }		
 				
 			body {
-			  display: flex;
-			  justify-content: center;
-			  align-items: center;
-			  height: 100vh;
-			  margin: 0;
 			  font-family: Arial, sans-serif;
+			  margin: 0;
+			  padding: 20px;
 			}
+			
+			.tables-container {
+			  display: flex;
+			  justify-content: space-between;
+			  margin-bottom: 20px;
+			}
+			
+			.table-wrapper {
+			  flex: 1;
+			  margin: 0 10px;
+			}
+			
+			.camera-section {
+			  display: flex;
+			  justify-content: space-between;
+			  align-items: flex-start;
+			  margin-top: 30px;
+			}
+			
 			.container {
 			  display: grid;
 			  grid-template-columns: 50px 50px 50px;
@@ -50,12 +66,14 @@
 			  justify-items: center;
 			  align-items: center;
 			}
+			
 			button {
 			  width: 80px;
 			  height: 40px;
 			  font-size: 16px;
 			  cursor: pointer;
 			}
+			
 			/* Расположение кнопок */
 			.up {
 			  grid-column: 2;
@@ -73,19 +91,21 @@
 			  grid-column: 2;
 			  grid-row: 3;
 			}
+			
 			.camera-button {
-				width: 120px;   /* в 2 раза больше 60px */
-				height: 120px;  /* в 2 раза больше 60px */
+				width: 120px;
+				height: 120px;
 				border-radius: 50%;
 				border: 2px solid #0074D9;
 				background-color: white;
 				color: #0074D9;
-				font-size: 48px; /* увеличенный размер иконки */
+				font-size: 48px;
 				display: flex;
 				justify-content: center;
 				align-items: center;
 				cursor: pointer;
 				transition: background-color 0.3s, color 0.3s;
+				margin-left: 200px;
 			  }
 
 			  .camera-button:hover {
@@ -102,92 +122,96 @@
 				<TR><TD><P><BR></P></TD></TR>
 				<TR><TD><P><BR></P></TD></TR>
 				<TR align=center><TD><H2>Настройки портов Ethernet</H2></TD></TR>
+				
+				<!-- Контейнер для горизонтального расположения таблиц -->
 				<TR>
 					<TD>
-						<TABLE class=table_tt align=center>
-							<P>
-								<TR><TD colspan=100%><b><big>Настройки портов</big></b></TD></TR>
-								<TR>
-									<TD><b>Номер порта</b></TD>
-									<TD><b>Включен</b></TD>
-									<TD><b>Авто</b></TD>
-									<TD><b>Скорость</b></TD>
-									<TD><b>Дуплекс</b></TD>
-									<TD><b>Упр. потоком</b></TD>
-									<TD colspan=2><b>MDI/MDIX</b></TD>
-								</TR>
-								<TR>
-									<TD><b>Eth.1</b></TD>
-									<TD><input type=radio name=pen_1 value=1 checked disabled>Вкл.</input></br><input type=radio name=pen_1 value=0 disabled>Выкл.</input></TD>
-									<TD><input type=radio name=pauto_1 value=1 disabled>Вкл.</input></br><input type=radio name=pauto_1 value=0 disabled>Выкл.</input></TD>
-									<TD><input type=radio name=pspeed_1 value=1 disabled>100Мбит</input></br><input type=radio name=pspeed_1 value=0 disabled>10Мбит</input></TD>
-									<TD><input type=radio name=pduplex_1 value=1 checked disabled>FDX</input></br><input type=radio name=pduplex_1 value=0 disabled>HDX</input></TD>
-									<TD><input type=radio name=pcflw_1 value=1 checked disabled>Вкл.</input></br><input type=radio name=pcflw_1 value=0 disabled>Выкл.</input></TD>
-									<TD><span>Auto</span></br> <input type=checkbox name=pamdi_1 value=1 disabled></input></TD>
-									<TD><input type=radio name=pmdi_1 value=1 disabled>MDI</input> </br><input type=radio name=pmdi_1 value=0 disabled>MDIX</input></TD>
-								</TR>
-								<TR>
-									<TD><b>Eth.2</b></TD>
-									<TD><input type=radio name=pen_2 value=1 checked disabled>Вкл.</input></br><input type=radio name=pen_2 value=0 disabled>Выкл.</input></TD>
-									<TD><input type=radio name=pauto_2 value=1 disabled>Вкл.</input></br><input type=radio name=pauto_2 value=0 disabled>Выкл.</input></TD>
-									<TD><input type=radio name=pspeed_2 value=1 disabled>100Мбит</input></br><input type=radio name=pspeed_2 value=0 disabled>10Мбит</input></TD>
-									<TD><input type=radio name=pduplex_2 value=1 checked disabled>FDX</input></br><input type=radio name=pduplex_2 value=0 disabled>HDX</input></TD>
-									<TD><input type=radio name=pcflw_2 value=1 checked disabled>Вкл.</input></br><input type=radio name=pcflw_2 value=0 disabled>Выкл.</input></TD>
-									<TD><span>Auto</span></br> <input type=checkbox name=pamdi_2 value=1 disabled></input></TD>
-									<TD><input type=radio name=pmdi_2 value=1 disabled>MDI</input> </br><input type=radio name=pmdi_2 value=0 disabled>MDIX</input></TD>
-								</TR>
-								<TR>
-									<TD><b>Eth.3</b></TD>
-									<TD><input type=radio name=pen_3 value=1 checked disabled>Вкл.</input></br><input type=radio name=pen_3 value=0 disabled>Выкл.</input></TD>
-									<TD><input type=radio name=pauto_3 value=1 disabled>Вкл.</input></br><input type=radio name=pauto_3 value=0 disabled>Выкл.</input></TD>
-									<TD><input type=radio name=pspeed_3 value=1 disabled>100Мбит</input></br><input type=radio name=pspeed_3 value=0 disabled>10Мбит</input></TD>
-									<TD><input type=radio name=pduplex_3 value=1 checked disabled>FDX</input></br><input type=radio name=pduplex_3 value=0 disabled>HDX</input></TD>
-									<TD><input type=radio name=pcflw_3 value=1 checked disabled>Вкл.</input></br><input type=radio name=pcflw_3 value=0 disabled>Выкл.</input></TD>
-									<TD><span>Auto</span></br> <input type=checkbox name=pamdi_3 value=1 disabled></input></TD>
-									<TD><input type=radio name=pmdi_3 value=1 disabled>MDI</input> </br><input type=radio name=pmdi_3 value=0 disabled>MDIX</input></TD>
-								</TR>
-								
-							</P>
-						</TABLE>
+						<div class="tables-container">
+							<div class="table-wrapper">
+								<TABLE class=table_tt>
+									<P>
+										<TR><TD colspan=100%><b><big>Настройки портов</big></b></TD></TR>
+										<TR>
+											<TD><b>Номер порта</b></TD>
+											<TD><b>Включен</b></TD>
+											<TD><b>Авто</b></TD>
+											<TD><b>Скорость</b></TD>
+											<TD><b>Дуплекс</b></TD>
+											<TD><b>Упр. потоком</b></TD>
+											<TD colspan=2><b>MDI/MDIX</b></TD>
+										</TR>
+										<TR>
+											<TD><b>Eth.1</b></TD>
+											<TD><input type=radio name=pen_1 value=1 checked disabled>Вкл.</input></br><input type=radio name=pen_1 value=0 disabled>Выкл.</input></TD>
+											<TD><input type=radio name=pauto_1 value=1 disabled>Вкл.</input></br><input type=radio name=pauto_1 value=0 disabled>Выкл.</input></TD>
+											<TD><input type=radio name=pspeed_1 value=1 disabled>100Мбит</input></br><input type=radio name=pspeed_1 value=0 disabled>10Мбит</input></TD>
+											<TD><input type=radio name=pduplex_1 value=1 checked disabled>FDX</input></br><input type=radio name=pduplex_1 value=0 disabled>HDX</input></TD>
+											<TD><input type=radio name=pcflw_1 value=1 checked disabled>Вкл.</input></br><input type=radio name=pcflw_1 value=0 disabled>Выкл.</input></TD>
+											<TD><span>Auto</span></br> <input type=checkbox name=pamdi_1 value=1 disabled></input></TD>
+											<TD><input type=radio name=pmdi_1 value=1 disabled>MDI</input> </br><input type=radio name=pmdi_1 value=0 disabled>MDIX</input></TD>
+										</TR>
+										<TR>
+											<TD><b>Eth.2</b></TD>
+											<TD><input type=radio name=pen_2 value=1 checked disabled>Вкл.</input></br><input type=radio name=pen_2 value=0 disabled>Выкл.</input></TD>
+											<TD><input type=radio name=pauto_2 value=1 disabled>Вкл.</input></br><input type=radio name=pauto_2 value=0 disabled>Выкл.</input></TD>
+											<TD><input type=radio name=pspeed_2 value=1 disabled>100Мбит</input></br><input type=radio name=pspeed_2 value=0 disabled>10Мбит</input></TD>
+											<TD><input type=radio name=pduplex_2 value=1 checked disabled>FDX</input></br><input type=radio name=pduplex_2 value=0 disabled>HDX</input></TD>
+											<TD><input type=radio name=pcflw_2 value=1 checked disabled>Вкл.</input></br><input type=radio name=pcflw_2 value=0 disabled>Выкл.</input></TD>
+											<TD><span>Auto</span></br> <input type=checkbox name=pamdi_2 value=1 disabled></input></TD>
+											<TD><input type=radio name=pmdi_2 value=1 disabled>MDI</input> </br><input type=radio name=pmdi_2 value=0 disabled>MDIX</input></TD>
+										</TR>
+										<TR>
+											<TD><b>Eth.3</b></TD>
+											<TD><input type=radio name=pen_3 value=1 checked disabled>Вкл.</input></br><input type=radio name=pen_3 value=0 disabled>Выкл.</input></TD>
+											<TD><input type=radio name=pauto_3 value=1 disabled>Вкл.</input></br><input type=radio name=pauto_3 value=0 disabled>Выкл.</input></TD>
+											<TD><input type=radio name=pspeed_3 value=1 disabled>100Мбит</input></br><input type=radio name=pspeed_3 value=0 disabled>10Мбит</input></TD>
+											<TD><input type=radio name=pduplex_3 value=1 checked disabled>FDX</input></br><input type=radio name=pduplex_3 value=0 disabled>HDX</input></TD>
+											<TD><input type=radio name=pcflw_3 value=1 checked disabled>Вкл.</input></br><input type=radio name=pcflw_3 value=0 disabled>Выкл.</input></TD>
+											<TD><span>Auto</span></br> <input type=checkbox name=pamdi_3 value=1 disabled></input></TD>
+											<TD><input type=radio name=pmdi_3 value=1 disabled>MDI</input> </br><input type=radio name=pmdi_3 value=0 disabled>MDIX</input></TD>
+										</TR>
+									</P>
+								</TABLE>
+							</div>
+							
+							<div class="table-wrapper">
+								<TABLE class="table_t3">
+									<TR><TD colspan=100%><b><big>Подсети на основе портов</big></b></TD></TR>
+									<TR>
+										<TD></b>Подсети</b><TD><b>Порты-члены</b></TD>
+									<TR>
+										<TD><b>Подсеть 1</b></TD>
+										<TD>1<input type="checkbox" id="subnet_member_1_1"></input>
+											2<input type="checkbox" id="subnet_member_1_2"></input>
+											3<input type="checkbox" id="subnet_member_1_3"></input>
+											
+											<input type="hidden" name="subnet_member_1"></input>
+										</TD>
+									</TR>
+									<TR>
+										<TD><b>Подсеть 2</b></TD>
+										<TD>1<input type="checkbox" id="subnet_member_2_1"></input>
+											2<input type="checkbox" id="subnet_member_2_2"></input>
+											3<input type="checkbox" id="subnet_member_2_3"></input>
+										
+											<input type="hidden" name="subnet_member_2"></input>
+										</TD>
+									</TR>
+									<TR>
+										<TD><b>Подсеть 3</b></TD>
+										<TD>1<input type="checkbox" id="subnet_member_3_1"></input>
+											2<input type="checkbox" id="subnet_member_3_2"></input>
+											3<input type="checkbox" id="subnet_member_3_3"></input>
+											
+											<input type="hidden" name="subnet_member_3"></input>
+										</TD>
+									</TR>
+								</TABLE>
+							</div>
+						</div>
 					</TD>
 				</TR>
-				<TR><TD><P><BR></P></TD></TR>
-				<TR>
-					<TD>
-						<TABLE class="table_t3" align="center">
-						<TR><TD colspan=100%><b><big>Подсети на основе портов</big></b></TD></TR> <!--<font color="yellow"></font>-->
-							<TR>
-								<TD></b>Подсети</b><TD><b>Порты-члены</b></TD>
-							<TR>
-								<TD><b>Подсеть 1</b></TD>
-								<TD>1<input type="checkbox" id="subnet_member_1_1"></input>
-									2<input type="checkbox" id="subnet_member_1_2"></input>
-									3<input type="checkbox" id="subnet_member_1_3"></input>
-									
-									<input type="hidden" name="subnet_member_1"></input><!-- Для упаковки -->
-								</TD>
-							</TR>
-							<TR>
-								<TD><b>Подсеть 2</b></TD>
-								<TD>1<input type="checkbox" id="subnet_member_2_1"></input>
-									2<input type="checkbox" id="subnet_member_2_2"></input>
-									3<input type="checkbox" id="subnet_member_2_3"></input>
-								
-									<input type="hidden" name="subnet_member_2"></input><!-- Для упаковки -->
-								</TD>
-							</TR>
-							<TR>
-								<TD><b>Подсеть 3</b></TD>
-								<TD>1<input type="checkbox" id="subnet_member_3_1"></input>
-									2<input type="checkbox" id="subnet_member_3_2"></input>
-									3<input type="checkbox" id="subnet_member_3_3"></input>
-									
-									<input type="hidden" name="subnet_member_3"></input><!-- Для упаковки -->
-								</TD>
-							</TR>
-						</TABLE>
-					</TD>
-				</TR>
+				
 				<TR><TD><P><BR></P></TD></TR>
 				<TR width=50% align=center>
 					<TD><input value=отмена type=reset style=width:45%></input> 
@@ -196,20 +220,27 @@
 				<TR><TD><P><BR></P></TD></TR>
 				
 			</TABLE>
-			 <div class="header">Управление приводом камеры</div>
-			 <div class="container">
-				<button class="up" name="move_up">Вверх</button>
-				<button class="left" name="move_left">Влево</button>
-				<button class="right" name="move_righ">Вправо</button>
-				<button class="down" name="move_down">Вниз</button>				
+			
+			<!-- Секция управления камерой -->
+			<div class="camera-section">
+				<div>
+					<div class="header">Управление приводом камеры</div>
+					<div class="container">
+						<button class="up" name="move_up">Вверх</button>
+						<button class="left" name="move_left">Влево</button>
+						<button class="right" name="move_righ">Вправо</button>
+						<button class="down" name="move_down">Вниз</button>				
+					</div>
+					<div class="button-row">
+						<button name="stop">Стоп</button>
+						<button name="start">Старт</button>
+					</div>
+				</div>
+				
+				<button class="camera-button" title="Открыть камеру" aria-label="Открыть камеру">
+					📷
+				</button>
 			</div>
-			 <div class="button-row">
-				<button name="stop">Стоп</button>
-				<button name="start">Старт</button>
-			  </div>
-			   <button class="camera-button" title="Открыть камеру" aria-label="Открыть камеру">
-				📷
-			  </button>
 		</form>
 		<script>
 				document.querySelector('.camera-button').addEventListener('click', () => {
