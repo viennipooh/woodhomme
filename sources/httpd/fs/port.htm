@@ -53,9 +53,10 @@
 			
 			.camera-section {
 			  display: flex;
-			  justify-content: space-between;
-			  align-items: flex-start;
+			   justify-content: flex-start; /* Изменено с space-between на flex-start */
+			  align-items: center; /* Изменено с flex-start на center для выравнивания по центру */
 			  margin-top: 30px;
+			  gap: 20px; /* Добавлен отступ между элементами */
 			}
 			
 			.container {
@@ -94,18 +95,18 @@
 			
 			.camera-button {
 				width: 120px;
-				height: 120px;
-				border-radius: 50%;
+				height: 60px; /* Уменьшена высота для прямоугольной формы */
+				border-radius: 0; /* Убрано скругление углов */
 				border: 2px solid #0074D9;
 				background-color: white;
 				color: #0074D9;
-				font-size: 48px;
+				font-size: 24px; /* Уменьшен размер иконки */
 				display: flex;
 				justify-content: center;
 				align-items: center;
 				cursor: pointer;
 				transition: background-color 0.3s, color 0.3s;
-				margin-left: 200px;
+				margin-left: 0; /* Убран отступ слева */
 			  }
 
 			  .camera-button:hover {

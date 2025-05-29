@@ -208,6 +208,9 @@ unsigned long ticks = 0;
 volatile bool gSwitchStarted = false;
 
 extern void ping_thread(void *arg);
+extern void Move_thread(void *arg);
+
+
 #include "sntp.h"
 #include "extio.h"
 #if (IMC_FTX_MC != 0)
@@ -338,7 +341,7 @@ void checkPortMigration() {
 struct SDrive_s gDriveParam = {
   .time   = 200,      //Канал RS485
   .drive_ev   = STOP,      //Адрес
-	.autoMove = true,
+	.autoMove = false,
 };
 
 
@@ -363,7 +366,7 @@ void AutoMove(void ){
 			PWM_ON;
 			vTaskDelay(3000);
 			PWM_OFF;
-			if ( gDriveParam.autoMove ) return;
+			if ( !gDriveParam.autoMove ) return;
 
 			BACK;
 			DRIVE_Y;
@@ -371,16 +374,14 @@ void AutoMove(void ){
 			PWM_ON;
 			vTaskDelay(5000);
 			PWM_OFF;
-			if ( gDriveParam.autoMove ) return;
+			if ( !gDriveParam.autoMove ) return;
 
 			FORWARD;
 			DRIVE_Y;
-
 			PWM_ON;
 			vTaskDelay(5000);
 			PWM_OFF;
-			if ( gDriveParam.autoMove ) return;
-			POWER_OFF;
+			if ( !gDriveParam.autoMove ) return;
 	}
 	else {
 			switch (gDriveParam.drive_ev) {
@@ -437,7 +438,7 @@ void main_task(void * pvParameters)
 	extio_gpio_out(GPIOE,13,ON);   // Light 1
   extio_gpio_out(GPIOE,14,ON);   // Light 2
 
-
+	sys_thread_new("Move_thread", Move_thread, NULL, DEFAULT_THREAD_STACKSIZE, DEFAULT_THREAD_PRIO);
 
 //	AutoMove();
 #ifdef USE_SDRAM
@@ -533,7 +534,7 @@ void main_task(void * pvParameters)
   while(1)
   {
 #if (PIXEL != 0)
-			AutoMove();
+
 
 #if (PIXEL_TEPLO != 0)
       uint32_t cTickCount1 = xTaskGetTickCount();
@@ -620,6 +621,15 @@ void main_task(void * pvParameters)
     ProcessLog();
   }
 }
+
+void Move_thread(void *arg){
+
+	while(1)
+  {
+			AutoMove();
+	}
+}
+
 
 #ifndef USE_SDRAM //Использование SDRAM
  #ifdef USE_AT45DB     //Использовать Flash-память at45db
