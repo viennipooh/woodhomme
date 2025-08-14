@@ -280,16 +280,17 @@ enum {
   CGI_SYSTEM_EVENTS = 22,
   CGI_SYSTEM_EVENT_TAB = 23,
   CGI_SYSTEM_TEMP = 24,
-  CGI_SYSTEM_CONV_WIFI = 25,
+	CGI_SYSTEM_MOVE = 25,
 };
 
 
-/* CGI handler for LED control */
+/* CGI handler */
 const char * SYSTEM_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
 const char * SYSTEM_TABLE_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
 const char * SYSTEM_SETTINGS_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
 const char * SYSTEM_STAT_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
 const char * SYSTEM_PORT_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
+const char * SYSTEM_MOVE_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);  // новаЯ сраница с движением камеры
 const char * SYSTEM_IP_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
 const char * SYSTEM_SAVE_RESTART_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
 const char * SYSTEM_DMAC_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
@@ -307,9 +308,7 @@ const char * SYSTEM_PING_CGI_Handler(int iIndex, int iNumParams, char *pcParam[]
 const char * SYSTEM_EVENTS_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
 const char * SYSTEM_EVENT_TAB_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
 const char * SYSTEM_TEMP_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
-#if ((UTD_M != 0) || (IIP != 0))
-const char * SYSTEM_CONV_WIFI_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
-#endif
+
 
 /* Html request for "/leds.cgi" will start LEDS_CGI_Handler */
 
@@ -340,9 +339,8 @@ tCGI CGI_TAB[] = {
   {"/events.htm",SYSTEM_EVENTS_CGI_Handler},
   {"/event_tab.htm",SYSTEM_EVENT_TAB_CGI_Handler},
   {"/temp.htm",SYSTEM_TEMP_CGI_Handler},
-#if ((UTD_M != 0) || (IIP != 0))
-  {"/conv_wifi.htm",SYSTEM_CONV_WIFI_CGI_Handler},
-#endif
+	{"/move.htm",SYSTEM_MOVE_CGI_Handler},
+
 };
 
 const char * SYSTEM_PWR_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[])
@@ -906,117 +904,6 @@ const char * SYSTEM_PORTPOLL_CGI_Handler(int iIndex, int iNumParams, char *pcPar
   return "/portpoll.htm";
 }
 
-//#include "main.h"
-//const char * SYSTEM_MOVE_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[])
-//{ //
-//  uint8_t i;
-//  int value;
-//  bool cApplying = false, cStoping = false;
-//
-////	struct SDrive_s gDriveParam = {
-////  .time   = 200,      //Канал RS485
-////  .drive_ev   = STOP,      //Адрес
-////};
-//
-//  switch(iIndex){
-//    case CGI_SYSTEM_PORTPOLL:
-//      {
-//        if(iNumParams>0)
-//        {
-//          for (i=0; i<iNumParams; i++)
-//          {
-//            if (strcmp(pcParam[i] , "startpoll") == 0) {
-//              sscanf(pcValue[i],"%d",&value);
-//              if (value)
-//                cApplying = true;
-//            }
-//            if (strcmp(pcParam[i] , "for_change") == 0) {
-//              sscanf(pcValue[i],"%d",&value);
-//              if (value)
-//                cStoping = true;
-//            }
-//            if (strncmp(pcParam[i] , "rs_tx_count", 11) == 0) {
-//              sscanf(pcValue[i],"%d",&value);
-//              gTxCount = value;
-//            }
-//            if (strncmp(pcParam[i] , "rs_err_count", 12) == 0) {
-//              sscanf(pcValue[i],"%d",&value);
-//              gErrCount = value;
-//            }
-//          }
-//          gApplying = cApplying;
-//          gStoping = cStoping;
-//          if (gApplying) {
-//            bool cChanged = false;
-//            for (i=0; i<iNumParams; i++)
-//            {
-//              if (strncmp(pcParam[i] , "rs_dev_addr_1", 13) == 0)
-//              {
-//                sscanf(pcValue[i],"%d",&value);
-//                if (value < 0)
-//                  value = 0;
-//                if (value > 254)
-//                  value = 254;
-//                if (cpMBParam->Addr != value) {
-//                  cpMBParam->Addr = value;
-//                  cChanged = true;
-//                }
-//              } else if (strncmp(pcParam[i] , "rs_modbus_func_1", 15) == 0) {
-//                sscanf(pcValue[i],"%d",&value);
-//                if (cpMBParam->Func != value) {
-//                  cpMBParam->Func = value;
-//                  cChanged = true;
-//                }
-//              } else if (strncmp(pcParam[i] , "rs_start_reg_1", 12) == 0) {
-//                sscanf(pcValue[i],"%d",&value);
-//                if (value < 0)
-//                  value = 0;
-//                if (value > 65635)
-//                  value = 65635;
-//                if (cpMBParam->Start != value) {
-//                  cpMBParam->Start = value;
-//                  cChanged = true;
-//                }
-//              } else if (strncmp(pcParam[i] , "rs_reg_number_1", 14) == 0) {
-//                sscanf(pcValue[i],"%d",&value);
-//                if (value < 1)
-//                  value = 1;
-//                if (value > 65635)
-//                  value = 65635;
-//                if (cpMBParam->Number != value) {
-//                  cpMBParam->Number = value;
-//                  cChanged = true;
-//                }
-//              } else if (strncmp(pcParam[i] , "rs_poll_period_1", 15) == 0) {
-//                sscanf(pcValue[i],"%d",&value);
-//                if (value < 500)
-//                  value = 500;
-//                if (value > 10000)
-//                  value = 10000;
-//                if (cpMBParam->Period != value) {
-//                  cpMBParam->Period = value;
-//                  cChanged = true;
-//                }
-//              } else if (strncmp(pcParam[i] , "rs_poll_channel_1", 16) == 0) {
-//                sscanf(pcValue[i],"%d",&value);
-//                if (cpMBParam->Chan != value) {
-//                  cpMBParam->Chan = value;
-//                  cChanged = true;
-//                }
-//              }
-//            }
-//            if (cChanged) {
-//            }
-//            cpMBParam->Error = mbrNone;
-//          } else { //Останов
-//          }
-//        }
-//      }
-//      break;
-//  }
-//  return "/portpoll.htm";
-//}
-
 
 const char * SYSTEM_FRAMEPOLL_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[])
 { //
@@ -1245,6 +1132,88 @@ const char * SYSTEM_PORT_CGI_Handler(int iIndex, int iNumParams, char *pcParam[]
       break;
   }
   return "/port.htm";
+}
+
+const char * SYSTEM_MOVE_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[])
+{
+	uint8_t i;
+	bool cApplying ;
+	switch(iIndex){
+	case CGI_SYSTEM_MOVE:
+		{
+			if(iNumParams>0)
+			{
+				for (i=0; i<iNumParams; i++)
+				{
+					int value;
+
+					if (strcmp(pcParam[i], "move_up") == 0)
+					{
+						gDriveParam.drive_ev = UP;
+						sscanf(pcValue[i], "%d", &value);
+						if (value)
+						{
+							// Действие для "вверх"
+							cApplying = true;
+						}
+					}
+					else if (strcmp(pcParam[i], "move_down") == 0)
+					{
+						gDriveParam.drive_ev = DOWN;
+						sscanf(pcValue[i], "%d", &value);
+						if (value)
+						{
+							// Действие для "вниз"
+							cApplying = true;
+						}
+					}
+					else if (strcmp(pcParam[i], "move_left") == 0)
+					{
+						gDriveParam.drive_ev = LEFT;
+						sscanf(pcValue[i], "%d", &value);
+						if (value)
+						{
+							// Действие для "влево"
+							cApplying = true;
+						}
+					}
+					else if (strcmp(pcParam[i], "move_righ") == 0)
+					{
+						gDriveParam.drive_ev = RIGHT;
+						sscanf(pcValue[i], "%d", &value);
+						if (value)
+						{
+							// Действие для "вправо"
+							cApplying = true;
+						}
+					}
+					else if (strcmp(pcParam[i], "stop") == 0)
+					{
+						gDriveParam.autoMove = false;
+						sscanf(pcValue[i], "%d", &value);
+						if (value)
+						{
+							// Действие для "стоп"
+							cApplying = true;
+						}
+					}
+					else if (strcmp(pcParam[i], "start") == 0)
+					{
+						gDriveParam.autoMove = true;
+						sscanf(pcValue[i], "%d", &value);
+						if (value)
+						{
+							// Действие для "стоп"
+							cApplying = true;
+						}
+					}
+					return "/move.htm";
+				}
+				break;
+			}
+			return "/move.htm";
+		}
+	}
 }
 
 #ifdef USE_SWITCH //Использовать свитч kmz8895

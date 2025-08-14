@@ -8,6 +8,7 @@
 <SCRIPT	language=JavaScript>
     foldersTree =gFld("Главное меню")
     insDoc(foldersTree, gLnk(0, "Состояние", "main.htm"))
+	insDoc(foldersTree, gLnk(0, "Управление камерой", "move.htm"))
     folder_ext = insFld(foldersTree, gFld("Настройки",	"port.htm"))
 	insDoc(folder_ext, gLnk(0, "Настройка Ethernet",  "port.htm"))
 	insDoc(folder_ext, gLnk(0, "Настройка RS485",  "portrs.htm"))
@@ -34,8 +35,7 @@
     insDoc(foldersTree, gLnk(0, "Настройки сети", "ip.htm"))
     insDoc(foldersTree, gLnk(0, "Настройки доступа", "pass.htm"))
     insDoc(foldersTree, gLnk(0, "Сохранить/Перезагрузить", "save_restart.htm"))
-	insDoc(foldersTree, gLnk(0, "Поворотный механизм", "move.htm"))
-	insDoc(foldersTree, gLnk(0, "Движение", "move2.html"))
+	
     initializeDocument()
 </SCRIPT>
 </BODY>

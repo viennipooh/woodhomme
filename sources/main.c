@@ -417,7 +417,7 @@ void AutoMove(void ){
 						PWM_OFF;
 						gDriveParam.drive_ev= NONE;
 						break;
-				case RIGHT:
+
 						DRIVE_MODE;
 						POWER_ON;
 						PWM_OFF;
@@ -428,6 +428,11 @@ void AutoMove(void ){
 						PWM_OFF;
 						gDriveParam.drive_ev= NONE;
 						break;
+
+					case STOP:
+							PWM_OFF;
+							POWER_OFF;
+							break;
 			}
 	}
 }
